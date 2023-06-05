@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
 
-<BorderPane fx:id="MainContainer" xmlns:fx="http://javafx.com/fxml"
-            stylesheets="@style.css">
+<BorderPane fx:id="MainContainer" xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
+            prefHeight="840.0" prefWidth="1240.0">
 
+    <left>
+        <VBox fx:id="menuContainer" styleClass="menuContainer"
+              prefWidth="200.0">
+
+        </VBox>
+    </left>
+    <center>
+        <GridPane fx:id="dashboardContainer" styleClass="dashboardContainer">
+
+        </GridPane>
+    </center>
+    <right>
+        <VBox fx:id="filterContainer" styleClass="filterContainer"
+              prefWidth="200.0">
+
+        </VBox>
+    </right>
 </BorderPane>

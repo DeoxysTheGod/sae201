@@ -1,3 +1,11 @@
-root {
-    -fx-background-color: beige;
+.menuContainer {
+    -fx-background-color: #b98d59;
+}
+
+.dashboardContainer {
+    -fx-background-color: #e5c1b2;
+}
+
+.filterContainer {
+    -fx-background-color: #b98d59;
 }
