@@ -1,5 +1,5 @@
 .menuContainer {
-    -fx-background-color: #b98d59;
+    -fx-background-color: #b98d58;
 }
 
 .dashboardContainer {
@@ -8,4 +8,8 @@
 
 .filterContainer {
     -fx-background-color: #b98d59;
+}
+
+.hiddenMenuContainer {
+    -fx-background-color: cyan;
 }

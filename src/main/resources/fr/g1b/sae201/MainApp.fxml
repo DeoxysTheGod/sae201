@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="MainContainer" xmlns:fx="http://javafx.com/fxml" stylesheets="@style.css"
-            prefHeight="840.0" prefWidth="1240.0">
+<Pane fx:id="MainContainer" prefHeight="840.0" prefWidth="1240.0"
+      stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="fr.g1b.sae201.SisAppController">
+    <Pane>
+        <VBox>
+            <Button onAction="#hideAndShowMenu" text="Clic frère" />
+            <VBox fx:id="hiddenMenuContainer" prefHeight="800.0" prefWidth="330.0" styleClass="hiddenMenuContainer" VBox.vgrow="ALWAYS">
 
-    <left>
-        <VBox fx:id="menuContainer" styleClass="menuContainer"
-              prefWidth="200.0">
-
+            </VBox>
         </VBox>
-    </left>
-    <center>
-        <GridPane fx:id="dashboardContainer" styleClass="dashboardContainer">
+    </Pane>
+    <GridPane fx:id="dashboardContainer" styleClass="dashboardContainer">
 
-        </GridPane>
-    </center>
-    <right>
-        <VBox fx:id="filterContainer" styleClass="filterContainer"
-              prefWidth="200.0">
+    </GridPane>
+    <VBox fx:id="filterContainer" prefWidth="330.0" styleClass="filterContainer">
 
-        </VBox>
-    </right>
-</BorderPane>
+    </VBox>
+</Pane>
