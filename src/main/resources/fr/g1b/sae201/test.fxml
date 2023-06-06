@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="400.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="fr.g1b.sae201.SisAppController">
+    <HBox>
+        <Button layoutX="7.0" layoutY="14.0" mnemonicParsing="false" text="&gt;" onAction="#hideAndShowMenu"/>
+        <Pane fx:id="hiddenMenuContainer" layoutX="42.0" layoutY="21.0" prefHeight="358.0" prefWidth="194.0"
+              style="-fx-background-color: red;" managed="false" visible="false"/>
+        <FlowPane>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Button"/>
+            <Button fx:id="addButton" text="Ajouter" onAction="#addCSV"/>
+        </FlowPane>
+        <Pane style="-fx-background-color: blue" prefWidth="120.0"/>
+    </HBox>
+</Pane>
