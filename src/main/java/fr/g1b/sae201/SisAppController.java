@@ -17,44 +17,83 @@ public class SisAppController {
     // Containers
     @FXML
     private Pane mainContainer; // fenêtre principale
-    @FXML
-    private VBox checkBoxContainer; // Menu de gauche
-    @FXML
-    private FlowPane dashboardContainer;
+
+    // Menu de gauche
     @FXML
     private Pane leftMenuContainer;
+    @FXML
+    private VBox checkBoxContainer;
+
+    // Dashboard
+    @FXML
+    private FlowPane dashboardContainer;
+
+    // Menu de droite
+    @FXML
+    private Pane rightMenuContainer;
+    @FXML
+    private VBox filterContainer;
 
     // Controls
     @FXML
     private Button addButton;
+
+    @FXML
+    private Button filterMenuBtn;
     @FXML
     private Button checkBoxMenuBtn;
 
 
     // Autres
-    private boolean booleanMenu;
+    private boolean isCheckBoxContainerVisible;
+    private boolean isFilterContainerVisible;
+
+    // Taille des menus
+    private double rightMenuSize;
+    private double leftMenuSize;
 
     public SisAppController() {
-
-        booleanMenu = false;
+        isCheckBoxContainerVisible = false;
+        isFilterContainerVisible = false;
     }
 
     public void initialize() {
         System.out.println("App launched successfully!");
+        /*
         ImageView view = new ImageView(new Image("menuButton.png"));
         view.setPreserveRatio(true);
         view.setFitWidth(30);
         checkBoxMenuBtn.setGraphic(view);
 
+         */
 
         // Initialisation de l'interface
         InterfaceInitialize();
+
+        rightMenuContainer.setPrefWidth(0.0);
+        leftMenuContainer.setPrefWidth(0.0);
     }
 
-    public void hideAndShowMenu() {
-        booleanMenu = !booleanMenu;
-        checkBoxContainer.setManaged(booleanMenu);
-        checkBoxContainer.setVisible(booleanMenu);
+    public void showCheckBoxMenu() {
+        isCheckBoxContainerVisible = !isCheckBoxContainerVisible;
+        checkBoxContainer.setManaged(isCheckBoxContainerVisible);
+        checkBoxContainer.setVisible(isCheckBoxContainerVisible);
+        if (isCheckBoxContainerVisible) {
+            leftMenuContainer.setPrefWidth(rightMenuSize);
+        } else {
+            leftMenuContainer.setPrefWidth(0.0);
+        }
+    }
+
+    public void showFilterMenu() {
+        isFilterContainerVisible = !isFilterContainerVisible;
+        filterContainer.setManaged(isFilterContainerVisible);
+        filterContainer.setVisible(isFilterContainerVisible);
+        if (isFilterContainerVisible) {
+            leftMenuContainer.setPrefWidth(leftMenuSize);
+        } else {
+            leftMenuContainer.setPrefWidth(0.0);
+        }
     }
 
     @FXML
@@ -76,16 +115,36 @@ public class SisAppController {
     }
 
     public void InterfaceInitialize() {
-
         // Initialisation du conteneur du menu de gauche
+        checkBoxMenuBtn.setLayoutX(30.0);
+        checkBoxMenuBtn.setLayoutY(30.0);
+
+        checkBoxContainer.setLayoutX(15.0);
+        checkBoxContainer.setLayoutY(15.0);
+
         leftMenuContainer.setPrefHeight(mainContainer.getPrefHeight());
 
-        checkBoxContainer.setVisible(false);
-        checkBoxContainer.setPrefHeight(leftMenuContainer.getPrefHeight()-checkBoxContainer.getLayoutY()*2);
-        checkBoxContainer.setPrefWidth(leftMenuContainer.getPrefWidth()-checkBoxContainer.getLayoutX()*2);
+        checkBoxContainer.setVisible(isCheckBoxContainerVisible);
+        checkBoxContainer.setPrefHeight(leftMenuContainer.getPrefHeight() - checkBoxContainer.getLayoutY() * 2);
+        checkBoxContainer.setPrefWidth(leftMenuContainer.getPrefWidth() - checkBoxContainer.getLayoutX());
 
-        checkBoxContainer.setPadding(new Insets(0,0,0,checkBoxMenuBtn.getLayoutX()-checkBoxContainer.getLayoutX()));
+        checkBoxContainer.setPadding(new Insets(0, 0, 0, checkBoxMenuBtn.getLayoutX() - checkBoxContainer.getLayoutX()));
+
+        // Initialisation du conteneur du menu de droite
+        filterMenuBtn.setLayoutX(rightMenuContainer.getPrefWidth()-(30.0 + filterMenuBtn.getPrefWidth()));
+        filterMenuBtn.setLayoutY(30.0);
+
+        filterContainer.setLayoutY(15.0);
+
+        rightMenuContainer.setPrefHeight(mainContainer.getPrefHeight());
+        rightMenuContainer.setLayoutX(mainContainer.getPrefWidth() - rightMenuContainer.getPrefWidth());
+
+        filterContainer.setVisible(isFilterContainerVisible);
+        filterContainer.setPrefWidth(rightMenuContainer.getPrefWidth() - 15.0);
+        filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight() - filterContainer.getLayoutY()*2);
+
         // Initialisation du Dashboard
+        dashboardContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
 
     }
 }

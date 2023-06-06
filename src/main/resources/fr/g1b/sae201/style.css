@@ -7,8 +7,6 @@
     selected-box-color: white;
     box-color: black;
     mark-color: white;
-
-
 }
 
 .check-box:selected > .box {
@@ -16,24 +14,20 @@
     -fx-background-color: selected-box-color;
 }
 
-
-.checkBoxContainer{
+.menuContainer {
     -fx-background-color: #5ba7a8;
     -fx-background-radius: 20px;
 
     -fx-border-radius: 20px;
 
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
-
-
 }
-.checkBoxMenuBtn{
+
+.menuBtn {
     -fx-background-color: #5ba7a8;
     -fx-background-radius: 20px;
+}
 
-
-
-
-
-
+.menuBtn:hover {
+    -fx-background-color: #3c8788;
 }
