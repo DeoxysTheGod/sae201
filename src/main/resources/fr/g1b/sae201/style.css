@@ -7,8 +7,6 @@
     selected-box-color: white;
     box-color: black;
     mark-color: white;
-
-
 }
 
 .check-box:selected > .box {
@@ -17,23 +15,15 @@
 }
 
 
-.checkBoxContainer{
+.menuContainer{
     -fx-background-color: #5ba7a8;
     -fx-background-radius: 20px;
 
     -fx-border-radius: 20px;
 
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
-
-
 }
 .checkBoxMenuBtn{
     -fx-background-color: #5ba7a8;
     -fx-background-radius: 20px;
-
-
-
-
-
-
 }

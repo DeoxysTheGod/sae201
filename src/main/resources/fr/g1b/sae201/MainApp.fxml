@@ -14,12 +14,12 @@
     </FlowPane>
     <Pane fx:id="leftMenuContainer" prefWidth="300.0" styleClass="leftMenuContainer">
         <VBox fx:id="checkBoxContainer" alignment="CENTER_LEFT" spacing="30.0" styleClass="menuContainer">
-            <CheckBox text="checkbox1" />
-            <CheckBox text="checkbox2" />
-            <CheckBox text="checkbox3" />
-            <CheckBox text="checkbox4" />
+            <CheckBox text="checkbox1" styleClass="check-box"/>
+            <CheckBox text="checkbox2" styleClass="check-box"/>
+            <CheckBox text="checkbox3" styleClass="check-box"/>
+            <CheckBox text="checkbox4" styleClass="check-box"/>
         </VBox>
-        <Button fx:id="checkBoxMenuBtn" onAction="#showCheckBoxMenu" prefHeight="60.0" prefWidth="60.0" text="&gt;" />
+        <Button fx:id="checkBoxMenuBtn" styleClass="checkBoxMenuBtn" onAction="#showCheckBoxMenu" prefHeight="60.0" prefWidth="60.0" text="&gt;" />
     </Pane>
 
     <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="rightMenuContainer">
