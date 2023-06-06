@@ -103,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686039021961</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="lecture csv au point normalement">
+      <created>1686040131512</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686040131512</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,6 +119,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ajout du boutton pour ajouter le fichier CSV" />
     <MESSAGE value="modif workspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="modif workspace" />
+    <MESSAGE value="lecture csv au point normalement" />
+    <option name="LAST_COMMIT_MESSAGE" value="lecture csv au point normalement" />
   </component>
 </project>
