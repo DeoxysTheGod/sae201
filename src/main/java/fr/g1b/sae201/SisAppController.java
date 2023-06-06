@@ -3,6 +3,8 @@ package fr.g1b.sae201;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -28,6 +30,7 @@ public class SisAppController {
     @FXML
     private Button checkBoxMenuBtn;
 
+
     // Autres
     private boolean booleanMenu;
 
@@ -38,6 +41,11 @@ public class SisAppController {
 
     public void initialize() {
         System.out.println("App launched successfully!");
+        ImageView view = new ImageView(new Image("menuButton.png"));
+        view.setPreserveRatio(true);
+        view.setFitWidth(30);
+        checkBoxMenuBtn.setGraphic(view);
+
 
         // Initialisation de l'interface
         InterfaceInitialize();
@@ -68,6 +76,7 @@ public class SisAppController {
     }
 
     public void InterfaceInitialize() {
+
         // Initialisation du conteneur du menu de gauche
         leftMenuContainer.setPrefHeight(mainContainer.getPrefHeight());
 
@@ -76,7 +85,6 @@ public class SisAppController {
         checkBoxContainer.setPrefWidth(leftMenuContainer.getPrefWidth()-checkBoxContainer.getLayoutX()*2);
 
         checkBoxContainer.setPadding(new Insets(0,0,0,checkBoxMenuBtn.getLayoutX()-checkBoxContainer.getLayoutX()));
-
         // Initialisation du Dashboard
 
     }

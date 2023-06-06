@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Lecture {
     public static void main(String[] args) {
-        String csvFile = "/amuhome/d22020033/IdeaProjects/sae201/src/main/resources/fr/g1b/sae201/seismes.csv";
+        String csvFile = "src/main/resources/fr/g1b/sae201/seismes.csv";
         String line;
         String csvSplitBy = ",";
 
