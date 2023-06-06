@@ -1,15 +1,7 @@
-.menuContainer {
-    -fx-background-color: #b98d58;
+.mainContainer {
+    -fx-background-color: #b2e1e5;
 }
 
-.dashboardContainer {
-    -fx-background-color: #e5c1b2;
-}
-
-.filterContainer {
-    -fx-background-color: #b98d59;
-}
-
-.hiddenMenuContainer {
-    -fx-background-color: cyan;
+.checkBoxContainer {
+    -fx-background-color: #6c6ce1;
 }
