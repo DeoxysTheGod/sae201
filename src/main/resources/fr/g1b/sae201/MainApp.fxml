@@ -19,7 +19,7 @@
             <CheckBox text="checkbox3" styleClass="check-box"/>
             <CheckBox text="checkbox4" styleClass="check-box"/>
         </VBox>
-        <Button fx:id="checkBoxMenuBtn" styleClass="checkBoxMenuBtn" onAction="#showCheckBoxMenu" prefHeight="60.0" prefWidth="60.0" text="&gt;" />
+        <Button fx:id="checkBoxMenuBtn" styleClass="menuBtn" onAction="#showCheckBoxMenu" prefHeight="60.0" prefWidth="60.0" text="&gt;" />
     </Pane>
 
     <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="rightMenuContainer">
@@ -30,7 +30,7 @@
             <TextField/>
             <TextField/>
         </VBox>
-        <Button fx:id="filterMenuBtn" prefHeight="60.0" prefWidth="60.0" onAction="#showFilterMenu" text="&lt;" />
+        <Button fx:id="filterMenuBtn" styleClass="menuBtn" prefHeight="60.0" prefWidth="60.0" onAction="#showFilterMenu" text="&lt;" />
     </Pane>
 
 </Pane>
