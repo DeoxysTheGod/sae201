@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="mainContainer" prefHeight="607.0" prefWidth="1080.0" styleClass="mainContainer" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.g1b.sae201.SisAppController">
+<Pane fx:id="mainContainer" prefHeight="800.0" prefWidth="1400.0" styleClass="mainContainer" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.g1b.sae201.SisAppController">
 
     <FlowPane fx:id="dashboardContainer" layoutX="150.0" styleClass="dashboardContainer">
         <Button text="jsp" />

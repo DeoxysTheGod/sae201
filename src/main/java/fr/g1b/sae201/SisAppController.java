@@ -60,13 +60,14 @@ public class SisAppController {
     public void initialize() {
         System.out.println("App launched successfully!");
 
-        ImageView view = new ImageView(new Image("fr/g1b/sae201/menuButton.png"));
-        ImageView view_two = new ImageView(new Image("fr/g1b/sae201/menuButton.png"));
+        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuButton.png")));
         view.setPreserveRatio(true);
-        view.setFitWidth(30);
-        view_two.setPreserveRatio(true);
-        view_two.setFitWidth(30);
+        view.setFitWidth(40.0);
         checkBoxMenuBtn.setGraphic(view);
+
+        ImageView view_two = new ImageView(new Image(getClass().getResourceAsStream("menuButton.png")));
+        view_two.setPreserveRatio(true);
+        view_two.setFitWidth(40.0);
         filterMenuBtn.setGraphic(view_two);
 
 
