@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Lecture {
     public static void main(String[] args) {
-        String csvFile = "/amuhome/d22020033/IdeaProjects/sae201/src/main/resources/fr/g1b/sae201/seismes.csv";
+        String csvFile = "src/main/resources/fr/g1b/sae201/seismes.csv";
         String line;
         String csvSplitBy = ",";
 
@@ -54,15 +54,15 @@ public class Lecture {
     }
 }
 
-// Identifiant,
-// "Date (AAAA/MM/JJ)"
-// ,Heure,
-// Nom,
-// "Région épicentrale",
-// Choc,
-// "X RGF93/L93",
-// "Y RGF93/L93",
-// "Latitude en WGS 84",
-// "Longitude en WGS 84",
-// "Intensité épicentrale",
-// "Qualité intensité épicentrale"
+// Identifiant, 0
+// "Date (AAAA/MM/JJ)" 1
+// ,Heure, 2
+// Nom, 3
+// "Région épicentrale", 4
+// Choc, 5
+// "X RGF93/L93", 6
+// "Y RGF93/L93", 7
+// "Latitude en WGS 84", 8
+// "Longitude en WGS 84", 9
+// "Intensité épicentrale", 10
+// "Qualité intensité épicentrale" 11
