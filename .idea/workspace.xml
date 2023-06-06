@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="merge">
+    <list default="true" id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="modif rapide du css et du fxml pour améliorer l'affichage">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" afterDir="false" />

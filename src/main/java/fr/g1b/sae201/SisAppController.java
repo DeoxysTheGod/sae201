@@ -60,8 +60,8 @@ public class SisAppController {
     public void initialize() {
         System.out.println("App launched successfully!");
 
-        ImageView view = new ImageView(new Image("menuButton.png"));
-        ImageView view_two = new ImageView(new Image("menuButton.png"));
+        ImageView view = new ImageView(new Image("fr/g1b/sae201/menuButton.png"));
+        ImageView view_two = new ImageView(new Image("fr/g1b/sae201/menuButton.png"));
         view.setPreserveRatio(true);
         view.setFitWidth(30);
         view_two.setPreserveRatio(true);
