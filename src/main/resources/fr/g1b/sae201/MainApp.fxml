@@ -4,47 +4,40 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="mainContainer" prefHeight="800.0" prefWidth="1400.0" styleClass="mainContainer" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.g1b.sae201.SisAppController">
+<Pane fx:id="mainContainer" prefHeight="800.0" prefWidth="1400.0" styleClass="mainContainer" stylesheets="@style.css"
+      xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="fr.g1b.sae201.SisAppController">
 
     <FlowPane fx:id="dashboardContainer" layoutX="150.0" styleClass="dashboardContainer">
-        <Button text="jsp" />
-        <Button text="jsp" />
-        <Button text="jsp" />
-        <Button text="jspfiodsjfs" />
+
     </FlowPane>
     <Pane fx:id="leftMenuContainer" prefWidth="300.0" styleClass="leftMenuContainer">
         <VBox fx:id="checkBoxContainer" alignment="CENTER_LEFT" spacing="30.0" styleClass="menuContainer">
-            <CheckBox text="checkbox1" styleClass="check-box"/>
-            <CheckBox text="checkbox2" styleClass="check-box"/>
-            <CheckBox text="checkbox3" styleClass="check-box"/>
-            <CheckBox text="checkbox4" styleClass="check-box"/>
+            <CheckBox text="pane 1" styleClass="check-box"/>
+            <CheckBox text="pane 2" styleClass="check-box"/>
+            <CheckBox text="pane 3" styleClass="check-box"/>
+            <CheckBox text="pane 4" styleClass="check-box"/>
 
-            <!-- Bouton "Appliquer" en dessous des checkBox, il faut encore coder la class qui applique les filtres
-
-            <Button fx:id="checkButton" styleClass="checkButton" text="Appliquer" >
+            <!-- Bouton "Appliquer" en dessous des checkBox, il faut encore coder la class qui applique les filtres-->
+            <Button fx:id="checkButton" styleClass="checkButton" text="Appliquer">
                 <VBox.margin>
-                    <Insets top="45.0" right="0.0" bottom="0.0" left="80.0" />
+                    <Insets top="45.0" right="0.0" bottom="0.0" left="80.0"/>
                 </VBox.margin>
             </Button>
-
-            -->
-
         </VBox>
-
-
-
-        <Button fx:id="checkBoxMenuBtn" styleClass="menuBtn" onAction="#showCheckBoxMenu"  prefHeight="60.0" prefWidth="60.0"  />
+        <Button fx:id="checkBoxMenuBtn" styleClass="menuBtn" onAction="#showCheckBoxMenu" prefHeight="60.0"
+                prefWidth="60.0"/>
     </Pane>
 
     <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="rightMenuContainer">
-
         <VBox fx:id="filterContainer" alignment="CENTER_RIGHT" spacing="30.0" styleClass="menuContainer">
             <TextField styleClass="textfieldRight"/>
             <TextField styleClass="textfieldRight"/>
             <TextField styleClass="textfieldRight"/>
             <TextField styleClass="textfieldRight"/>
         </VBox>
-        <Button fx:id="filterMenuBtn" styleClass="menuBtn" prefHeight="60.0" prefWidth="60.0" onAction="#showFilterMenu"  />
+        <Button fx:id="filterMenuBtn" styleClass="menuBtn" prefHeight="60.0" prefWidth="60.0"
+                onAction="#showFilterMenu"/>
     </Pane>
 
 </Pane>

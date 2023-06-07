@@ -4,6 +4,7 @@
 
 .check-box {
     /* default properties */
+    -fx-font-size: 18px;
     selected-box-color: white;
     box-color: black;
     mark-color: white;
@@ -44,5 +45,9 @@
 
 .checkButton{
 
+}
 
+.dashboardContainer {
+    -fx-background-color: #72bfe8;
+    -fx-background-radius: 20px;
 }
