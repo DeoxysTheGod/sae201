@@ -1,5 +1,6 @@
 package fr.g1b.sae201;
 
+import fr.g1b.sae201.dashboardpane.CustomPaneBarChart;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -85,6 +86,13 @@ public class SisAppController {
 
         rightMenuContainer.setPrefWidth(0.0);
         leftMenuContainer.setPrefWidth(0.0);
+
+        LectureBis l1 = new LectureBis(this.getClass().getResource("seismes.csv").getFile());
+        CustomPaneBarChart cb1 = new CustomPaneBarChart(400,400,l1.getDataset());
+        CustomPaneBarChart cb2 = new CustomPaneBarChart(400,400,l1.getDataset());
+        CustomPaneBarChart cb3 = new CustomPaneBarChart(400,400,l1.getDataset());
+
+        dashboardContainer.getChildren().addAll(cb1, cb2, cb3);
     }
     @FXML
     private void showCheckBoxMenu() {
@@ -111,6 +119,7 @@ public class SisAppController {
         }
     }
 
+    /* pas utile pour l'instant
     @FXML
     public void addCSV() {
         FileChooser fileChooser = new FileChooser();
@@ -128,6 +137,7 @@ public class SisAppController {
             addButton.setText(selectedFile.getName());
         }
     }
+    */
 
     public void InterfaceInitialize() {
         // Initialisation du conteneur du menu de gauche
@@ -160,6 +170,7 @@ public class SisAppController {
 
         // Initialisation du Dashboard
         dashboardContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
+        dashboardContainer.setPrefWidth(mainContainer.getPrefWidth()-(rightMenuSize+leftMenuSize+dashboardContainer.getLayoutX()*2));
 
     }
 

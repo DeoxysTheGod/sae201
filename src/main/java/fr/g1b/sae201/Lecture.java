@@ -41,6 +41,7 @@ public class Lecture extends Application {
     private static List<String> col11 = new ArrayList<>();
     private static List<String> col12 = new ArrayList<>();
 
+
     public static void main(String[] args) {
         String csvFile = Lecture.class.getResource("seismes.csv").getFile();
         String line;
