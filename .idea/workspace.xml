@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="modif .gitignore">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Changement des liens des images">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,12 +20,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectId" id="2Qs4Oqko6a5Rrhg1ymuDsKKURxP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "node.js.selected.package.tslint": "(autodetect)"
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.4561201",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -35,7 +46,20 @@
       <recent name="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MainApp">
+    <configuration name="Lecture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture" />
+      <module name="sae201" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="fr.g1b.sae201.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.MainApp" />
       <module name="sae201" />
@@ -52,9 +76,11 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainApp" />
+        <item itemvalue="Application.Lecture" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="modif .gitignore">
       <created>1686087886499</created>
@@ -63,11 +89,31 @@
       <option name="project" value="LOCAL" />
       <updated>1686087886499</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changement des liens des images">
+      <created>1686087934161</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686087934161</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Changement des liens des images" />
+      <created>1686128933046</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686128933046</updated>
+      <workItem from="1686128938771" duration="120000" />
+      <workItem from="1686130190759" duration="276000" />
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="modif .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="modif .gitignore" />
+    <MESSAGE value="Changement des liens des images" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changement des liens des images" />
   </component>
 </project>

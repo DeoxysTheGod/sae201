@@ -42,7 +42,7 @@ public class Lecture extends Application {
     private static List<String> col12 = new ArrayList<>();
 
     public static void main(String[] args) {
-        String csvFile = "src/main/resources/fr/g1b/sae201/seismes.csv";
+        String csvFile = Lecture.class.getResource("seismes.csv").getFile();
         String line;
         String csvSplitBy = ",";
 
