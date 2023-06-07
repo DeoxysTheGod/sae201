@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="suppression de test.fxml et correction de Lecture">
+    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
     </list>
@@ -145,7 +142,7 @@
       <updated>1686128933046</updated>
       <workItem from="1686128938771" duration="120000" />
       <workItem from="1686130190759" duration="276000" />
-      <workItem from="1686140496020" duration="9298000" />
+      <workItem from="1686140496020" duration="11280000" />
     </task>
     <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
       <created>1686140571540</created>
@@ -154,7 +151,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686140571540</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
+      <created>1686149904820</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686149904820</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
+      <created>1686149975914</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1686149975914</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +175,9 @@
     <MESSAGE value="modif .gitignore" />
     <MESSAGE value="Changement des liens des images" />
     <MESSAGE value="suppression de test.fxml et correction de Lecture" />
-    <option name="LAST_COMMIT_MESSAGE" value="suppression de test.fxml et correction de Lecture" />
+    <MESSAGE value="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+    <MESSAGE value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

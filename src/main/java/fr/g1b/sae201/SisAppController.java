@@ -4,6 +4,7 @@ import fr.g1b.sae201.dashboardpane.CustomPaneBarChart;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -26,6 +27,8 @@ public class SisAppController {
     private VBox checkBoxContainer;
 
     // Dashboard
+    @FXML
+    private ScrollPane dashboardScrollContainer;
     @FXML
     private FlowPane dashboardContainer;
 
@@ -90,7 +93,7 @@ public class SisAppController {
         LectureBis l1 = new LectureBis(this.getClass().getResource("seismes.csv").getFile());
         CustomPaneBarChart cb1 = new CustomPaneBarChart(400,400,l1.getDataset());
         CustomPaneBarChart cb2 = new CustomPaneBarChart(400,400,l1.getDataset());
-        CustomPaneBarChart cb3 = new CustomPaneBarChart(400,400,l1.getDataset());
+        CustomPaneBarChart cb3 = new CustomPaneBarChart(400,500,l1.getDataset());
 
         dashboardContainer.getChildren().addAll(cb1, cb2, cb3);
     }
@@ -169,8 +172,11 @@ public class SisAppController {
         filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight() - filterContainer.getLayoutY()*2);
 
         // Initialisation du Dashboard
-        dashboardContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
-        dashboardContainer.setPrefWidth(mainContainer.getPrefWidth()-(rightMenuSize+leftMenuSize+dashboardContainer.getLayoutX()*2));
+        dashboardScrollContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
+        dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth()-(rightMenuSize+leftMenuSize+dashboardScrollContainer.getLayoutX()*2));
+        dashboardScrollContainer.setPrefHeight(mainContainer.getPrefHeight()-(checkBoxMenuBtn.getLayoutY()*2));
+
+        dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth()-40);
 
     }
 

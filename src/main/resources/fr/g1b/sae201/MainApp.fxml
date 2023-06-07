@@ -8,9 +8,9 @@
       xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="fr.g1b.sae201.SisAppController">
 
-    <FlowPane fx:id="dashboardContainer" layoutX="150.0" styleClass="dashboardContainer">
-
-    </FlowPane>
+    <ScrollPane fx:id="dashboardScrollContainer" layoutX="150.0" styleClass="dashboardScrollContainer">
+        <FlowPane fx:id="dashboardContainer" styleClass="dashboardContainer"/>
+    </ScrollPane>
     <Pane fx:id="leftMenuContainer" prefWidth="300.0" styleClass="leftMenuContainer">
         <VBox fx:id="checkBoxContainer" alignment="CENTER_LEFT" spacing="30.0" styleClass="menuContainer">
             <CheckBox text="pane 1" styleClass="check-box"/>
