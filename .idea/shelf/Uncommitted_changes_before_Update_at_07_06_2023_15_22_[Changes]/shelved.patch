@@ -1,0 +1,127 @@
+Index: src/main/java/fr/g1b/sae201/Lecture.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fr.g1b.sae201;\n\nimport java.io.File;\nimport java.io.FileNotFoundException;\nimport java.util.Scanner;\n\nimport java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\nimport java.util.ArrayList;\nimport java.util.List;\n\n\nimport javafx.application.Application;\nimport javafx.beans.property.ReadOnlyStringWrapper;\nimport javafx.beans.property.SimpleStringProperty;\nimport javafx.collections.FXCollections;\nimport javafx.collections.ObservableList;\nimport javafx.geometry.Insets;\nimport javafx.geometry.Pos;\nimport javafx.scene.Scene;\nimport javafx.scene.control.*;\nimport javafx.scene.layout.HBox;\nimport javafx.scene.layout.Priority;\nimport javafx.scene.layout.VBox;\nimport javafx.stage.Stage;\n\n\npublic class Lecture extends Application {\n\n    private static List<String> col1 = new ArrayList<>();\n    private static List<String> col2 = new ArrayList<>();\n    private static List<String> col3 = new ArrayList<>();\n    private static List<String> col4 = new ArrayList<>();\n    private static List<String> col5 = new ArrayList<>();\n    private static List<String> col6 = new ArrayList<>();\n    private static List<String> col7 = new ArrayList<>();\n    private static List<String> col8 = new ArrayList<>();\n    private static List<String> col9 = new ArrayList<>();\n    private static List<String> col10 = new ArrayList<>();\n    private static List<String> col11 = new ArrayList<>();\n    private static List<String> col12 = new ArrayList<>();\n\n    public static void main(String[] args) {\n        String csvFile = \"src/main/resources/fr/g1b/sae201/seismes.csv\";\n        String line;\n        String csvSplitBy = \",\";\n\n        /**\n         *\n         * Les données CSV dans 12 listes distinctes (tableaux dynamiques)\n         * Identifiant, 0\n         * \"Date (AAAA/MM/JJ)\" 1\n         * Heure, 2\n         * Nom, 3\n         * \"Région épicentrale\", 4\n         * Choc, 5\n         * \"X RGF93/L93\", 6\n         * \"Y RGF93/L93\", 7\n         * \"Latitude en WGS 84\", 8\n         * \"Longitude en WGS 84\", 9\n         * \"Intensité épicentrale\", 10\n         * \"Qualité intensité épicentrale\" 11\n         **/\n\n\n\n        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {\n            while ((line = br.readLine()) != null) {\n                String[] data = line.split(csvSplitBy);\n                col1.add(data[0]);\n                col2.add(data[1]);\n                col3.add(data[2]);\n                col4.add(data[3]);\n                col5.add(data[4]);\n                col6.add(data[5]);\n                col7.add(data[6]);\n                col8.add(data[7]);\n                col9.add(data[8]);\n                col10.add(data[9]);\n                col11.add(data[10]);\n                col12.add(data[11]);\n            }\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n        System.out.println(col1);\n    launch(args);\n    }\n\n\n    @Override\n    public void start(Stage primaryStage) throws Exception {\n        // Création du conteneur principal\n        VBox vbox = new VBox();\n\n        // Création du conteneur correspondant à la ligne de contrôle haut dessus du tableau\n        HBox topControls = new HBox();\n        topControls.setAlignment( Pos.BOTTOM_LEFT );\n        Button btnRefresh = new Button(\"Refresh\");\n\n        HBox topRightControls = new HBox();\n        HBox.setHgrow(topRightControls, Priority.ALWAYS );\n        topRightControls.setAlignment( Pos.BOTTOM_RIGHT );\n        Hyperlink signOutLink = new Hyperlink(\"Sign Out\");\n        topRightControls.getChildren().add( signOutLink );\n\n        topControls.getChildren().addAll( btnRefresh, topRightControls );\n\n        // Création du tableau avec les 12 colonnes\n        TableView<Object> tblSeismes = new TableView<>();\n        //tblSeismes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);\n        TableColumn<Object, String> date = new TableColumn<>(\"Date\");\n        TableColumn<Object, String> heure = new TableColumn<>(\"Heure\");\n        TableColumn<Object, String> nom = new TableColumn<>(\"Nom\");\n        TableColumn<Object, String> epicentre = new TableColumn<>(\"Région épicentrale\");\n        TableColumn<Object, String> choc = new TableColumn<>(\"Choc\");\n        TableColumn<Object, String> x = new TableColumn<>(\"X\");\n        TableColumn<Object, String> y = new TableColumn<>(\"Y\");\n        TableColumn<Object, String> intensite = new TableColumn<>(\"Intensité épicentrale\");\n\n        tblSeismes.getColumns().addAll( date, heure, nom, epicentre, choc, x, y, intensite );\n        VBox.setVgrow( tblSeismes, Priority.ALWAYS );\n\n        date.setCellValueFactory(data -> new SimpleStringProperty());\n        heure.setCellValueFactory(data -> new SimpleStringProperty(col1.toString()));\n        nom.setCellValueFactory(data -> new SimpleStringProperty(col2.toString()));\n        epicentre.setCellValueFactory(data -> new SimpleStringProperty(col3.toString()));\n        choc.setCellValueFactory(data -> new SimpleStringProperty(col4.toString()));\n        x.setCellValueFactory(data -> new SimpleStringProperty(col5.toString()));\n        y.setCellValueFactory(data -> new SimpleStringProperty(col6.toString()));\n        intensite.setCellValueFactory(data -> new SimpleStringProperty(col9.toString()));\n\n        // Création de la ligne de séparation\n        Separator sep = new Separator();\n\n        // Création du bandeau en bas de la fenêtre\n        HBox bottomControls = new HBox();\n        bottomControls.setAlignment(Pos.BOTTOM_RIGHT );\n        Button btnClose = new Button(\"Close\");\n        bottomControls.getChildren().add( btnClose );\n\n        // Ajout des contrôleurs au conteneur principal\n        vbox.getChildren().addAll(\n                topControls,\n                tblSeismes,\n                sep,\n                bottomControls\n        );\n\n        VBox.setMargin( topControls, new Insets(10.0d) );\n        VBox.setMargin( tblSeismes, new Insets(0.0d, 10.0d, 10.0d, 10.0d) );\n        VBox.setMargin( bottomControls, new Insets(10.0d) );\n\n        // Ajout du conteneur à la scene\n        Scene scene = new Scene(vbox );\n\n        // Ajout de la scene à la fenêtre et changement de ses paramètres (dimensions et titre)\n        primaryStage.setScene( scene );\n        primaryStage.setWidth( 800 );\n        primaryStage.setHeight( 600 );\n        primaryStage.setTitle(\"VBox and HBox App\");\n\n        // Affichage de la fenêtre\n\n        primaryStage.show();\n    }\n\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/fr/g1b/sae201/Lecture.java b/src/main/java/fr/g1b/sae201/Lecture.java
+--- a/src/main/java/fr/g1b/sae201/Lecture.java	(revision 8d78680c3f8db5dcb944f02d3ab63eb2d08df790)
++++ b/src/main/java/fr/g1b/sae201/Lecture.java	(date 1686131517031)
+@@ -122,14 +122,14 @@
+         tblSeismes.getColumns().addAll( date, heure, nom, epicentre, choc, x, y, intensite );
+         VBox.setVgrow( tblSeismes, Priority.ALWAYS );
+ 
+-        date.setCellValueFactory(data -> new SimpleStringProperty());
+-        heure.setCellValueFactory(data -> new SimpleStringProperty(col1.toString()));
+-        nom.setCellValueFactory(data -> new SimpleStringProperty(col2.toString()));
+-        epicentre.setCellValueFactory(data -> new SimpleStringProperty(col3.toString()));
+-        choc.setCellValueFactory(data -> new SimpleStringProperty(col4.toString()));
+-        x.setCellValueFactory(data -> new SimpleStringProperty(col5.toString()));
+-        y.setCellValueFactory(data -> new SimpleStringProperty(col6.toString()));
+-        intensite.setCellValueFactory(data -> new SimpleStringProperty(col9.toString()));
++        date.setCellValueFactory(data -> new SimpleStringProperty(col1.toString()));
++        heure.setCellValueFactory(data -> new SimpleStringProperty(col2.toString()));
++        nom.setCellValueFactory(data -> new SimpleStringProperty(col3.toString()));
++        epicentre.setCellValueFactory(data -> new SimpleStringProperty(col4.toString()));
++        choc.setCellValueFactory(data -> new SimpleStringProperty(col5.toString()));
++        x.setCellValueFactory(data -> new SimpleStringProperty(col6.toString()));
++        y.setCellValueFactory(data -> new SimpleStringProperty(col9.toString()));
++        intensite.setCellValueFactory(data -> new SimpleStringProperty(col10.toString()));
+ 
+         // Création de la ligne de séparation
+         Separator sep = new Separator();
+@@ -165,7 +165,6 @@
+ 
+         primaryStage.show();
+     }
+-
+ }
+ 
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"modif .gitignore\">\n      <change beforePath=\"$PROJECT_DIR$/.gitignore\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gitignore\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"node.js.selected.package.tslint\": \"(autodetect)\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"MainApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainApp\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.MainApp\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"TaskManager\">\n    <task id=\"LOCAL-00001\" summary=\"modif .gitignore\">\n      <created>1686087886499</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686087886499</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"modif .gitignore\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"modif .gitignore\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 8d78680c3f8db5dcb944f02d3ab63eb2d08df790)
++++ b/.idea/workspace.xml	(date 1686131818220)
+@@ -5,11 +5,8 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="modif .gitignore">
+-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -22,12 +19,32 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="MavenImportPreferences">
++    <option name="generalSettings">
++      <MavenGeneralSettings>
++        <option name="mavenHome" value="Use Maven wrapper" />
++        <option name="useMavenConfig" value="true" />
++      </MavenGeneralSettings>
++    </option>
++  </component>
++  <component name="ProjectId" id="2Qs6VlaryiEWPwwskH5a2RtGpV0" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="1" id="Add" />
++  </component>
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
+-    "node.js.selected.package.tslint": "(autodetect)"
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "node.js.detected.package.eslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "settings.editor.selected.configurable": "preferences.lookFeel",
++    "vue.rearranger.settings.migration": "true"
+   }
+ }]]></component>
+   <component name="RecentsManager">
+@@ -55,6 +72,7 @@
+       </list>
+     </recent_temporary>
+   </component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task id="LOCAL-00001" summary="modif .gitignore">
+       <created>1686087886499</created>
+@@ -62,9 +80,20 @@
+       <option name="presentableId" value="LOCAL-00001" />
+       <option name="project" value="LOCAL" />
+       <updated>1686087886499</updated>
++    </task>
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="modif .gitignore" />
++      <created>1686129976068</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1686129976068</updated>
++      <workItem from="1686129980226" duration="1827000" />
+     </task>
+     <option name="localTasksCounter" value="2" />
+     <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="modif .gitignore" />
