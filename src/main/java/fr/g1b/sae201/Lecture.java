@@ -1,29 +1,24 @@
 package fr.g1b.sae201;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import javafx.application.Application;
-import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 
 public class Lecture extends Application {
@@ -42,7 +37,7 @@ public class Lecture extends Application {
     private static List<String> col12 = new ArrayList<>();
 
     public static void main(String[] args) {
-        String csvFile = Lecture.class.getResource("seismes.csv").getFile();
+        String csvFile = Lecture2.class.getResource("seismes.csv").getFile();
         String line;
         String csvSplitBy = ",";
 
@@ -122,14 +117,14 @@ public class Lecture extends Application {
         tblSeismes.getColumns().addAll( date, heure, nom, epicentre, choc, x, y, intensite );
         VBox.setVgrow( tblSeismes, Priority.ALWAYS );
 
-        date.setCellValueFactory(data -> new SimpleStringProperty());
-        heure.setCellValueFactory(data -> new SimpleStringProperty(col1.toString()));
-        nom.setCellValueFactory(data -> new SimpleStringProperty(col2.toString()));
-        epicentre.setCellValueFactory(data -> new SimpleStringProperty(col3.toString()));
-        choc.setCellValueFactory(data -> new SimpleStringProperty(col4.toString()));
-        x.setCellValueFactory(data -> new SimpleStringProperty(col5.toString()));
-        y.setCellValueFactory(data -> new SimpleStringProperty(col6.toString()));
-        intensite.setCellValueFactory(data -> new SimpleStringProperty(col9.toString()));
+        date.setCellValueFactory(data -> new SimpleStringProperty(col1.toString()));
+        heure.setCellValueFactory(data -> new SimpleStringProperty(col2.toString()));
+        nom.setCellValueFactory(data -> new SimpleStringProperty(col3.toString()));
+        epicentre.setCellValueFactory(data -> new SimpleStringProperty(col4.toString()));
+        choc.setCellValueFactory(data -> new SimpleStringProperty(col5.toString()));
+        x.setCellValueFactory(data -> new SimpleStringProperty(col6.toString()));
+        y.setCellValueFactory(data -> new SimpleStringProperty(col9.toString()));
+        intensite.setCellValueFactory(data -> new SimpleStringProperty(col10.toString()));
 
         // Création de la ligne de séparation
         Separator sep = new Separator();
@@ -165,7 +160,6 @@ public class Lecture extends Application {
 
         primaryStage.show();
     }
-
 }
 
 
