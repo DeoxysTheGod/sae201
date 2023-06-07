@@ -52,6 +52,14 @@ public class SisAppController {
     private double rightMenuSize;
     private double leftMenuSize;
 
+    private void setMainContainerOverlay(boolean overlay) {
+        if (overlay) {
+            mainContainer.getStyleClass().add("overlay");
+        } else {
+            mainContainer.getStyleClass().remove("overlay");
+        }
+    }
+
     public SisAppController() {
         isCheckBoxContainerVisible = false;
         isFilterContainerVisible = false;
@@ -78,14 +86,16 @@ public class SisAppController {
         rightMenuContainer.setPrefWidth(0.0);
         leftMenuContainer.setPrefWidth(0.0);
     }
-
-    public void showCheckBoxMenu() {
+    @FXML
+    private void showCheckBoxMenu() {
         isCheckBoxContainerVisible = !isCheckBoxContainerVisible;
         checkBoxContainer.setManaged(isCheckBoxContainerVisible);
         checkBoxContainer.setVisible(isCheckBoxContainerVisible);
         if (isCheckBoxContainerVisible) {
+            setMainContainerOverlay(true); // Ajouter la superposition pour l'effet d'assombrissement
             leftMenuContainer.setPrefWidth(rightMenuSize);
         } else {
+            setMainContainerOverlay(false); // Supprimer la superposition
             leftMenuContainer.setPrefWidth(0.0);
         }
     }
@@ -152,4 +162,18 @@ public class SisAppController {
         dashboardContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
 
     }
+
+    @FXML
+    private void setMainContainerOpacity(double opacity) {
+        mainContainer.setOpacity(opacity);
+    }
+
+    @FXML
+    public void mainContainerBack() {
+        setMainContainerOverlay(false); // Supprimer la superposition
+    }
+
+
+
+
 }
