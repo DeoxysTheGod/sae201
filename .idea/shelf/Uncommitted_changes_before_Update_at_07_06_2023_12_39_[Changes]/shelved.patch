@@ -1,0 +1,72 @@
+Index: src/main/resources/fr/g1b/sae201/style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.menuContainer {\r\n    -fx-background-color: #b98d58;\r\n}\r\n\r\n.dashboardContainer {\r\n    -fx-background-color: #e5c1b2;\r\n}\r\n\r\n.filterContainer {\r\n    -fx-background-color: #b98d59;\r\n}\r\n\r\n.hiddenMenuContainer {\r\n    -fx-background-color: cyan;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/fr/g1b/sae201/style.css b/src/main/resources/fr/g1b/sae201/style.css
+--- a/src/main/resources/fr/g1b/sae201/style.css	(revision 7c0e08524306e570bf56a3b3ed37cf45cebb77cb)
++++ b/src/main/resources/fr/g1b/sae201/style.css	(date 1685976623555)
+@@ -12,4 +12,6 @@
+ 
+ .hiddenMenuContainer {
+     -fx-background-color: cyan;
+-}
+\ No newline at end of file
++}
++
++
+Index: src/main/resources/fr/g1b/sae201/test.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<?import javafx.scene.control.*?>\r\n<?import javafx.scene.layout.*?>\r\n\r\n<Pane prefHeight=\"400.0\" prefWidth=\"600.0\"\r\n      xmlns=\"http://javafx.com/javafx/17.0.2-ea\" xmlns:fx=\"http://javafx.com/fxml/1\"\r\n      fx:controller=\"fr.g1b.sae201.SisAppController\">\r\n    <HBox>\r\n        <Button layoutX=\"7.0\" layoutY=\"14.0\" mnemonicParsing=\"false\" text=\"&gt;\" onAction=\"#hideAndShowMenu\"/>\r\n        <Pane fx:id=\"hiddenMenuContainer\" layoutX=\"42.0\" layoutY=\"21.0\" prefHeight=\"358.0\" prefWidth=\"194.0\"\r\n              style=\"-fx-background-color: red;\" managed=\"false\" visible=\"false\"/>\r\n        <FlowPane>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button mnemonicParsing=\"false\" text=\"Button\"/>\r\n            <Button fx:id=\"addButton\" text=\"Ajouter\" onAction=\"#addCSV\"/>\r\n        </FlowPane>\r\n        <Pane style=\"-fx-background-color: blue\" prefWidth=\"120.0\"/>\r\n    </HBox>\r\n</Pane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/fr/g1b/sae201/test.fxml b/src/main/resources/fr/g1b/sae201/test.fxml
+--- a/src/main/resources/fr/g1b/sae201/test.fxml	(revision 7c0e08524306e570bf56a3b3ed37cf45cebb77cb)
++++ b/src/main/resources/fr/g1b/sae201/test.fxml	(date 1685976154754)
+@@ -21,7 +21,7 @@
+             <Button mnemonicParsing="false" text="Button"/>
+             <Button mnemonicParsing="false" text="Button"/>
+             <Button mnemonicParsing="false" text="Button"/>
+-            <Button fx:id="addButton" text="Ajouter" onAction="#addCSV"/>
++            <Button fx:id="addButton"  text="Ajouter" onAction="#addCSV"/>
+         </FlowPane>
+         <Pane style="-fx-background-color: blue" prefWidth="120.0"/>
+     </HBox>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"6444e694-09b3-4dd1-9ed9-e9d6612a5bee\" name=\"Changes\" comment=\"ajout du boutton pour ajouter le fichier CSV\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"CSS File\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\r\n        <option name=\"useMavenConfig\" value=\"true\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2QmjeAmTlZcGtAO4TuFyrDCdoD3\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;/home/quentin/Documents&quot;,\r\n    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"MainApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainApp\" />\r\n      <module name=\"sae201\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.MainApp\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"6444e694-09b3-4dd1-9ed9-e9d6612a5bee\" name=\"Changes\" comment=\"\" />\r\n      <created>1685959759057</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1685959759057</updated>\r\n      <workItem from=\"1685959761345\" duration=\"658000\" />\r\n      <workItem from=\"1685965744851\" duration=\"4759000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"ajout du boutton pour ajouter le fichier CSV\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"ajout du boutton pour ajouter le fichier CSV\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 7c0e08524306e570bf56a3b3ed37cf45cebb77cb)
++++ b/.idea/workspace.xml	(date 1685976083512)
+@@ -6,7 +6,7 @@
+   <component name="ChangeListManager">
+     <list default="true" id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="ajout du boutton pour ajouter le fichier CSV">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -91,6 +91,14 @@
+       <workItem from="1685959761345" duration="658000" />
+       <workItem from="1685965744851" duration="4759000" />
+     </task>
++    <task id="LOCAL-00001" summary="ajout du boutton pour ajouter le fichier CSV">
++      <created>1685975534806</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1685975534806</updated>
++    </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
