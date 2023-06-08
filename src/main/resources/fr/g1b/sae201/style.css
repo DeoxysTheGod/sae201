@@ -1,10 +1,13 @@
+Label, CheckBox, TextField {
+    -fx-font-size: 18;
+}
+
 .mainContainer {
     -fx-background-color: #b2e1e5;
 }
 
 .check-box {
     /* default properties */
-    -fx-font-size: 18px;
     selected-box-color: white;
     box-color: black;
     mark-color: white;
@@ -45,4 +48,10 @@
 
 .checkButton{
 
+}
+
+.dateRangeSliderLabel {
+    -fx-background-color: white;
+    -fx-alignment: center;
+    -fx-pref-width: 60px;
 }

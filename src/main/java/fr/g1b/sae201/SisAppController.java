@@ -1,30 +1,24 @@
 package fr.g1b.sae201;
 
-import fr.g1b.sae201.dashboardpane.CustomPaneBarChart;
-import javafx.beans.Observable;
+import fr.g1b.sae201.dashboardpane.CustomInformationDisplayPane;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import javafx.util.StringConverter;
-import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.NumberStringConverter;
+import javafx.scene.text.Text;
 import org.controlsfx.control.RangeSlider;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
+import org.controlsfx.control.ToggleSwitch;
 
-import java.io.File;
-import java.util.concurrent.Callable;
+import java.util.List;
 
 public class SisAppController {
     // Containers
@@ -49,11 +43,19 @@ public class SisAppController {
     @FXML
     private RangeSlider dateRangeSlider;
     @FXML
-    private TextField minValueDateTextField;
+    private Label minValueDateLabel;
     @FXML
-    private TextField maxValueDateTextField;
+    private Label maxValueDateLabel;
     @FXML
     private VBox filterContainer;
+    @FXML
+    private VBox betweenTwoDatesContainer;
+    @FXML
+    private ToggleSwitch toggleBetweenTwoDates;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private ToggleSwitch togglePreciseDate;
 
     // Controls
     @FXML
@@ -72,6 +74,11 @@ public class SisAppController {
     // Taille des menus
     private double rightMenuSize;
     private double leftMenuSize;
+
+    // Dataset
+    private DataGetter dataset;
+    private List<String[]> filteredList;
+    private String filter;
 
     private void setMainContainerOverlay(boolean overlay) {
         if (overlay) {
@@ -107,15 +114,16 @@ public class SisAppController {
         rightMenuContainer.setPrefWidth(0.0);
         leftMenuContainer.setPrefWidth(0.0);
 
-        LectureBis l1 = new LectureBis(this.getClass().getResource("seismes.csv").getFile());
-        CustomPaneBarChart cb1 = new CustomPaneBarChart(400,400,l1.getDataset());
-        CustomPaneBarChart cb2 = new CustomPaneBarChart(400,400,l1.getDataset());
+        dataset = new DataGetter(this.getClass().getResource("seismes.csv").getFile());
+        CustomInformationDisplayPane cb1 = new CustomInformationDisplayPane(400, 400, dataset.getDataset());
+        CustomInformationDisplayPane cb2 = new CustomInformationDisplayPane(400, 400, dataset.getDataset());
 
         cb1.addingBarChartEarthQuakePerYear();
         cb2.addingBarChartEarthQuakeIntensityPerRegion();
 
         dashboardContainer.getChildren().addAll(cb1, cb2);
     }
+
     @FXML
     private void showCheckBoxMenu() {
         isCheckBoxContainerVisible = !isCheckBoxContainerVisible;
@@ -178,7 +186,7 @@ public class SisAppController {
         checkBoxContainer.setPadding(new Insets(0, 0, 0, checkBoxMenuBtn.getLayoutX() - checkBoxContainer.getLayoutX()));
 
         // Initialisation du conteneur du menu de droite
-        filterMenuBtn.setLayoutX(rightMenuContainer.getPrefWidth()-(30.0 + filterMenuBtn.getPrefWidth()));
+        filterMenuBtn.setLayoutX(rightMenuContainer.getPrefWidth() - (30.0 + filterMenuBtn.getPrefWidth()));
         filterMenuBtn.setLayoutY(30.0);
 
         filterContainer.setLayoutY(15.0);
@@ -188,7 +196,7 @@ public class SisAppController {
 
         filterContainer.setVisible(isFilterContainerVisible);
         filterContainer.setPrefWidth(rightMenuContainer.getPrefWidth() - 15.0);
-        filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight() - filterContainer.getLayoutY()*2);
+        filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight() - filterContainer.getLayoutY() * 2);
 
         // Initialisation du RangeSlider pour les dates
         dateRangeSlider.setMax(2023);
@@ -196,33 +204,85 @@ public class SisAppController {
         dateRangeSlider.setHighValue(2023);
         dateRangeSlider.setLowValue(1970);
         dateRangeSlider.setMajorTickUnit(10);
-        dateRangeSlider.setBlockIncrement(10);
         dateRangeSlider.setSnapToTicks(true);
         dateRangeSlider.setShowTickLabels(true);
+        dateRangeSlider.setMinorTickCount(1);
 
         // Initialisation du Dashboard
         dashboardScrollContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
-        dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth()-(rightMenuSize+leftMenuSize+dashboardScrollContainer.getLayoutX()*2));
-        dashboardScrollContainer.setPrefHeight(mainContainer.getPrefHeight()-(checkBoxMenuBtn.getLayoutY()*2));
+        dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth() - (rightMenuSize + leftMenuSize + dashboardScrollContainer.getLayoutX() * 2));
+        dashboardScrollContainer.setPrefHeight(mainContainer.getPrefHeight() - (checkBoxMenuBtn.getLayoutY() * 2));
 
-        dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth()-40);
+        dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth() - 40);
     }
 
     public void createBindings() {
-        /*
-        StringProperty dateFieldMaxValue = maxValueDateTextField.textProperty();
-        IntegerProperty it = new SimpleIntegerProperty();
-        DoubleProperty dateSliderMaxValue = dateRangeSlider.highValueProperty();
+        dateRangeSlider.highValueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
 
-        it.bind(Bindings.createIntegerBinding((Callable<Integer>) () -> (int) dateSliderMaxValue.get(), (Observable) dateRangeSlider));
+                maxValueDateLabel.setText(String.format("%d",newValue.intValue()));
+            }
+        });
 
-        dateRangeSlider.highValueProperty().bindBidirectional(dateSliderMaxValue);
+        dateRangeSlider.lowValueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                minValueDateLabel.setText(String.format("%d",newValue.intValue()));
+            }
+        });
 
-        maxValueDateTextField.textProperty().bind(it.asString());
+        // filtres : Entre deux dates
+        betweenTwoDatesContainer.visibleProperty().bind(toggleBetweenTwoDates.selectedProperty());
+        betweenTwoDatesContainer.managedProperty().bind(toggleBetweenTwoDates.selectedProperty());
+        betweenTwoDatesContainer.disableProperty().bind(toggleBetweenTwoDates.selectedProperty().not());
 
-        StringConverter<Number> converter = new NumberStringConverter();
-        Bindings.bindBidirectional(dateFieldMaxValue, dateSliderMaxValue, converter);
-         */
+        // filtres : Date Précise
+        datePicker.visibleProperty().bind(togglePreciseDate.selectedProperty());
+        datePicker.managedProperty().bind(togglePreciseDate.selectedProperty());
+        datePicker.disableProperty().bind(togglePreciseDate.selectedProperty().not());
+
+        toggleBetweenTwoDates.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+                togglePreciseDate.setSelected(!newValue);
+            }
+        });
+
+        togglePreciseDate.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
+                System.out.println(newValue);
+                toggleBetweenTwoDates.setSelected(!newValue);
+            }
+        });
+    }
+
+    @FXML
+    private void applyFilter() {
+        StringBuilder sb = new StringBuilder();
+        if (toggleBetweenTwoDates.isSelected()) {
+            sb.append((int)dateRangeSlider.getLowValue() + "-" + (int)dateRangeSlider.getHighValue());
+        } else {
+            sb.append("none");
+        }
+        sb.append(",");
+        if (togglePreciseDate.isSelected()) {
+            sb.append(datePicker.getValue());
+        } else {
+            sb.append("none");
+        }
+
+        filter = sb.toString();
+
+        filteredList = dataset.applyFilter(filter);
+
+        dashboardContainer.getChildren().clear();
+        CustomInformationDisplayPane c1 = new CustomInformationDisplayPane(400,400,filteredList);
+        c1.addingBarChartEarthQuakePerYear();
+
+        dashboardContainer.getChildren().add(c1);
     }
 
     @FXML
@@ -234,8 +294,6 @@ public class SisAppController {
     public void mainContainerBack() {
         setMainContainerOverlay(false); // Supprimer la superposition
     }
-
-
 
 
 }

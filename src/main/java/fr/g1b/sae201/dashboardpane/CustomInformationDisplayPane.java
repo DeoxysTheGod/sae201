@@ -1,6 +1,5 @@
 package fr.g1b.sae201.dashboardpane;
 
-import fr.g1b.sae201.LectureBis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -8,18 +7,17 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
 
-public class CustomPaneBarChart extends Pane {
+public class CustomInformationDisplayPane extends Pane {
 
     private int width;
     private int heigth;
-    private ArrayList<String[]> dataset;
+    private List<String[]> dataset;
 
-    public CustomPaneBarChart(int width, int heigth, ArrayList<String[]> dataset) {
+    public CustomInformationDisplayPane(int width, int heigth, List<String[]> dataset) {
         setPrefWidth(width);
         setPrefHeight(heigth);
         this.width = width;
@@ -28,6 +26,8 @@ public class CustomPaneBarChart extends Pane {
     }
 
     public void addingBarChartEarthQuakePerYear() {
+        this.getChildren().clear();
+
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
 
@@ -70,6 +70,8 @@ public class CustomPaneBarChart extends Pane {
     }
 
     public void addingBarChartEarthQuakeIntensityPerRegion() {
+        this.getChildren().clear();
+
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
 
@@ -122,11 +124,14 @@ public class CustomPaneBarChart extends Pane {
 
     private int findIndexColumnWithColumnName(String columnName) {
         for (int i = 0; i < dataset.get(0).length; i++) {
-            System.out.println(dataset.get(0)[i].toLowerCase().trim());
             if (dataset.get(0)[i].toLowerCase().trim().equals(columnName.toLowerCase().trim())) {
                 return i;
             }
         }
         return -1;
+    }
+
+    public void setDataset(List<String[]> dataset) {
+        this.dataset = dataset;
     }
 }

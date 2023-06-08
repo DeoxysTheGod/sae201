@@ -6,6 +6,7 @@
 
 <?import org.controlsfx.control.RangeSlider?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.ToggleSwitch?>
 <Pane fx:id="mainContainer" prefHeight="800.0" prefWidth="1400.0" styleClass="mainContainer" stylesheets="@style.css"
       xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="fr.g1b.sae201.SisAppController">
@@ -33,14 +34,25 @@
 
     <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="rightMenuContainer">
         <VBox fx:id="filterContainer" alignment="CENTER_RIGHT" spacing="30.0" styleClass="menuContainer">
-            <HBox spacing="20.0">
-                <TextField fx:id="minValueDateTextField" editable="true"/>
-                <TextField fx:id="maxValueDateTextField" editable="true"/>
+            <HBox>
+                <Label text="Entre deux date :"/>
+                <ToggleSwitch fx:id="toggleBetweenTwoDates" selected="true"/>
             </HBox>
-            <RangeSlider fx:id="dateRangeSlider" styleClass="textfieldRight"/>
+            <VBox fx:id="betweenTwoDatesContainer">
+                <HBox fx:id="dateLabelContainer" spacing="20.0" alignment="CENTER">
+                    <Label fx:id="minValueDateLabel" styleClass="dateRangeSliderLabel"/>
+                    <Label fx:id="maxValueDateLabel" styleClass="dateRangeSliderLabel"/>
+                </HBox>
+                <RangeSlider fx:id="dateRangeSlider" styleClass="textfieldRight"/>
+            </VBox>
+            <HBox>
+                <Label text="Date précise :"/>
+                <ToggleSwitch fx:id="togglePreciseDate" selected="false"/>
+            </HBox>
+            <DatePicker fx:id="datePicker"/>
             <TextField styleClass="textfieldRight"/>
             <TextField styleClass="textfieldRight"/>
-            <TextField styleClass="textfieldRight"/>
+            <Button fx:id="applyFilterBtn" onAction="#applyFilter" text="Filtrer"/>
         </VBox>
         <Button fx:id="filterMenuBtn" styleClass="menuBtn" prefHeight="60.0" prefWidth="60.0"
                 onAction="#showFilterMenu"/>

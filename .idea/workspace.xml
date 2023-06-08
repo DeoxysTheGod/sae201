@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif">
+    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Finalisation du graphique ajouté">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomPaneBarChart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomPaneBarChart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/LectureBis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomPaneBarChart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,8 +60,8 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.MainApp">
-    <configuration name="CustomPaneBarChart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.dashboardpane.CustomPaneBarChart" />
+    <configuration name="CustomInformationDisplayPane" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.dashboardpane.CustomInformationDisplayPane" />
       <module name="sae201" />
       <extension name="coverage">
         <pattern>
@@ -69,8 +73,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Lecture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture" />
+    <configuration name="DataGetter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.DataGetter" />
       <module name="sae201" />
       <extension name="coverage">
         <pattern>
@@ -82,8 +86,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LectureBis" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.LectureBis" />
+    <configuration name="Lecture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture" />
       <module name="sae201" />
       <extension name="coverage">
         <pattern>
@@ -111,8 +115,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainApp" />
-        <item itemvalue="Application.CustomPaneBarChart" />
-        <item itemvalue="Application.LectureBis" />
+        <item itemvalue="Application.DataGetter" />
+        <item itemvalue="Application.CustomInformationDisplayPane" />
         <item itemvalue="Application.Lecture" />
       </list>
     </recent_temporary>
@@ -175,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686218937069</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Finalisation du graphique ajouté">
+      <created>1686239937879</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1686239937879</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,13 +200,24 @@
     <MESSAGE value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
     <MESSAGE value="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif" />
     <MESSAGE value="encapsulation du FlowPane dans un ScrollPane" />
-    <option name="LAST_COMMIT_MESSAGE" value="encapsulation du FlowPane dans un ScrollPane" />
+    <MESSAGE value="Finalisation du graphique ajouté" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalisation du graphique ajouté" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java</url>
+          <line>278</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="dataset.get(0)[i].toLowerCase().trim()" language="JAVA" />
-        <watch expression="dataset.get(i)[dateColumnIndex].substring(0,4)" language="JAVA" />
+        <watch expression="element[1].substring(0,4)" language="JAVA" />
+        <watch expression="filter.substring(5,9)" language="JAVA" />
+        <watch expression="Integer.parseInt(element[1].substring(0,4)) &gt; Integer.parseInt(filter.substring(0,4)))                                     || (Integer.parseInt(element[1].substring(0,4)) &lt; Integer.parseInt(filter.substring(5,9))" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
