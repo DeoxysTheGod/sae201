@@ -44,10 +44,18 @@ public class DataGetter {
         List<String[]> filteredDataset = getDataset().stream()
                 .skip(1)
                 .filter(element -> {
-                    int dateIndex = DataGetter.findIndexColumnWithColumnName("Date", dataset);
                     if (separatedFilter[0].matches("\\d{4}-\\d{4}")) {
-                        return ((Integer.parseInt(element[dateIndex].substring(0, 4)) <= Integer.parseInt(filter.substring(5, 9)))
-                                && (Integer.parseInt(element[dateIndex].substring(0, 4)) >= Integer.parseInt(filter.substring(0, 4))));
+                        int dateIndex = DataGetter.findIndexColumnWithColumnName("Date", dataset);
+                        return ((Integer.parseInt(element[dateIndex].substring(0, 4)) <= Integer.parseInt(separatedFilter[0].substring(5, 9)))
+                                && (Integer.parseInt(element[dateIndex].substring(0, 4)) >= Integer.parseInt(separatedFilter[0].substring(0, 4))));
+                    } else {
+                        return true;
+                    }
+                })
+                .filter(element -> {
+                    if (separatedFilter[1].matches("\\d{4}/\\d{2}/\\d{2}")) {
+                        int dateIndex = DataGetter.findIndexColumnWithColumnName("Date", dataset);
+                        return element[dateIndex].equals(separatedFilter[1]);
                     } else {
                         return true;
                     }

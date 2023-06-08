@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)">
+    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Correction d'un bug + ajout d'une bd plus grande">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686261472995</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Correction d'un bug + ajout d'une bd plus grande">
+      <created>1686263635326</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1686263635326</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,14 +245,15 @@
     <MESSAGE value="encapsulation du FlowPane dans un ScrollPane" />
     <MESSAGE value="Finalisation du graphique ajouté" />
     <MESSAGE value="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)" />
+    <MESSAGE value="Correction d'un bug + ajout d'une bd plus grande" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction d'un bug + ajout d'une bd plus grande" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java</url>
-          <line>277</line>
+          <line>275</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

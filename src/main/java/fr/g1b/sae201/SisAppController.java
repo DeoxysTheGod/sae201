@@ -260,15 +260,13 @@ public class SisAppController {
     private void applyFilter() {
         StringBuilder sb = new StringBuilder();
         if (toggleBetweenTwoDates.isSelected()) {
-
             sb.append((int)dateRangeSlider.getLowValue() + "-" + (int)dateRangeSlider.getHighValue());
-            System.out.println(sb.toString());
         } else {
             sb.append("none");
         }
         sb.append(",");
         if (togglePreciseDate.isSelected()) {
-            sb.append(datePicker.getValue());
+            sb.append(datePicker.getValue().toString().replace("-","/"));
         } else {
             sb.append("none");
         }
