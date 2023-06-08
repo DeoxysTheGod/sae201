@@ -41,13 +41,13 @@ public class CustomPaneBarChart extends Pane {
             System.out.println("Error the column you are searching for does not exist");
             return;
         }
-        int nbSeisme = 0;
+
         for (int i = 1; i < dataset.size() - 1; i++) {
             String year = dataset.get(i)[dateColumnIndex].substring(0, 4);
-            nbSeisme++;
-            if (!year.equals(dataset.get(i + 1)[dateColumnIndex].substring(0, 4))) {
-                yearsCounts.put(year, nbSeisme);
-                nbSeisme = 0;
+            if (yearsCounts.containsKey(year)) {
+                yearsCounts.put(year, yearsCounts.get(year) + 1);
+            } else {
+                yearsCounts.put(year, 1);
             }
         }
 
@@ -60,6 +60,8 @@ public class CustomPaneBarChart extends Pane {
 
         barChart.setPrefWidth(width);
         barChart.setPrefHeight(heigth);
+
+        barChart.setTitle("Nombre de séismes par année");
 
         xAxis.setLabel("Année");
         yAxis.setLabel("Nombre de seisme");
@@ -74,6 +76,7 @@ public class CustomPaneBarChart extends Pane {
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
 
         Map<String, Double> regionsName = new LinkedHashMap<>();
+        Map<String, Integer> nbSeisme = new LinkedHashMap<>();
 
         int regionColumnIndex = findIndexColumnWithColumnName("Région épicentrale");
         int intensityColumnIndex = findIndexColumnWithColumnName("Intensité épicentrale");
@@ -88,9 +91,15 @@ public class CustomPaneBarChart extends Pane {
             double intensity = Double.parseDouble(dataset.get(i)[intensityColumnIndex]);
             if (regionsName.containsKey(region)) {
                 regionsName.put(region, regionsName.get(region) + intensity);
+                nbSeisme.put(region, nbSeisme.get(region) + 1);
             } else {
                 regionsName.put(region, intensity);
+                nbSeisme.put(region, 1);
             }
+        }
+
+        for (String region : regionsName.keySet()) {
+            regionsName.put(region, regionsName.get(region)/nbSeisme.get(region));
         }
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
@@ -102,6 +111,8 @@ public class CustomPaneBarChart extends Pane {
 
         barChart.setPrefWidth(width);
         barChart.setPrefHeight(heigth);
+
+        barChart.setTitle("Intensité moyenne des séismes par région");
 
         xAxis.setLabel("Année");
         yAxis.setLabel("Nombre de seisme");
