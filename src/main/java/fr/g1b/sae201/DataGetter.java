@@ -44,9 +44,10 @@ public class DataGetter {
         List<String[]> filteredDataset = getDataset().stream()
                 .skip(1)
                 .filter(element -> {
+                    int dateIndex = DataGetter.findIndexColumnWithColumnName("Date", dataset);
                     if (separatedFilter[0].matches("\\d{4}-\\d{4}")) {
-                        return ((Integer.parseInt(element[1].substring(0, 4)) <= Integer.parseInt(filter.substring(5, 9)))
-                                && (Integer.parseInt(element[1].substring(0, 4)) >= Integer.parseInt(filter.substring(0, 4))));
+                        return ((Integer.parseInt(element[dateIndex].substring(0, 4)) <= Integer.parseInt(filter.substring(5, 9)))
+                                && (Integer.parseInt(element[dateIndex].substring(0, 4)) >= Integer.parseInt(filter.substring(0, 4))));
                     } else {
                         return true;
                     }
@@ -57,4 +58,14 @@ public class DataGetter {
 
         return filteredDataset;
     }
+
+    public static int findIndexColumnWithColumnName(String columnName, List<String[]> dataset) {
+        for (int i = 0; i < dataset.get(0).length; i++) {
+            if (dataset.get(0)[i].toLowerCase().trim().contains(columnName.toLowerCase().trim())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }

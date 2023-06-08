@@ -1,5 +1,6 @@
 package fr.g1b.sae201.dashboardpane;
 
+import fr.g1b.sae201.DataGetter;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -35,14 +36,14 @@ public class CustomInformationDisplayPane extends Pane {
 
         Map<String, Integer> yearsCounts = new LinkedHashMap<>();
 
-        int dateColumnIndex = findIndexColumnWithColumnName("Date (AAAA/MM/JJ)");
+        int dateColumnIndex = DataGetter.findIndexColumnWithColumnName("Date", dataset);
 
         if (dateColumnIndex == -1) {
             System.out.println("Error the column you are searching for does not exist");
             return;
         }
 
-        for (int i = 1; i < dataset.size() - 1; i++) {
+        for (int i = 1; i < dataset.size(); i++) {
             String year = dataset.get(i)[dateColumnIndex].substring(0, 4);
             if (yearsCounts.containsKey(year)) {
                 yearsCounts.put(year, yearsCounts.get(year) + 1);
@@ -80,15 +81,15 @@ public class CustomInformationDisplayPane extends Pane {
         Map<String, Double> regionsName = new LinkedHashMap<>();
         Map<String, Integer> nbSeisme = new LinkedHashMap<>();
 
-        int regionColumnIndex = findIndexColumnWithColumnName("Région épicentrale");
-        int intensityColumnIndex = findIndexColumnWithColumnName("Intensité épicentrale");
+        int regionColumnIndex = DataGetter.findIndexColumnWithColumnName("Région épicentrale", dataset);
+        int intensityColumnIndex = DataGetter.findIndexColumnWithColumnName("Intensité épicentrale", dataset);
 
         if (regionColumnIndex == -1 || intensityColumnIndex == -1) {
             System.out.println("Error the column you are searching for does not exist");
             return;
         }
 
-        for (int i = 1; i < dataset.size() - 1; i++) {
+        for (int i = 1; i < dataset.size(); i++) {
             String region = dataset.get(i)[regionColumnIndex];
             double intensity = Double.parseDouble(dataset.get(i)[intensityColumnIndex]);
             if (regionsName.containsKey(region)) {
@@ -121,14 +122,4 @@ public class CustomInformationDisplayPane extends Pane {
 
         this.getChildren().add(barChart);
     }
-
-    private int findIndexColumnWithColumnName(String columnName) {
-        for (int i = 0; i < dataset.get(0).length; i++) {
-            if (dataset.get(0)[i].toLowerCase().trim().equals(columnName.toLowerCase().trim())) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
 }

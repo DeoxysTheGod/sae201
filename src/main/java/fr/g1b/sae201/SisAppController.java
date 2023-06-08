@@ -108,13 +108,13 @@ public class SisAppController {
 
 
         // Initialisation de l'interface
-        InterfaceInitialize();
         createBindings();
+        InterfaceInitialize();
 
         rightMenuContainer.setPrefWidth(0.0);
         leftMenuContainer.setPrefWidth(0.0);
 
-        dataset = new DataGetter(this.getClass().getResource("seismes.csv").getFile());
+        dataset = new DataGetter(this.getClass().getResource("seismes_complet.csv").getFile());
         CustomInformationDisplayPane cb1 = new CustomInformationDisplayPane(400, 400, dataset.getDataset());
         CustomInformationDisplayPane cb2 = new CustomInformationDisplayPane(400, 400, dataset.getDataset());
 
@@ -199,14 +199,12 @@ public class SisAppController {
         filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight() - filterContainer.getLayoutY() * 2);
 
         // Initialisation du RangeSlider pour les dates
-        dateRangeSlider.setMax(2023);
-        dateRangeSlider.setMin(1970);
-        dateRangeSlider.setHighValue(2023);
-        dateRangeSlider.setLowValue(1970);
+        dateRangeSlider.setMax(2007);
+        dateRangeSlider.setMin(1500);
+        dateRangeSlider.setHighValue(2007);
+        dateRangeSlider.setLowValue(1500);
         dateRangeSlider.setMajorTickUnit(10);
-        dateRangeSlider.setSnapToTicks(true);
         dateRangeSlider.setShowTickLabels(true);
-        dateRangeSlider.setMinorTickCount(1);
 
         // Initialisation du Dashboard
         dashboardScrollContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
@@ -220,7 +218,6 @@ public class SisAppController {
         dateRangeSlider.highValueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                System.out.println(newValue);
                 maxValueDateLabel.setText(String.format("%d",newValue.intValue()));
             }
         });
@@ -263,7 +260,9 @@ public class SisAppController {
     private void applyFilter() {
         StringBuilder sb = new StringBuilder();
         if (toggleBetweenTwoDates.isSelected()) {
+
             sb.append((int)dateRangeSlider.getLowValue() + "-" + (int)dateRangeSlider.getHighValue());
+            System.out.println(sb.toString());
         } else {
             sb.append("none");
         }
