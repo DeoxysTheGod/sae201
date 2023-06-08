@@ -220,7 +220,7 @@ public class SisAppController {
         dateRangeSlider.highValueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-
+                System.out.println(newValue);
                 maxValueDateLabel.setText(String.format("%d",newValue.intValue()));
             }
         });

@@ -5,7 +5,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import com.gluonhq.maps.*;
 

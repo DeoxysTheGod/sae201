@@ -131,7 +131,4 @@ public class CustomInformationDisplayPane extends Pane {
         return -1;
     }
 
-    public void setDataset(List<String[]> dataset) {
-        this.dataset = dataset;
-    }
 }
