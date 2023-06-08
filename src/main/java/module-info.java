@@ -4,6 +4,7 @@ module fr.g1b.sae201 {
     requires com.opencsv;
     requires javafx.web;
     requires org.controlsfx.controls;
+    requires com.gluonhq.maps;
 
 
     opens fr.g1b.sae201 to javafx.fxml;
