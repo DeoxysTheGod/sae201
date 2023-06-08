@@ -1,19 +1,30 @@
 package fr.g1b.sae201;
 
 import fr.g1b.sae201.dashboardpane.CustomPaneBarChart;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
+import javafx.util.StringConverter;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.NumberStringConverter;
+import org.controlsfx.control.RangeSlider;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 import java.io.File;
+import java.util.concurrent.Callable;
 
 public class SisAppController {
     // Containers
@@ -35,6 +46,12 @@ public class SisAppController {
     // Menu de droite
     @FXML
     private Pane rightMenuContainer;
+    @FXML
+    private RangeSlider dateRangeSlider;
+    @FXML
+    private TextField minValueDateTextField;
+    @FXML
+    private TextField maxValueDateTextField;
     @FXML
     private VBox filterContainer;
 
@@ -83,9 +100,9 @@ public class SisAppController {
         filterMenuBtn.setGraphic(view_two);
 
 
-
         // Initialisation de l'interface
         InterfaceInitialize();
+        createBindings();
 
         rightMenuContainer.setPrefWidth(0.0);
         leftMenuContainer.setPrefWidth(0.0);
@@ -171,13 +188,39 @@ public class SisAppController {
         filterContainer.setPrefWidth(rightMenuContainer.getPrefWidth() - 15.0);
         filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight() - filterContainer.getLayoutY()*2);
 
+        // Initialisation du RangeSlider pour les dates
+        dateRangeSlider.setMax(2023);
+        dateRangeSlider.setMin(1970);
+        dateRangeSlider.setHighValue(2023);
+        dateRangeSlider.setLowValue(1970);
+        dateRangeSlider.setMajorTickUnit(10);
+        dateRangeSlider.setBlockIncrement(10);
+        dateRangeSlider.setSnapToTicks(true);
+        dateRangeSlider.setShowTickLabels(true);
+
         // Initialisation du Dashboard
         dashboardScrollContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
         dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth()-(rightMenuSize+leftMenuSize+dashboardScrollContainer.getLayoutX()*2));
         dashboardScrollContainer.setPrefHeight(mainContainer.getPrefHeight()-(checkBoxMenuBtn.getLayoutY()*2));
 
         dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth()-40);
+    }
 
+    public void createBindings() {
+        /*
+        StringProperty dateFieldMaxValue = maxValueDateTextField.textProperty();
+        IntegerProperty it = new SimpleIntegerProperty();
+        DoubleProperty dateSliderMaxValue = dateRangeSlider.highValueProperty();
+
+        it.bind(Bindings.createIntegerBinding((Callable<Integer>) () -> (int) dateSliderMaxValue.get(), (Observable) dateRangeSlider));
+
+        dateRangeSlider.highValueProperty().bindBidirectional(dateSliderMaxValue);
+
+        maxValueDateTextField.textProperty().bind(it.asString());
+
+        StringConverter<Number> converter = new NumberStringConverter();
+        Bindings.bindBidirectional(dateFieldMaxValue, dateSliderMaxValue, converter);
+         */
     }
 
     @FXML

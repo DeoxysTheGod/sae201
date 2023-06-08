@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CustomPaneBarChart extends Pane {
@@ -29,12 +30,14 @@ public class CustomPaneBarChart extends Pane {
 
     public void addingBarChartEarthQuakePerYear() {
 
+
+
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
 
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
 
-        Map<String, Integer> yearsCounts = new HashMap<>();
+        Map<String, Integer> yearsCounts = new LinkedHashMap<>();
 
         int dateColumnIndex = -1;
         for (int i = 0; i < dataset.get(0).length; i++) {
@@ -48,17 +51,17 @@ public class CustomPaneBarChart extends Pane {
             return;
         }
         int nbSeisme = 0;
-        for (int i = 1; i < dataset.size()-1; i++) {
-            String year = dataset.get(i)[dateColumnIndex].substring(0,4);
+        for (int i = 1; i < dataset.size() - 1; i++) {
+            String year = dataset.get(i)[dateColumnIndex].substring(0, 4);
             nbSeisme++;
-            if (!year.equals(dataset.get(i+1)[dateColumnIndex].substring(0,4))) {
+            if (!year.equals(dataset.get(i + 1)[dateColumnIndex].substring(0, 4))) {
                 yearsCounts.put(year, nbSeisme);
                 nbSeisme = 0;
             }
         }
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        for (String year: yearsCounts.keySet()) {
+        for (String year : yearsCounts.keySet()) {
             series.getData().add(new XYChart.Data<>(year, yearsCounts.get(year)));
         }
 
@@ -67,7 +70,10 @@ public class CustomPaneBarChart extends Pane {
         barChart.setPrefWidth(width);
         barChart.setPrefHeight(heigth);
 
-        xAxis.setLabel("Years");
+
+
+
+        xAxis.setLabel("Année");
         yAxis.setLabel("Nombre de seisme");
 
         this.getChildren().add(barChart);

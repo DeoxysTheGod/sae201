@@ -4,6 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import org.controlsfx.control.RangeSlider?>
+<?import javafx.scene.text.Text?>
 <Pane fx:id="mainContainer" prefHeight="800.0" prefWidth="1400.0" styleClass="mainContainer" stylesheets="@style.css"
       xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="fr.g1b.sae201.SisAppController">
@@ -31,7 +33,11 @@
 
     <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="rightMenuContainer">
         <VBox fx:id="filterContainer" alignment="CENTER_RIGHT" spacing="30.0" styleClass="menuContainer">
-            <TextField styleClass="textfieldRight"/>
+            <HBox spacing="20.0">
+                <TextField fx:id="minValueDateTextField" editable="true"/>
+                <TextField fx:id="maxValueDateTextField" editable="true"/>
+            </HBox>
+            <RangeSlider fx:id="dateRangeSlider" styleClass="textfieldRight"/>
             <TextField styleClass="textfieldRight"/>
             <TextField styleClass="textfieldRight"/>
             <TextField styleClass="textfieldRight"/>

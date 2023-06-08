@@ -2,6 +2,7 @@ module fr.g1b.sae201 {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.opencsv;
+    requires org.controlsfx.controls;
 
 
     opens fr.g1b.sae201 to javafx.fxml;
