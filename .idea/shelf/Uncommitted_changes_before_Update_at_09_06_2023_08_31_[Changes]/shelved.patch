@@ -1,0 +1,465 @@
+Index: src/main/java/fr/g1b/sae201/Lecture.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fr.g1b.sae201;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport javafx.application.Application;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.TableColumn;\r\nimport javafx.scene.control.TableView;\r\nimport javafx.scene.layout.VBox;\r\nimport javafx.stage.Stage;\r\n\r\n\r\nimport javafx.beans.property.SimpleStringProperty;\r\nimport javafx.geometry.Insets;\r\nimport javafx.geometry.Pos;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.layout.HBox;\r\nimport javafx.scene.layout.Priority;\r\n\r\n\r\npublic class Lecture extends Application {\r\n\r\n    private static List<String> col1 = new ArrayList<>();\r\n    private static List<String> col2 = new ArrayList<>();\r\n    private static List<String> col3 = new ArrayList<>();\r\n    private static List<String> col4 = new ArrayList<>();\r\n    private static List<String> col5 = new ArrayList<>();\r\n    private static List<String> col6 = new ArrayList<>();\r\n    private static List<String> col7 = new ArrayList<>();\r\n    private static List<String> col8 = new ArrayList<>();\r\n    private static List<String> col9 = new ArrayList<>();\r\n    private static List<String> col10 = new ArrayList<>();\r\n    private static List<String> col11 = new ArrayList<>();\r\n    private static List<String> col12 = new ArrayList<>();\r\n\r\n\r\n    public static void main(String[] args) {\r\n        String csvFile = Lecture2.class.getResource(\"seismes.csv\").getFile();\r\n        String line;\r\n        String csvSplitBy = \",\";\r\n\r\n        /**\r\n         *\r\n         * Les données CSV dans 12 listes distinctes (tableaux dynamiques)\r\n         * Identifiant, 0\r\n         * \"Date (AAAA/MM/JJ)\" 1\r\n         * Heure, 2\r\n         * Nom, 3\r\n         * \"Région épicentrale\", 4\r\n         * Choc, 5\r\n         * \"X RGF93/L93\", 6\r\n         * \"Y RGF93/L93\", 7\r\n         * \"Latitude en WGS 84\", 8\r\n         * \"Longitude en WGS 84\", 9\r\n         * \"Intensité épicentrale\", 10\r\n         * \"Qualité intensité épicentrale\" 11\r\n         **/\r\n\r\n\r\n\r\n        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {\r\n            while ((line = br.readLine()) != null) {\r\n                String[] data = line.split(csvSplitBy);\r\n                col1.add(data[0]);\r\n                col2.add(data[1]);\r\n                col3.add(data[2]);\r\n                col4.add(data[3]);\r\n                col5.add(data[4]);\r\n                col6.add(data[5]);\r\n                col7.add(data[6]);\r\n                col8.add(data[7]);\r\n                col9.add(data[8]);\r\n                col10.add(data[9]);\r\n                col11.add(data[10]);\r\n                col12.add(data[11]);\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        System.out.println(col1);\r\n    launch(args);\r\n    }\r\n\r\n\r\n    @Override\r\n    public void start(Stage primaryStage) throws Exception {\r\n        // Création du conteneur principal\r\n        VBox vbox = new VBox();\r\n\r\n        // Création du conteneur correspondant à la ligne de contrôle haut dessus du tableau\r\n        HBox topControls = new HBox();\r\n        topControls.setAlignment( Pos.BOTTOM_LEFT );\r\n        Button btnRefresh = new Button(\"Refresh\");\r\n\r\n        HBox topRightControls = new HBox();\r\n        HBox.setHgrow(topRightControls, Priority.ALWAYS );\r\n        topRightControls.setAlignment( Pos.BOTTOM_RIGHT );\r\n        Hyperlink signOutLink = new Hyperlink(\"Sign Out\");\r\n        topRightControls.getChildren().add( signOutLink );\r\n\r\n        topControls.getChildren().addAll( btnRefresh, topRightControls );\r\n\r\n        // Création du tableau avec les 12 colonnes\r\n        TableView<Object> tblSeismes = new TableView<>();\r\n        //tblSeismes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);\r\n        TableColumn<Object, String> date = new TableColumn<>(\"Date\");\r\n        TableColumn<Object, String> heure = new TableColumn<>(\"Heure\");\r\n        TableColumn<Object, String> nom = new TableColumn<>(\"Nom\");\r\n        TableColumn<Object, String> epicentre = new TableColumn<>(\"Région épicentrale\");\r\n        TableColumn<Object, String> choc = new TableColumn<>(\"Choc\");\r\n        TableColumn<Object, String> x = new TableColumn<>(\"X\");\r\n        TableColumn<Object, String> y = new TableColumn<>(\"Y\");\r\n        TableColumn<Object, String> intensite = new TableColumn<>(\"Intensité épicentrale\");\r\n\r\n        tblSeismes.getColumns().addAll( date, heure, nom, epicentre, choc, x, y, intensite );\r\n        VBox.setVgrow( tblSeismes, Priority.ALWAYS );\r\n\r\n        date.setCellValueFactory(data -> new SimpleStringProperty(col1.toString()));\r\n        heure.setCellValueFactory(data -> new SimpleStringProperty(col2.toString()));\r\n        nom.setCellValueFactory(data -> new SimpleStringProperty(col3.toString()));\r\n        epicentre.setCellValueFactory(data -> new SimpleStringProperty(col4.toString()));\r\n        choc.setCellValueFactory(data -> new SimpleStringProperty(col5.toString()));\r\n        x.setCellValueFactory(data -> new SimpleStringProperty(col6.toString()));\r\n        y.setCellValueFactory(data -> new SimpleStringProperty(col9.toString()));\r\n        intensite.setCellValueFactory(data -> new SimpleStringProperty(col10.toString()));\r\n\r\n        // Création de la ligne de séparation\r\n        Separator sep = new Separator();\r\n\r\n        // Création du bandeau en bas de la fenêtre\r\n        HBox bottomControls = new HBox();\r\n        bottomControls.setAlignment(Pos.BOTTOM_RIGHT );\r\n        Button btnClose = new Button(\"Close\");\r\n        bottomControls.getChildren().add( btnClose );\r\n\r\n        // Ajout des contrôleurs au conteneur principal\r\n        vbox.getChildren().addAll(\r\n                topControls,\r\n                tblSeismes,\r\n                sep,\r\n                bottomControls\r\n        );\r\n\r\n        VBox.setMargin( topControls, new Insets(10.0d) );\r\n        VBox.setMargin( tblSeismes, new Insets(0.0d, 10.0d, 10.0d, 10.0d) );\r\n        VBox.setMargin( bottomControls, new Insets(10.0d) );\r\n\r\n        // Ajout du conteneur à la scene\r\n        Scene scene = new Scene(vbox );\r\n\r\n        // Ajout de la scene à la fenêtre et changement de ses paramètres (dimensions et titre)\r\n        primaryStage.setScene( scene );\r\n        primaryStage.setWidth( 800 );\r\n        primaryStage.setHeight( 600 );\r\n        primaryStage.setTitle(\"VBox and HBox App\");\r\n\r\n        // Affichage de la fenêtre\r\n\r\n        primaryStage.show();\r\n    }\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/fr/g1b/sae201/Lecture.java b/src/main/java/fr/g1b/sae201/Lecture.java
+--- a/src/main/java/fr/g1b/sae201/Lecture.java	(revision a14b27d928ac8cebe7ccc317a17fdd22ac5cb6e8)
++++ b/src/main/java/fr/g1b/sae201/Lecture.java	(date 1686210359335)
+@@ -1,65 +1,33 @@
+ package fr.g1b.sae201;
+ 
++import java.io.File;
++import java.io.FileNotFoundException;
++import java.util.Scanner;
++
+ import java.io.BufferedReader;
+ import java.io.FileReader;
+ import java.io.IOException;
+ import java.util.ArrayList;
+ import java.util.List;
+-import javafx.application.Application;
+-import javafx.scene.Scene;
+-import javafx.scene.control.TableColumn;
+-import javafx.scene.control.TableView;
+-import javafx.scene.layout.VBox;
+-import javafx.stage.Stage;
+-
+-
+-import javafx.beans.property.SimpleStringProperty;
+-import javafx.geometry.Insets;
+-import javafx.geometry.Pos;
+-import javafx.scene.control.*;
+-import javafx.scene.layout.HBox;
+-import javafx.scene.layout.Priority;
+-
+-
+-public class Lecture extends Application {
+ 
+-    private static List<String> col1 = new ArrayList<>();
+-    private static List<String> col2 = new ArrayList<>();
+-    private static List<String> col3 = new ArrayList<>();
+-    private static List<String> col4 = new ArrayList<>();
+-    private static List<String> col5 = new ArrayList<>();
+-    private static List<String> col6 = new ArrayList<>();
+-    private static List<String> col7 = new ArrayList<>();
+-    private static List<String> col8 = new ArrayList<>();
+-    private static List<String> col9 = new ArrayList<>();
+-    private static List<String> col10 = new ArrayList<>();
+-    private static List<String> col11 = new ArrayList<>();
+-    private static List<String> col12 = new ArrayList<>();
+-
+-
++public class Lecture {
+     public static void main(String[] args) {
+-        String csvFile = Lecture2.class.getResource("seismes.csv").getFile();
++        String csvFile = "resources/fr/g1b/sae201/seismes.csv";
+         String line;
+         String csvSplitBy = ",";
+ 
+-        /**
+-         *
+-         * Les données CSV dans 12 listes distinctes (tableaux dynamiques)
+-         * Identifiant, 0
+-         * "Date (AAAA/MM/JJ)" 1
+-         * Heure, 2
+-         * Nom, 3
+-         * "Région épicentrale", 4
+-         * Choc, 5
+-         * "X RGF93/L93", 6
+-         * "Y RGF93/L93", 7
+-         * "Latitude en WGS 84", 8
+-         * "Longitude en WGS 84", 9
+-         * "Intensité épicentrale", 10
+-         * "Qualité intensité épicentrale" 11
+-         **/
+-
+-
++        List<String> col1 = new ArrayList<>();
++        List<String> col2 = new ArrayList<>();
++        List<String> col3 = new ArrayList<>();
++        List<String> col4 = new ArrayList<>();
++        List<String> col5 = new ArrayList<>();
++        List<String> col6 = new ArrayList<>();
++        List<String> col7 = new ArrayList<>();
++        List<String> col8 = new ArrayList<>();
++        List<String> col9 = new ArrayList<>();
++        List<String> col10 = new ArrayList<>();
++        List<String> col11 = new ArrayList<>();
++        List<String> col12 = new ArrayList<>();
+ 
+         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+             while ((line = br.readLine()) != null) {
+@@ -81,86 +49,20 @@
+             e.printStackTrace();
+         }
+         System.out.println(col1);
+-    launch(args);
+-    }
+ 
+-
+-    @Override
+-    public void start(Stage primaryStage) throws Exception {
+-        // Création du conteneur principal
+-        VBox vbox = new VBox();
+-
+-        // Création du conteneur correspondant à la ligne de contrôle haut dessus du tableau
+-        HBox topControls = new HBox();
+-        topControls.setAlignment( Pos.BOTTOM_LEFT );
+-        Button btnRefresh = new Button("Refresh");
+-
+-        HBox topRightControls = new HBox();
+-        HBox.setHgrow(topRightControls, Priority.ALWAYS );
+-        topRightControls.setAlignment( Pos.BOTTOM_RIGHT );
+-        Hyperlink signOutLink = new Hyperlink("Sign Out");
+-        topRightControls.getChildren().add( signOutLink );
+-
+-        topControls.getChildren().addAll( btnRefresh, topRightControls );
+-
+-        // Création du tableau avec les 12 colonnes
+-        TableView<Object> tblSeismes = new TableView<>();
+-        //tblSeismes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+-        TableColumn<Object, String> date = new TableColumn<>("Date");
+-        TableColumn<Object, String> heure = new TableColumn<>("Heure");
+-        TableColumn<Object, String> nom = new TableColumn<>("Nom");
+-        TableColumn<Object, String> epicentre = new TableColumn<>("Région épicentrale");
+-        TableColumn<Object, String> choc = new TableColumn<>("Choc");
+-        TableColumn<Object, String> x = new TableColumn<>("X");
+-        TableColumn<Object, String> y = new TableColumn<>("Y");
+-        TableColumn<Object, String> intensite = new TableColumn<>("Intensité épicentrale");
+-
+-        tblSeismes.getColumns().addAll( date, heure, nom, epicentre, choc, x, y, intensite );
+-        VBox.setVgrow( tblSeismes, Priority.ALWAYS );
+-
+-        date.setCellValueFactory(data -> new SimpleStringProperty(col1.toString()));
+-        heure.setCellValueFactory(data -> new SimpleStringProperty(col2.toString()));
+-        nom.setCellValueFactory(data -> new SimpleStringProperty(col3.toString()));
+-        epicentre.setCellValueFactory(data -> new SimpleStringProperty(col4.toString()));
+-        choc.setCellValueFactory(data -> new SimpleStringProperty(col5.toString()));
+-        x.setCellValueFactory(data -> new SimpleStringProperty(col6.toString()));
+-        y.setCellValueFactory(data -> new SimpleStringProperty(col9.toString()));
+-        intensite.setCellValueFactory(data -> new SimpleStringProperty(col10.toString()));
+-
+-        // Création de la ligne de séparation
+-        Separator sep = new Separator();
+-
+-        // Création du bandeau en bas de la fenêtre
+-        HBox bottomControls = new HBox();
+-        bottomControls.setAlignment(Pos.BOTTOM_RIGHT );
+-        Button btnClose = new Button("Close");
+-        bottomControls.getChildren().add( btnClose );
+-
+-        // Ajout des contrôleurs au conteneur principal
+-        vbox.getChildren().addAll(
+-                topControls,
+-                tblSeismes,
+-                sep,
+-                bottomControls
+-        );
+-
+-        VBox.setMargin( topControls, new Insets(10.0d) );
+-        VBox.setMargin( tblSeismes, new Insets(0.0d, 10.0d, 10.0d, 10.0d) );
+-        VBox.setMargin( bottomControls, new Insets(10.0d) );
+-
+-        // Ajout du conteneur à la scene
+-        Scene scene = new Scene(vbox );
+-
+-        // Ajout de la scene à la fenêtre et changement de ses paramètres (dimensions et titre)
+-        primaryStage.setScene( scene );
+-        primaryStage.setWidth( 800 );
+-        primaryStage.setHeight( 600 );
+-        primaryStage.setTitle("VBox and HBox App");
+-
+-        // Affichage de la fenêtre
+-
+-        primaryStage.show();
++        // Maintenant, vous avez vos données CSV dans 12 listes distinctes (tableaux dynamiques)
+     }
+ }
+ 
+-
++// Identifiant,
++// "Date (AAAA/MM/JJ)"
++// ,Heure,
++// Nom,
++// "Région épicentrale",
++// Choc,
++// "X RGF93/L93",
++// "Y RGF93/L93",
++// "Latitude en WGS 84",
++// "Longitude en WGS 84",
++// "Intensité épicentrale",
++// "Qualité intensité épicentrale"
+\ No newline at end of file
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n  <modelVersion>4.0.0</modelVersion>\r\n\r\n  <groupId>fr.g1b</groupId>\r\n  <artifactId>sae201</artifactId>\r\n  <version>1.0-SNAPSHOT</version>\r\n  <name>sae201</name>\r\n\r\n  <properties>\r\n    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\r\n    <junit.version>5.9.2</junit.version>      </properties>\r\n\r\n  <dependencies>\r\n    <dependency>\r\n      <groupId>org.openjfx</groupId>\r\n      <artifactId>javafx-controls</artifactId>\r\n      <version>20</version>\r\n    </dependency>\r\n\r\n    <dependency>\r\n      <groupId>org.openjfx</groupId>\r\n      <artifactId>javafx-fxml</artifactId>\r\n      <version>20</version>\r\n    </dependency>\r\n                                    \r\n    <dependency>\r\n      <groupId>org.junit.jupiter</groupId>\r\n      <artifactId>junit-jupiter-api</artifactId>\r\n      <version>${junit.version}</version>\r\n      <scope>test</scope>\r\n    </dependency>\r\n\r\n    <dependency>\r\n      <groupId>org.junit.jupiter</groupId>\r\n      <artifactId>junit-jupiter-engine</artifactId>\r\n      <version>${junit.version}</version>\r\n      <scope>test</scope>\r\n    </dependency>\r\n\r\n    <dependency>\r\n      <groupId>com.opencsv</groupId>\r\n      <artifactId>opencsv</artifactId>\r\n      <version>5.7.1</version>\r\n    </dependency>\r\n  </dependencies>\r\n\r\n  <build>\r\n        <plugins>\r\n            <plugin>\r\n        <groupId>org.apache.maven.plugins</groupId>\r\n        <artifactId>maven-compiler-plugin</artifactId>\r\n        <version>3.11.0</version>\r\n        <configuration>\r\n          <source>20</source>\r\n          <target>20</target>\r\n        </configuration>\r\n            </plugin>\r\n      <plugin>\r\n        <groupId>org.openjfx</groupId>\r\n        <artifactId>javafx-maven-plugin</artifactId>\r\n        <version>0.0.8</version>\r\n        <executions>\r\n          <execution>\r\n            <!-- Default configuration for running with: mvn clean javafx:run -->\r\n            <id>default-cli</id>\r\n            <configuration>\r\n              <mainClass>fr.g1b.sae201/fr.g1b.sae201.MainApp</mainClass>\r\n              <launcher>app</launcher>\r\n              <jlinkZipName>app</jlinkZipName>\r\n              <jlinkImageName>app</jlinkImageName>\r\n              <noManPages>true</noManPages>\r\n              <stripDebug>true</stripDebug>\r\n              <noHeaderFiles>true</noHeaderFiles>\r\n            </configuration>\r\n          </execution>\r\n        </executions>\r\n      </plugin>\r\n          </plugins>\r\n  </build>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision a14b27d928ac8cebe7ccc317a17fdd22ac5cb6e8)
++++ b/pom.xml	(date 1686211461046)
+@@ -45,6 +45,7 @@
+       <artifactId>opencsv</artifactId>
+       <version>5.7.1</version>
+     </dependency>
++
+   </dependencies>
+ 
+   <build>
+Index: src/main/java/fr/g1b/sae201/Lecture2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fr.g1b.sae201;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.beans.binding.Bindings;\r\nimport javafx.collections.FXCollections;\r\nimport javafx.collections.ObservableList;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.TableColumn;\r\nimport javafx.scene.control.TableView;\r\nimport javafx.scene.layout.VBox;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\n\r\npublic class Lecture2 extends Application {\r\n\r\n    private static final String CSV_FILE_PATH = \"/home/carlos/IdeaProjects/sae201/src/main/resources/fr/g1b/sae201/seismes.csv\";\r\n    private static final String CSV_SPLIT_BY = \",\";\r\n\r\n    public static void main(String[] args) {\r\n        launch(args);\r\n    }\r\n\r\n    @Override\r\n    public void start(Stage primaryStage) {\r\n        // Create TableView and columns\r\n        TableView<String[]> tableView = new TableView<>();\r\n\r\n        try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE_PATH))) {\r\n            String line;\r\n            boolean isFirstLine = true;\r\n            ObservableList<String[]> data = FXCollections.observableArrayList();\r\n\r\n            while ((line = br.readLine()) != null) {\r\n                String[] row = line.split(CSV_SPLIT_BY);\r\n\r\n                if (isFirstLine) {\r\n                    // Create columns based on the first line of CSV (header)\r\n                    for (int i = 0; i < row.length; i++) {\r\n                        final int colIndex = i;\r\n                        TableColumn<String[], String> column = new TableColumn<>(row[i]);\r\n                        column.setCellValueFactory(cellData ->\r\n                                Bindings.createStringBinding(() -> cellData.getValue()[colIndex]));\r\n                        tableView.getColumns().add(column);\r\n                    }\r\n                    isFirstLine = false;\r\n                } else {\r\n                    data.add(row);\r\n                }\r\n            }\r\n\r\n            // Set the data items of the TableView\r\n            tableView.setItems(data);\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n        // Create the layout and scene\r\n        VBox vbox = new VBox(tableView);\r\n        Scene scene = new Scene(vbox, 800, 600);\r\n        primaryStage.setScene(scene);\r\n        primaryStage.show();\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/fr/g1b/sae201/Lecture2.java b/src/main/java/fr/g1b/sae201/Lecture2.java
+--- a/src/main/java/fr/g1b/sae201/Lecture2.java	(revision a14b27d928ac8cebe7ccc317a17fdd22ac5cb6e8)
++++ b/src/main/java/fr/g1b/sae201/Lecture2.java	(date 1686218403285)
+@@ -16,7 +16,7 @@
+ 
+ public class Lecture2 extends Application {
+ 
+-    private static final String CSV_FILE_PATH = "/home/carlos/IdeaProjects/sae201/src/main/resources/fr/g1b/sae201/seismes.csv";
++    private static final String CSV_FILE_PATH = "sae201/src/main/resources/fr/g1b/sae201/seismes.csv";
+     private static final String CSV_SPLIT_BY = ",";
+ 
+     public static void main(String[] args) {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Qs4Oqko6a5Rrhg1ymuDsKKURxP\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.4561201\",\r\n    \"settings.editor.selected.configurable\": \"reference.settings.project.maven.repository.indices\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Application.MainApp\">\r\n    <configuration name=\"CustomPaneBarChart\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.dashboardpane.CustomPaneBarChart\" />\r\n      <module name=\"sae201\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.dashboardpane.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Lecture\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.Lecture\" />\r\n      <module name=\"sae201\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LectureBis\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.LectureBis\" />\r\n      <module name=\"sae201\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"MainApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainApp\" />\r\n      <module name=\"sae201\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.MainApp\" />\r\n        <item itemvalue=\"Application.CustomPaneBarChart\" />\r\n        <item itemvalue=\"Application.LectureBis\" />\r\n        <item itemvalue=\"Application.Lecture\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task id=\"LOCAL-00001\" summary=\"modif .gitignore\">\r\n      <created>1686087886499</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1686087886499</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Changement des liens des images\">\r\n      <created>1686087934161</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1686087934161</updated>\r\n    </task>\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"Changement des liens des images\" />\r\n      <created>1686128933046</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1686128933046</updated>\r\n      <workItem from=\"1686128938771\" duration=\"120000\" />\r\n      <workItem from=\"1686130190759\" duration=\"276000\" />\r\n      <workItem from=\"1686140496020\" duration=\"11280000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"suppression de test.fxml et correction de Lecture\">\r\n      <created>1686140571540</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1686140571540</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\r\n      <created>1686149904820</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1686149904820</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\r\n      <created>1686149975914</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1686149975914</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"modif .gitignore\" />\r\n    <MESSAGE value=\"Changement des liens des images\" />\r\n    <MESSAGE value=\"suppression de test.fxml et correction de Lecture\" />\r\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\r\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <watches-manager>\r\n      <configuration name=\"Application\">\r\n        <watch expression=\"dataset.get(0)[i].toLowerCase().trim()\" language=\"JAVA\" />\r\n        <watch expression=\"dataset.get(i)[dateColumnIndex].substring(0,4)\" language=\"JAVA\" />\r\n      </configuration>\r\n    </watches-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a14b27d928ac8cebe7ccc317a17fdd22ac5cb6e8)
++++ b/.idea/workspace.xml	(date 1686218518851)
+@@ -4,11 +4,17 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
++    <list default="true" id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="ajout du boutton pour ajouter le fichier CSV">
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_08_17__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_08_17__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_23_26__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_23_26__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_06_2023_12_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_06_2023_12_39__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_06_2023_15_22__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_07_06_2023_15_22__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture2.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -21,6 +27,7 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
++        <option value="CSS File" />
+         <option value="Class" />
+       </list>
+     </option>
+@@ -28,7 +35,15 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="ProjectId" id="2Qs4Oqko6a5Rrhg1ymuDsKKURxP" />
++  <component name="MavenImportPreferences">
++    <option name="generalSettings">
++      <MavenGeneralSettings>
++        <option name="mavenHome" value="Use Maven wrapper" />
++        <option name="useMavenConfig" value="true" />
++      </MavenGeneralSettings>
++    </option>
++  </component>
++  <component name="ProjectId" id="2QmjeAmTlZcGtAO4TuFyrDCdoD3" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="1" id="Add" />
+   </component>
+@@ -36,66 +51,26 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "project.structure.last.edited": "Modules",
+-    "project.structure.proportion": "0.0",
+-    "project.structure.side.proportion": "0.4561201",
+-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+-    "vue.rearranger.settings.migration": "true"
+-  }
+-}]]></component>
+-  <component name="RecentsManager">
+-    <key name="MoveFile.RECENT_KEYS">
+-      <recent name="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201" />
+-    </key>
+-  </component>
+-  <component name="RunManager" selected="Application.MainApp">
+-    <configuration name="CustomPaneBarChart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.dashboardpane.CustomPaneBarChart" />
+-      <module name="sae201" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.dashboardpane.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="Lecture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture" />
+-      <module name="sae201" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="LectureBis" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.LectureBis" />
+-      <module name="sae201" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/degan/IdeaProjects/TP2&quot;,
++    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  }
++}</component>
++  <component name="RunManager">
+     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.MainApp" />
+       <module name="sae201" />
+@@ -112,79 +87,28 @@
+     <recent_temporary>
+       <list>
+         <item itemvalue="Application.MainApp" />
+-        <item itemvalue="Application.CustomPaneBarChart" />
+-        <item itemvalue="Application.LectureBis" />
+-        <item itemvalue="Application.Lecture" />
+       </list>
+     </recent_temporary>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+-    <task id="LOCAL-00001" summary="modif .gitignore">
+-      <created>1686087886499</created>
+-      <option name="number" value="00001" />
+-      <option name="presentableId" value="LOCAL-00001" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686087886499</updated>
+-    </task>
+-    <task id="LOCAL-00002" summary="Changement des liens des images">
+-      <created>1686087934161</created>
+-      <option name="number" value="00002" />
+-      <option name="presentableId" value="LOCAL-00002" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686087934161</updated>
+-    </task>
+     <task active="true" id="Default" summary="Default task">
+-      <changelist id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Changement des liens des images" />
+-      <created>1686128933046</created>
++      <changelist id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="" />
++      <created>1685959759057</created>
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+-      <updated>1686128933046</updated>
+-      <workItem from="1686128938771" duration="120000" />
+-      <workItem from="1686130190759" duration="276000" />
+-      <workItem from="1686140496020" duration="11280000" />
+-    </task>
+-    <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
+-      <created>1686140571540</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686140571540</updated>
++      <updated>1685959759057</updated>
++      <workItem from="1685959761345" duration="658000" />
++      <workItem from="1685965744851" duration="4759000" />
++      <workItem from="1686218517376" duration="2000" />
+     </task>
+-    <task id="LOCAL-00004" summary="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
+-      <created>1686149904820</created>
+-      <option name="number" value="00004" />
+-      <option name="presentableId" value="LOCAL-00004" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686149904820</updated>
+-    </task>
+-    <task id="LOCAL-00005" summary="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
+-      <created>1686149975914</created>
+-      <option name="number" value="00005" />
+-      <option name="presentableId" value="LOCAL-00005" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686149975914</updated>
+-    </task>
+-    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="modif .gitignore" />
+-    <MESSAGE value="Changement des liens des images" />
+-    <MESSAGE value="suppression de test.fxml et correction de Lecture" />
+-    <MESSAGE value="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+-    <MESSAGE value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+-  </component>
+-  <component name="XDebuggerManager">
+-    <watches-manager>
+-      <configuration name="Application">
+-        <watch expression="dataset.get(0)[i].toLowerCase().trim()" language="JAVA" />
+-        <watch expression="dataset.get(i)[dateColumnIndex].substring(0,4)" language="JAVA" />
+-      </configuration>
+-    </watches-manager>
++    <MESSAGE value="ajout du boutton pour ajouter le fichier CSV" />
++    <option name="LAST_COMMIT_MESSAGE" value="ajout du boutton pour ajouter le fichier CSV" />
+   </component>
+ </project>
+\ No newline at end of file

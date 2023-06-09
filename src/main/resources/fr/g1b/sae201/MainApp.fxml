@@ -16,13 +16,13 @@
     </ScrollPane>
     <Pane fx:id="leftMenuContainer" prefWidth="300.0" styleClass="leftMenuContainer">
         <VBox fx:id="checkBoxContainer" alignment="CENTER_LEFT" spacing="30.0" styleClass="menuContainer">
-            <CheckBox text="pane 1" styleClass="check-box"/>
-            <CheckBox text="pane 2" styleClass="check-box"/>
+            <CheckBox fx:id="pane1" text="pane 1" styleClass="check-box"/>
+            <CheckBox fx:id="pane2" text="pane 2" styleClass="check-box"/>
             <CheckBox text="pane 3" styleClass="check-box"/>
             <CheckBox text="pane 4" styleClass="check-box"/>
 
             <!-- Bouton "Appliquer" en dessous des checkBox, il faut encore coder la class qui applique les filtres-->
-            <Button fx:id="checkButton" styleClass="checkButton" text="Appliquer">
+            <Button fx:id="checkButton" onAction="#checkButton" styleClass="checkButton" text="Appliquer">
                 <VBox.margin>
                     <Insets top="45.0" right="0.0" bottom="0.0" left="80.0"/>
                 </VBox.margin>
@@ -50,8 +50,8 @@
                 <ToggleSwitch fx:id="togglePreciseDate" selected="false"/>
             </HBox>
             <DatePicker fx:id="datePicker"/>
-            <TextField styleClass="textfieldRight"/>
-            <TextField styleClass="textfieldRight"/>
+            <TextField fx:id="regionFilter"  styleClass="textfieldRight"/>
+
             <Button fx:id="applyFilterBtn" onAction="#applyFilter" text="Filtrer"/>
         </VBox>
         <Button fx:id="filterMenuBtn" styleClass="menuBtn" prefHeight="60.0" prefWidth="60.0"

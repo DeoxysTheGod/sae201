@@ -30,6 +30,10 @@ public class SisAppController {
     private Pane leftMenuContainer;
     @FXML
     private VBox checkBoxContainer;
+    @FXML
+    private CheckBox pane1;
+    @FXML
+    private CheckBox pane2;
 
     // Dashboard
     @FXML
@@ -56,6 +60,8 @@ public class SisAppController {
     private DatePicker datePicker;
     @FXML
     private ToggleSwitch togglePreciseDate;
+    @FXML
+    private TextField regionFilter;
 
     // Controls
     @FXML
@@ -88,7 +94,25 @@ public class SisAppController {
         }
     }
 
+    @FXML
+    private void checkButton(){
+        dashboardContainer.getChildren().clear();
+        if (pane1.isSelected()){
+            CustomInformationDisplayPane pane1 = new CustomInformationDisplayPane(400, 400, filteredList);
+            pane1.addingBarChartEarthQuakePerYear();
+            dashboardContainer.getChildren().add(pane1);
+        }
+        if (pane2.isSelected()){
+            CustomInformationDisplayPane pane2 = new CustomInformationDisplayPane(400, 400, filteredList);
+            pane2.addingBarChartEarthQuakeIntensityPerRegion();
+            dashboardContainer.getChildren().add(pane2);
+        }
+
+    }
+
     public SisAppController() {
+        dataset = new DataGetter(this.getClass().getResource("seismes_complet.csv").getFile());
+        filteredList = dataset.getDataset();
         isCheckBoxContainerVisible = false;
         isFilterContainerVisible = false;
     }
@@ -114,7 +138,7 @@ public class SisAppController {
         rightMenuContainer.setPrefWidth(0.0);
         leftMenuContainer.setPrefWidth(0.0);
 
-        dataset = new DataGetter(this.getClass().getResource("seismes_complet.csv").getFile());
+
         CustomInformationDisplayPane cb1 = new CustomInformationDisplayPane(400, 400, dataset.getDataset());
         CustomInformationDisplayPane cb2 = new CustomInformationDisplayPane(400, 400, dataset.getDataset());
 
@@ -260,13 +284,19 @@ public class SisAppController {
     private void applyFilter() {
         StringBuilder sb = new StringBuilder();
         if (toggleBetweenTwoDates.isSelected()) {
-            sb.append((int)dateRangeSlider.getLowValue() + "-" + (int)dateRangeSlider.getHighValue());
+            sb.append((int) dateRangeSlider.getLowValue() + "-" + (int) dateRangeSlider.getHighValue());
         } else {
             sb.append("none");
         }
         sb.append(",");
         if (togglePreciseDate.isSelected()) {
-            sb.append(datePicker.getValue().toString().replace("-","/"));
+            sb.append(datePicker.getValue().toString().replace("-", "/"));
+        } else {
+            sb.append("none");
+        }
+        sb.append(",");
+        if (!regionFilter.getText().isEmpty()) {
+            sb.append(regionFilter.getText());
         } else {
             sb.append("none");
         }
@@ -274,12 +304,8 @@ public class SisAppController {
         filter = sb.toString();
 
         filteredList = dataset.applyFilter(filter);
+        checkButton();
 
-        dashboardContainer.getChildren().clear();
-        CustomInformationDisplayPane c1 = new CustomInformationDisplayPane(400,400,filteredList);
-        c1.addingBarChartEarthQuakePerYear();
-
-        dashboardContainer.getChildren().add(c1);
     }
 
     @FXML
