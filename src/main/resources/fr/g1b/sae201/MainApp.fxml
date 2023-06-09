@@ -34,7 +34,7 @@
 
     <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="rightMenuContainer">
         <VBox fx:id="filterContainer" alignment="CENTER_RIGHT" spacing="30.0" styleClass="menuContainer">
-            <HBox>
+            <HBox styleClass="rightPadding">
                 <Label text="Entre deux date :"/>
                 <ToggleSwitch fx:id="toggleBetweenTwoDates" selected="true"/>
             </HBox>
@@ -45,14 +45,18 @@
                 </HBox>
                 <RangeSlider fx:id="dateRangeSlider" styleClass="textfieldRight"/>
             </VBox>
-            <HBox>
+            <HBox styleClass="rightPadding">
                 <Label text="Date précise :"/>
                 <ToggleSwitch fx:id="togglePreciseDate" selected="false"/>
             </HBox>
             <DatePicker fx:id="datePicker"/>
             <TextField fx:id="regionFilter"  styleClass="textfieldRight"/>
 
-            <Button fx:id="applyFilterBtn" onAction="#applyFilter" text="Filtrer"/>
+            <Button fx:id="applyFilterBtn" onAction="#applyFilter" text="Filtrer" styleClass="rightPadding">
+                <VBox.margin>
+                    <Insets top="0.0" right="100.0" bottom="0.0" left="0.0"/>
+                </VBox.margin>
+            </Button>
         </VBox>
         <Button fx:id="filterMenuBtn" styleClass="menuBtn" prefHeight="60.0" prefWidth="60.0"
                 onAction="#showFilterMenu"/>
