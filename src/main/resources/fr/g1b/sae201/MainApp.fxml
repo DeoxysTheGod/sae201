@@ -49,7 +49,11 @@
                 <Label text="Date précise :"/>
                 <ToggleSwitch fx:id="togglePreciseDate" selected="false"/>
             </HBox>
-            <DatePicker fx:id="datePicker"/>
+            <DatePicker fx:id="datePicker" styleClass="leftPadding">
+                <VBox.margin>
+                    <Insets top="0.0" right="45.0" bottom="0.0" left="0.0"/>
+                </VBox.margin>
+            </DatePicker>
             <TextField fx:id="regionFilter"  styleClass="textfieldRight"/>
 
             <Button fx:id="applyFilterBtn" onAction="#applyFilter" text="Filtrer" styleClass="rightPadding">
