@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class Lecture2 extends Application {
 
-    private static final String CSV_FILE_PATH = "/home/carlos/IdeaProjects/sae201/src/main/resources/fr/g1b/sae201/seismes.csv";
+    private static final String CSV_FILE_PATH = "/amuhome/d22020033/IdeaProjects/sae201/src/main/resources/fr/g1b/sae201/seismes.csv";
     private static final String CSV_SPLIT_BY = ",";
 
     public static void main(String[] args) {
