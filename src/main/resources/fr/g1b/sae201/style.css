@@ -55,3 +55,10 @@ Label, CheckBox, TextField {
     -fx-alignment: center;
     -fx-pref-width: 60px;
 }
+
+.rightPadding{
+    -fx-padding: 20px;
+    -fx-border-insets: 20px;
+    -fx-background-insets: 15px;
+}
+
