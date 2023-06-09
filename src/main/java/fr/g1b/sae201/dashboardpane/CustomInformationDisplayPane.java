@@ -117,8 +117,8 @@ public class CustomInformationDisplayPane extends Pane {
 
         barChart.setTitle("Intensité moyenne des séismes par région");
 
-        xAxis.setLabel("Année");
-        yAxis.setLabel("Nombre de seisme");
+        xAxis.setLabel("Région");
+        yAxis.setLabel("Intensité");
 
         this.getChildren().add(barChart);
     }

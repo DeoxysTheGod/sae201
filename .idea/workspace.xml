@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Correction d'un bug + ajout d'une bd plus grande">
+    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,30 +34,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/quent/Documents/prog/java/demo&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.4561201&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.4561201",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainApp">
-    <configuration name="CustomInformationDisplayPane" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.dashboardpane.CustomInformationDisplayPane" />
+    <configuration name="CustomPaneBarChart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.dashboardpane.CustomPaneBarChart" />
       <module name="sae201" />
       <extension name="coverage">
         <pattern>
@@ -70,8 +69,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DataGetter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.DataGetter" />
+    <configuration name="Lecture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture" />
       <module name="sae201" />
       <extension name="coverage">
         <pattern>
@@ -83,8 +82,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Lecture2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture2" />
+    <configuration name="LectureBis" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.LectureBis" />
       <module name="sae201" />
       <extension name="coverage">
         <pattern>
@@ -109,26 +108,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MapApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.MapApplication" />
-      <module name="sae201" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="fr.g1b.sae201.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainApp" />
-        <item itemvalue="Application.Lecture2" />
-        <item itemvalue="Application.MapApplication" />
-        <item itemvalue="Application.DataGetter" />
-        <item itemvalue="Application.CustomInformationDisplayPane" />
+        <item itemvalue="Application.CustomPaneBarChart" />
+        <item itemvalue="Application.LectureBis" />
+        <item itemvalue="Application.Lecture" />
       </list>
     </recent_temporary>
   </component>
@@ -157,10 +142,6 @@
       <workItem from="1686128938771" duration="120000" />
       <workItem from="1686130190759" duration="276000" />
       <workItem from="1686140496020" duration="11280000" />
-      <workItem from="1686203121173" duration="12607000" />
-      <workItem from="1686140496020" duration="11380000" />
-      <workItem from="1686152029318" duration="203000" />
-      <workItem from="1686215591224" duration="17000" />
     </task>
     <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
       <created>1686140571540</created>
@@ -183,57 +164,18 @@
       <option name="project" value="LOCAL" />
       <updated>1686149975914</updated>
     </task>
-    <task id="LOCAL-00006" summary="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif">
-      <created>1686218937069</created>
+    <task id="LOCAL-00006" summary="Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region">
+      <created>1686295891525</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1686218937069</updated>
+      <updated>1686295891525</updated>
     </task>
-    <task id="LOCAL-00007" summary="Finalisation du graphique ajouté">
-      <created>1686239937879</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1686239937879</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)">
-      <created>1686259639036</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1686259639036</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)">
-      <created>1686261472995</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1686261472995</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Correction d'un bug + ajout d'une bd plus grande">
-      <created>1686263635326</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1686263635326</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="modif .gitignore" />
@@ -241,28 +183,14 @@
     <MESSAGE value="suppression de test.fxml et correction de Lecture" />
     <MESSAGE value="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
     <MESSAGE value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
-    <MESSAGE value="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif" />
-    <MESSAGE value="encapsulation du FlowPane dans un ScrollPane" />
-    <MESSAGE value="Finalisation du graphique ajouté" />
-    <MESSAGE value="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)" />
-    <MESSAGE value="Correction d'un bug + ajout d'une bd plus grande" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction d'un bug + ajout d'une bd plus grande" />
+    <MESSAGE value="Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java</url>
-          <line>275</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="element[1].substring(0,4)" language="JAVA" />
-        <watch expression="filter.substring(5,9)" language="JAVA" />
-        <watch expression="Integer.parseInt(element[1].substring(0,4)) &gt; Integer.parseInt(filter.substring(0,4)))                                     || (Integer.parseInt(element[1].substring(0,4)) &lt; Integer.parseInt(filter.substring(5,9))" language="JAVA" />
+        <watch expression="dataset.get(0)[i].toLowerCase().trim()" language="JAVA" />
+        <watch expression="dataset.get(i)[dateColumnIndex].substring(0,4)" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

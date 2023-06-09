@@ -60,6 +60,13 @@ public class DataGetter {
                         return true;
                     }
                 })
+                .filter((element) -> {
+                    if(!separatedFilter[2].matches("none")) {
+                        int dateIndex = DataGetter.findIndexColumnWithColumnName("Région", dataset);
+                        return element[dateIndex].toLowerCase().trim().contains(separatedFilter[2].toLowerCase().trim());
+                    }
+                    else return true;
+                })
                 .collect(Collectors.toList());
 
         filteredDataset.add(0, getDataset().get(0));
