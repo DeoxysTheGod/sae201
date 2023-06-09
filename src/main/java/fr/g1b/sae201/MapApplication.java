@@ -28,34 +28,37 @@ public class MapApplication extends Application {
         addPoint();
     }
 
+
+
+
     public void addPoint() {
         Circle circle = new Circle(7, Color.RED);
         circle.setVisible(true);
         List<String[]> donneesSeismes = (listedeseismes.getDataset());
         int indexX = DataGetter.findIndexColumnWithColumnName("latitude", donneesSeismes);
         int indexY = DataGetter.findIndexColumnWithColumnName("longtitude", donneesSeismes);
+
         MapLayer mapLayer = new MapLayer();
         carte.addLayer(mapLayer);
 
-        //for (int i = 1; i < donneesSeismes.size(); i++) {
-            /* Création du point avec latitude et longitude */
-            MapPoint mapPoint = new MapPoint(67.75632215237778, -43.459301016165384);
+        for (int i = 1; i < donneesSeismes.size(); i++) {
+        /* Création du point avec latitude et longitude */
+        MapPoint mapPoint = new MapPoint(67.75632215237778, -43.459301016165384);
 
-            /* Conversion du MapPoint vers Point2D */
-            Point2D point2d = carte.getMapPoint(mapPoint.getLatitude(), mapPoint.getLongitude());
+        /* Conversion du MapPoint vers Point2D */
+        //Point2D point2d = mapLayer.getMapPoint(mapPoint.getLatitude(), mapPoint.getLongitude());
 
-            /* Déplace le cercle selon les coordonnées du point */
-            circle.setTranslateX(point2d.getX());
-            circle.setTranslateY(point2d.getY());
+        /* Déplace le cercle selon les coordonnées du point */
+        //circle.setTranslateX(point2d.getX());
+        //circle.setTranslateY(point2d.getY());
 
+        /* Zoom de 5 */
+        carte.setZoom(5);
 
-            /* Zoom de 5 */
-            carte.setZoom(5);
+        /* Centre la carte sur le point */
+        carte.flyTo(0, mapPoint, 0.1);
 
-            /* Centre la carte sur le point */
-            carte.flyTo(0, mapPoint, 0.1);
-
-        //}
+        }
     }
 }
 
