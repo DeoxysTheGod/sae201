@@ -7,19 +7,19 @@ import com.gluonhq.maps.MapView;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.util.List;
 
-public class GluonMapExample extends Application {
-
-    public static DataGetter listedeseismes = new DataGetter("/amuhome/d22020033/IdeaProjects/sae201/src/main/resources/fr/g1b/sae201/seismes.csv");
+public class AffichageCarte extends Application {
+    private MapPoint dernierpoint;
+    public static DataGetter listedeseismes = new DataGetter("src/main/resources/fr/g1b/sae201/seismes.csv");
     List<String[]> donneesSeismes = (listedeseismes.getDataset());
-    int indexX = DataGetter.findIndexColumnWithColumnName("Latitude", donneesSeismes);
-    int indexY = DataGetter.findIndexColumnWithColumnName("Longitude", donneesSeismes);
+    int indexX = DataGetter.findIndexColumnWithColumnName("Lat", donneesSeismes);
+    int indexY = DataGetter.findIndexColumnWithColumnName("Long", donneesSeismes);
 
     public static void main(String[] args) {
         launch();
@@ -62,50 +62,32 @@ public class GluonMapExample extends Application {
     @Override
     public void start(Stage stage) {
 
-
         /* Définit la plate-forme pour éviter "javafx.platform is not defined" */
         System.setProperty("javafx.platform", "desktop");
 
-        /*
-         * Définit l'user agent pour éviter l'exception
-         * "Server returned HTTP response code: 403"
-         */
-        System.setProperty("http.agent", "Gluon Mobile/1.0.3");
-
-        VBox root = new VBox();
+        GridPane root = new GridPane();
 
         /* Création de la carte Gluon JavaFX */
-        MapView mapView = new MapView();
+        MapView carte = new MapView();
 
-        /* Création du point avec latitude et longitude */
-        for (int i = 1; i < donneesSeismes.size(); i++) {
-            MapPoint mapPoint = new MapPoint(Double.parseDouble(donneesSeismes.get(i)[indexX]),
-                    Double.parseDouble(donneesSeismes.get(i)[indexY]));
-            //ça coince ici
-
-            /* Création et ajoute une couche à la carte */
-
-
-            //LIGNES DEBUG
-            //System.out.println(donneesSeismes.get(i)[indexY]);
-            //System.out.println(donneesSeismes.get(i)[indexX]);
-
-            MapLayer mapLayer = new CustomCircleMarkerLayer(mapPoint);
-            mapView.addLayer(mapLayer);
-
+        /* Création des points avec latitude et longitude */
+        for (int i = 1; i < donneesSeismes.size() - 1; i++) {
+            if (!donneesSeismes.get(i)[indexX].isEmpty() && !donneesSeismes.get(i)[indexY].isEmpty()) {
+                MapPoint mapPoint = new MapPoint(Double.parseDouble(donneesSeismes.get(i)[indexX]), Double.parseDouble(donneesSeismes.get(i)[indexY]));
+                MapLayer mapLayer = new CustomCircleMarkerLayer(mapPoint);
+                carte.addLayer(mapLayer);
+                dernierpoint = mapPoint;
+            } else {
+                System.out.println("Erreur: Le seïsme ID " + donneesSeismes.get(i)[0] + " n'a pas de coordonnés.");
+            }
         }
-
-        root.getChildren().add(mapView);
-
-        /*
-         * IMPORTANT mettre la taille de la fenêtre pour éviter l'erreur
-         * java.lang.OutOfMemoryError
-         */
-        Scene scene = new Scene(root, 640, 480);
-
+        carte.setZoom(5);
+        carte.flyTo(0, dernierpoint, 0.1);
+        root.getChildren().add(carte);
+        Scene scene = new Scene(root, 800, 800);
         stage.setScene(scene);
+        stage.setTitle("Carte des séismes selectionnés");
         stage.show();
-
     }
 
 }
