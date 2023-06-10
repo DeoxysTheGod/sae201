@@ -21,13 +21,13 @@ public class AffichageCarte extends Application {
     private MapPoint dernierpoint;
     private MapView carte = new MapView();
 
-
-    public static DataGetter listedeseismes = new DataGetter("src/main/resources/fr/g1b/sae201/seismes.csv");
+    public static DataGetter listedeseismes = new DataGetter("src/main/resources/fr/g1b/sae201/seismesgrosseliste.csv");
     List<String[]> donneesSeismes = (listedeseismes.getDataset());
+
     int indexX = DataGetter.findIndexColumnWithColumnName("Lat", donneesSeismes);
     int indexY = DataGetter.findIndexColumnWithColumnName("Long", donneesSeismes);
     int indexIntensite = DataGetter.findIndexColumnWithColumnName("Intens", donneesSeismes);
-    //un peu dangereux, il y a deux colonnes avec Intens donc il risque de confondre mais bon là ça marche donc...
+    //un peu dangereux, il y a 2 colonnes avec Intens dans le csv donc il risque de confondre mais bon là ça marche donc...
 
     public static Color couleurIntensite = Color.color(0,0,0);
     public static void main(String[] args) {
@@ -82,26 +82,26 @@ public class AffichageCarte extends Application {
                  * Les seïsmes de faible intensité sont verts, les forts sont rouges.
                  * On supppose que l'intensité maximale est de 9.0. (NE PAS METTRE EN DESSOUS DE 7)
                  */
-                double t = Double.parseDouble(donneesSeismes.get(i)[indexIntensite]) / 9;
+                double t = Double.parseDouble(donneesSeismes.get(i)[indexIntensite]) / 10.5;
                 //LIGNE DEBUG
                 //System.out.println(t);
                 /**
                  * Ici on arrondit la valeur au cas ou elle dépasserait 1.0 ou serait inférieure à .0
                  */
-                double valueR = 1 - t;
+                double valueG = 1 - t;
 
-                if (valueR < 0.0) {
-                    valueR = 0.0;
+                if (valueG < 0.0) {
+                    valueG = 0.0;
                     System.out.println("Valeur ajustée");
-                } else if (valueR > 1.0) {
-                    valueR =  1.0;
+                } else if (valueG > 1.0) {
+                    valueG =  1.0;
                     System.out.println("Valeur ajustée");
                 }
                 /**
                  * C'est ici que les points sont placés sur la couche des points. On règle d'abord leur couleur, puis on les place sur la carte
                  * en fonction de leurs coordonnées. (MapPoint)
                  */
-                couleurIntensite = Color.color(valueR,t, 0);
+                couleurIntensite = Color.color(t, valueG, 0);
                 MapPoint mapPoint = new MapPoint(Double.parseDouble(donneesSeismes.get(i)[indexX]), Double.parseDouble(donneesSeismes.get(i)[indexY]));
                 MapLayer mapLayer = new CustomCircleMarkerLayer(mapPoint);
                 carte.addLayer(mapLayer);
