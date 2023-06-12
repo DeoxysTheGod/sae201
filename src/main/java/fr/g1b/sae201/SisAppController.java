@@ -25,10 +25,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.RangeSlider;
 import org.controlsfx.control.ToggleSwitch;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javafx.scene.control.ComboBox;
 
@@ -101,7 +98,7 @@ public class SisAppController {
     private ObservableList<String> regions;
 
     public SisAppController() {
-        dataset = new DataGetter(this.getClass().getResource("seismes_complet.csv").getFile());
+        dataset = new DataGetter(this.getClass().getResource("seismes.csv").getFile());
         filteredList = dataset.getDataset();
     }
 
@@ -117,18 +114,15 @@ public class SisAppController {
         regionFilter.setItems(regions);
     }*/
 
-    @FXML
     private void initializeRegions() {
-        DataGetter listedeseismes = new DataGetter("src/main/resources/fr/g1b/sae201/seismes.csv");
-        List<String[]> donneesSeismes = listedeseismes.getDataset();
+        List<String[]> donneesSeismes = dataset.getDataset();
         int indexregion = DataGetter.findIndexColumnWithColumnName("Région", donneesSeismes);
-
         Set<String> uniqueRegions = new HashSet<>();
         for (int i = 1; i < donneesSeismes.size() - 1; i++) {
             uniqueRegions.add(donneesSeismes.get(i)[indexregion]);
         }
-
         ObservableList<String> regions = FXCollections.observableArrayList(uniqueRegions);
+        Collections.sort(regions);
         regionFilter.setItems(regions);
     }
 
@@ -143,16 +137,8 @@ public class SisAppController {
         // Initialisation de l'interface
         InterfaceInitialize();
         createBindings();
-
         leftMenuContainer.setPrefWidth(0.0);
         rightMenuContainer.setPrefWidth(0.0);
-        regions = FXCollections.observableArrayList(
-                "Auvergne-Rhône-Alpes", "Alpes Maritimes", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val de Loire",
-                "Corse", "Grand Est", "Hauts-de-France", "Île-de-France", "Normandie", "Nouvelle-Aquitaine",
-                "Occitanie", "Pays de la Loire", "Provence-Alpes-Côte d'Azur"
-        );
-
-        regionFilter.setItems(regions); // Appel de la méthode pour initialiser les régions dans la ComboBox
         initializeRegions();
     }
 
