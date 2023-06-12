@@ -100,21 +100,33 @@ public class SisAppController {
     private ObservableList<String> regions;
 
     public SisAppController() {
-        dataset = new DataGetter(this.getClass().getResource("seismes.csv").getFile());
-        filteredList = dataset.getDataset();
+        //dataset = new DataGetter(this.getClass().getResource("seismes.csv").getFile());
+        //filteredList = dataset.getDataset();
     }
 
-/*    @FXML
-    private void initializeRegions() {
-        DataGetter listedeseismes = new DataGetter("src/main/resources/fr/g1b/sae201/seismes.csv");
-        List<String[]> donneesSeismes = (listedeseismes.getDataset());
-        int indexregion = DataGetter.findIndexColumnWithColumnName("Région", donneesSeismes);
-        ObservableList<String> regions = FXCollections.observableArrayList();
-        for (int i = 1; i < donneesSeismes.size() - 1; i++) {
-            regions.add(donneesSeismes.get(i)[indexregion]);
+    @FXML
+    public void addCSV() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sélectionner un fichier CSV");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSV", "*.csv"));
+
+        // Afficher la boîte de dialogue de sélection de fichier
+        File selectedFile = fileChooser.showOpenDialog(checkBoxContainer.getScene().getWindow());
+
+        if (selectedFile != null) {
+            // Traiter le fichier CSV sélectionné ici
+            System.out.println("Fichier sélectionné : " + selectedFile.getAbsolutePath());
+
+            // Mettre à jour le texte du bouton avec le nom du fichier sélectionné
+            addButton.setText(selectedFile.getName());
+
+            //Mettre le fichier selectionné en tant que DataSet
+            dataset = new DataGetter(selectedFile.getAbsolutePath());
+            filteredList = dataset.getDataset();
+            createBindings();
+            initializeRegions();
         }
-        regionFilter.setItems(regions);
-    }*/
+    }
 
     private void initializeRegions() {
         int indexregion = DataGetter.findIndexColumnWithColumnName("Région", filteredList);
@@ -127,7 +139,6 @@ public class SisAppController {
         regionFilter.setItems(regions);
     }
 
-
     @FXML
     public void initialize() {
         System.out.println("App launched successfully!");
@@ -137,10 +148,11 @@ public class SisAppController {
         leftMenuSize = leftMenuContainer.getPrefWidth();
         // Initialisation de l'interface
         InterfaceInitialize();
-        createBindings();
+        /**createBindings();
+        initializeRegions();**/
         leftMenuContainer.setPrefWidth(0.0);
         rightMenuContainer.setPrefWidth(0.0);
-        initializeRegions();
+
     }
 
 
@@ -214,28 +226,6 @@ public class SisAppController {
         checkButton();
 
     }
-
-    //pas utilisé pour l'instant mais il faudra le faire
-    @FXML
-    public void addCSV() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Sélectionner un fichier CSV");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSV", "*.csv"));
-
-        // Afficher la boîte de dialogue de sélection de fichier
-        File selectedFile = fileChooser.showOpenDialog(checkBoxContainer.getScene().getWindow());
-
-        if (selectedFile != null) {
-            // Traiter le fichier CSV sélectionné ici
-            System.out.println("Fichier sélectionné : " + selectedFile.getAbsolutePath());
-
-            // Mettre à jour le texte du bouton avec le nom du fichier sélectionné
-            addButton.setText(selectedFile.getName());
-        }
-        dataset = new DataGetter(this.getClass().getResource(selectedFile.getAbsolutePath()).getFile());
-        filteredList = dataset.getDataset();
-    }
-
 
     private void setMainContainerOverlay() {
         overlayMenu.setVisible(!overlayMenu.isVisible());
