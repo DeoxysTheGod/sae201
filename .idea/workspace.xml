@@ -208,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686580008167</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="-correctif bug des couleur sur les textes (elles s'affichaient en blanc et était donc invisible )&#10;- ajout d'un menu déroulent pour les régions &#10;-ajout d'un bouton clear pour les filtres">
+      <created>1686580369942</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1686580369942</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,7 +229,8 @@
     <MESSAGE value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
     <MESSAGE value="arrangement du pannel de droite (css)" />
     <MESSAGE value="On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)" />
-    <option name="LAST_COMMIT_MESSAGE" value="On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)" />
+    <MESSAGE value="-correctif bug des couleur sur les textes (elles s'affichaient en blanc et était donc invisible )&#10;- ajout d'un menu déroulent pour les régions &#10;-ajout d'un bouton clear pour les filtres" />
+    <option name="LAST_COMMIT_MESSAGE" value="-correctif bug des couleur sur les textes (elles s'affichaient en blanc et était donc invisible )&#10;- ajout d'un menu déroulent pour les régions &#10;-ajout d'un bouton clear pour les filtres" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
