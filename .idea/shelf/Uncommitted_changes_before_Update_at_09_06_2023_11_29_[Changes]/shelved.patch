@@ -1,0 +1,258 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2Qs4Oqko6a5Rrhg1ymuDsKKURxP\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"project.structure.last.edited\": \"Modules\",\n    \"project.structure.proportion\": \"0.0\",\n    \"project.structure.side.proportion\": \"0.4561201\",\n    \"settings.editor.selected.configurable\": \"reference.settings.project.maven.repository.indices\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.MainApp\">\n    <configuration name=\"CustomPaneBarChart\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.dashboardpane.CustomPaneBarChart\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.dashboardpane.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Lecture\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.Lecture\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"LectureBis\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.LectureBis\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"MainApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainApp\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.MainApp\" />\n        <item itemvalue=\"Application.CustomPaneBarChart\" />\n        <item itemvalue=\"Application.LectureBis\" />\n        <item itemvalue=\"Application.Lecture\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task id=\"LOCAL-00001\" summary=\"modif .gitignore\">\n      <created>1686087886499</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686087886499</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Changement des liens des images\">\n      <created>1686087934161</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686087934161</updated>\n    </task>\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"Changement des liens des images\" />\n      <created>1686128933046</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1686128933046</updated>\n      <workItem from=\"1686128938771\" duration=\"120000\" />\n      <workItem from=\"1686130190759\" duration=\"276000\" />\n      <workItem from=\"1686140496020\" duration=\"11280000\" />\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"suppression de test.fxml et correction de Lecture\">\n      <created>1686140571540</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686140571540</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\n      <created>1686149904820</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686149904820</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\n      <created>1686149975914</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686149975914</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region\">\n      <created>1686295891525</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686295891525</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"7\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"modif .gitignore\" />\n    <MESSAGE value=\"Changement des liens des images\" />\n    <MESSAGE value=\"suppression de test.fxml et correction de Lecture\" />\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\n    <MESSAGE value=\"Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <watches-manager>\n      <configuration name=\"Application\">\n        <watch expression=\"dataset.get(0)[i].toLowerCase().trim()\" language=\"JAVA\" />\n        <watch expression=\"dataset.get(i)[dateColumnIndex].substring(0,4)\" language=\"JAVA\" />\n      </configuration>\n    </watches-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 16e34bfab38221842ad654c14bb109db4722b72d)
++++ b/.idea/workspace.xml	(date 1686302874501)
+@@ -4,9 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region">
++    <list default="true" id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture2.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MapApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MapApplication.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -19,6 +20,7 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
++        <option value="CSS File" />
+         <option value="Class" />
+       </list>
+     </option>
+@@ -26,7 +28,18 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="ProjectId" id="2Qs4Oqko6a5Rrhg1ymuDsKKURxP" />
++  <component name="MarkdownSettingsMigration">
++    <option name="stateVersion" value="1" />
++  </component>
++  <component name="MavenImportPreferences">
++    <option name="generalSettings">
++      <MavenGeneralSettings>
++        <option name="mavenHome" value="Use Maven wrapper" />
++        <option name="useMavenConfig" value="true" />
++      </MavenGeneralSettings>
++    </option>
++  </component>
++  <component name="ProjectId" id="2QmjeAmTlZcGtAO4TuFyrDCdoD3" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="1" id="Add" />
+   </component>
+@@ -34,56 +47,31 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "project.structure.last.edited": "Modules",
+-    "project.structure.proportion": "0.0",
+-    "project.structure.side.proportion": "0.4561201",
+-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/home/quentin/Documents&quot;,
++    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201" />
++      <recent name="$PROJECT_DIR$/src/main/java/fr/g1b/sae201" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Application.MainApp">
+-    <configuration name="CustomPaneBarChart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.dashboardpane.CustomPaneBarChart" />
+-      <module name="sae201" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.dashboardpane.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="Lecture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture" />
+-      <module name="sae201" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="LectureBis" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.LectureBis" />
++  <component name="RunManager" selected="Application.GluonMapExample">
++    <configuration name="GluonMapExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.GluonMapExample" />
+       <module name="sae201" />
+       <extension name="coverage">
+         <pattern>
+@@ -110,88 +98,76 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Application.GluonMapExample" />
+         <item itemvalue="Application.MainApp" />
+-        <item itemvalue="Application.CustomPaneBarChart" />
+-        <item itemvalue="Application.LectureBis" />
+-        <item itemvalue="Application.Lecture" />
+       </list>
+     </recent_temporary>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+-    <task id="LOCAL-00001" summary="modif .gitignore">
+-      <created>1686087886499</created>
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="" />
++      <created>1685959759057</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1685959759057</updated>
++      <workItem from="1685959761345" duration="658000" />
++      <workItem from="1685965744851" duration="4759000" />
++      <workItem from="1686051662326" duration="355000" />
++      <workItem from="1686119515269" duration="1525000" />
++      <workItem from="1686291962503" duration="10906000" />
++    </task>
++    <task id="LOCAL-00001" summary="modif workspace">
++      <created>1686039021961</created>
+       <option name="number" value="00001" />
+       <option name="presentableId" value="LOCAL-00001" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686087886499</updated>
++      <updated>1686039021961</updated>
+     </task>
+-    <task id="LOCAL-00002" summary="Changement des liens des images">
+-      <created>1686087934161</created>
++    <task id="LOCAL-00002" summary="lecture csv au point normalement">
++      <created>1686040131512</created>
+       <option name="number" value="00002" />
+       <option name="presentableId" value="LOCAL-00002" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686087934161</updated>
++      <updated>1686040131512</updated>
+     </task>
+-    <task active="true" id="Default" summary="Default task">
+-      <changelist id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Changement des liens des images" />
+-      <created>1686128933046</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1686128933046</updated>
+-      <workItem from="1686128938771" duration="120000" />
+-      <workItem from="1686130190759" duration="276000" />
+-      <workItem from="1686140496020" duration="11280000" />
+-    </task>
+-    <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
+-      <created>1686140571540</created>
++    <task id="LOCAL-00003" summary="en cours d'ajout des informations dans le tableview">
++      <created>1686045963338</created>
+       <option name="number" value="00003" />
+       <option name="presentableId" value="LOCAL-00003" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686140571540</updated>
++      <updated>1686045963338</updated>
+     </task>
+-    <task id="LOCAL-00004" summary="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
+-      <created>1686149904820</created>
++    <task id="LOCAL-00004" summary="en cours d'ajout des points sur la carte">
++      <created>1686299537056</created>
+       <option name="number" value="00004" />
+       <option name="presentableId" value="LOCAL-00004" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686149904820</updated>
++      <updated>1686299537056</updated>
+     </task>
+-    <task id="LOCAL-00005" summary="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
+-      <created>1686149975914</created>
+-      <option name="number" value="00005" />
+-      <option name="presentableId" value="LOCAL-00005" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686149975914</updated>
+-    </task>
+-    <task id="LOCAL-00006" summary="Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region">
+-      <created>1686295891525</created>
+-      <option name="number" value="00006" />
+-      <option name="presentableId" value="LOCAL-00006" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686295891525</updated>
+-    </task>
+-    <option name="localTasksCounter" value="7" />
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="modif .gitignore" />
+-    <MESSAGE value="Changement des liens des images" />
+-    <MESSAGE value="suppression de test.fxml et correction de Lecture" />
+-    <MESSAGE value="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+-    <MESSAGE value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+-    <MESSAGE value="Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Ajout checkBox pour diagramme et filtre region&#10;&#10;Gestion des diagramme en fonction des checkBox et application d'un filtre sur le diagramme par region" />
++    <MESSAGE value="ajout du boutton pour ajouter le fichier CSV" />
++    <MESSAGE value="modif workspace" />
++    <MESSAGE value="lecture csv au point normalement" />
++    <MESSAGE value="en cours d'ajout des informations dans le tableview" />
++    <MESSAGE value="en cours d'ajout des points sur la carte" />
++    <option name="LAST_COMMIT_MESSAGE" value="en cours d'ajout des points sur la carte" />
+   </component>
+   <component name="XDebuggerManager">
+-    <watches-manager>
+-      <configuration name="Application">
+-        <watch expression="dataset.get(0)[i].toLowerCase().trim()" language="JAVA" />
+-        <watch expression="dataset.get(i)[dateColumnIndex].substring(0,4)" language="JAVA" />
+-      </configuration>
+-    </watches-manager>
++    <breakpoint-manager>
++      <breakpoints>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/GluonMapExample.java</url>
++          <line>83</line>
++          <option name="timeStamp" value="4" />
++        </line-breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
+   </component>
+ </project>
+\ No newline at end of file

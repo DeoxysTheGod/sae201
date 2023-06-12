@@ -6,7 +6,9 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -19,10 +21,15 @@ import javafx.scene.layout.VBox;
 
 
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.controlsfx.control.RangeSlider;
 import org.controlsfx.control.ToggleSwitch;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javafx.scene.control.ComboBox;
 
 
@@ -97,16 +104,35 @@ public class SisAppController {
         dataset = new DataGetter(this.getClass().getResource("seismes_complet.csv").getFile());
         filteredList = dataset.getDataset();
     }
+
+/*    @FXML
+    private void initializeRegions() {
+        DataGetter listedeseismes = new DataGetter("src/main/resources/fr/g1b/sae201/seismes.csv");
+        List<String[]> donneesSeismes = (listedeseismes.getDataset());
+        int indexregion = DataGetter.findIndexColumnWithColumnName("Région", donneesSeismes);
+        ObservableList<String> regions = FXCollections.observableArrayList();
+        for (int i = 1; i < donneesSeismes.size() - 1; i++) {
+            regions.add(donneesSeismes.get(i)[indexregion]);
+        }
+        regionFilter.setItems(regions);
+    }*/
+
     @FXML
     private void initializeRegions() {
-        ObservableList<String> regions = FXCollections.observableArrayList(
-                "Auvergne-Rhône-Alpes", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val de Loire",
-                "Corse", "Grand Est", "Hauts-de-France", "Île-de-France", "Normandie", "Nouvelle-Aquitaine",
-                "Occitanie", "Pays de la Loire", "Provence-Alpes-Côte d'Azur"
-        );
-        regionFilter.setItems(regions);
+        DataGetter listedeseismes = new DataGetter("src/main/resources/fr/g1b/sae201/seismes.csv");
+        List<String[]> donneesSeismes = listedeseismes.getDataset();
+        int indexregion = DataGetter.findIndexColumnWithColumnName("Région", donneesSeismes);
 
+        Set<String> uniqueRegions = new HashSet<>();
+        for (int i = 1; i < donneesSeismes.size() - 1; i++) {
+            uniqueRegions.add(donneesSeismes.get(i)[indexregion]);
+        }
+
+        ObservableList<String> regions = FXCollections.observableArrayList(uniqueRegions);
+        regionFilter.setItems(regions);
     }
+
+
     @FXML
     public void initialize() {
         System.out.println("App launched successfully!");
@@ -145,14 +171,14 @@ public class SisAppController {
     }
 
     @FXML
-    public void checkButton(){
+    public void checkButton() {
         dashboardContainer.getChildren().clear();
-        if (pane1.isSelected()){
+        if (pane1.isSelected()) {
             CustomInformationDisplayPane pane1 = new CustomInformationDisplayPane(400, 400, filteredList);
             pane1.addingBarChartEarthQuakePerYear();
             dashboardContainer.getChildren().add(pane1);
         }
-        if (pane2.isSelected()){
+        if (pane2.isSelected()) {
             CustomInformationDisplayPane pane2 = new CustomInformationDisplayPane(400, 400, filteredList);
             pane2.addingBarChartEarthQuakeIntensityPerRegion();
             dashboardContainer.getChildren().add(pane2);
@@ -247,8 +273,8 @@ public class SisAppController {
         checkBoxMenuBtn.setLayoutX(30.0);
         checkBoxMenuBtn.setLayoutY(30.0);
 
-        leftMenuContainer.setLayoutX(checkBoxMenuBtn.getLayoutX()/2);
-        leftMenuContainer.setLayoutY(checkBoxMenuBtn.getLayoutY()/2);
+        leftMenuContainer.setLayoutX(checkBoxMenuBtn.getLayoutX() / 2);
+        leftMenuContainer.setLayoutY(checkBoxMenuBtn.getLayoutY() / 2);
 
         leftMenuContainer.setPrefHeight(mainContainer.getPrefHeight() - leftMenuContainer.getLayoutY() * 2);
 
@@ -263,12 +289,12 @@ public class SisAppController {
 
         filterContainer.setLayoutY(15.0);
 
-        rightMenuContainer.setLayoutY(filterMenuBtn.getLayoutY()/2);
-        rightMenuContainer.setPrefHeight(mainContainer.getPrefHeight() - leftMenuContainer.getLayoutX()*2);
+        rightMenuContainer.setLayoutY(filterMenuBtn.getLayoutY() / 2);
+        rightMenuContainer.setPrefHeight(mainContainer.getPrefHeight() - leftMenuContainer.getLayoutX() * 2);
         rightMenuContainer.setLayoutX(mainContainer.getPrefWidth() - (rightMenuContainer.getPrefWidth() + leftMenuContainer.getLayoutX()));
 
         filterContainer.setPrefWidth(rightMenuContainer.getPrefWidth());
-        filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight() );
+        filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight());
 
         // Initialisation du RangeSlider pour les dates
         dateRangeSlider.setMax(2007);
@@ -280,7 +306,7 @@ public class SisAppController {
 
         // Initialisation du Dashboard
         dashboardScrollContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
-        dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth() - dashboardScrollContainer.getLayoutX()*2);
+        dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth() - dashboardScrollContainer.getLayoutX() * 2);
         dashboardScrollContainer.setPrefHeight(mainContainer.getPrefHeight() - (checkBoxMenuBtn.getLayoutY() * 2));
 
         dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth() - 40);
@@ -290,14 +316,14 @@ public class SisAppController {
         dateRangeSlider.highValueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                maxValueDateLabel.setText(String.format("%d",newValue.intValue()));
+                maxValueDateLabel.setText(String.format("%d", newValue.intValue()));
             }
         });
 
         dateRangeSlider.lowValueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                minValueDateLabel.setText(String.format("%d",newValue.intValue()));
+                minValueDateLabel.setText(String.format("%d", newValue.intValue()));
             }
         });
 
@@ -328,6 +354,7 @@ public class SisAppController {
         });
 
     }
+
     @FXML
     private void clearFilter() {
         dateRangeSlider.setLowValue(1500);
@@ -345,9 +372,6 @@ public class SisAppController {
 
 
     }
-
-
-
 
 
 }
