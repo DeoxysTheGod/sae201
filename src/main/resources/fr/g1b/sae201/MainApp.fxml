@@ -36,6 +36,10 @@
 
     <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="menuContainer">
         <VBox fx:id="filterContainer" visible="false" managed="false" styleClass="rightPadding">
+
+            <Button fx:id="addButton" onAction="#addCSV" text="Ajouter CSV">
+            </Button>
+
             <HBox>
                 <Label text="Entre deux date :"/>
                 <ToggleSwitch fx:id="toggleBetweenTwoDates" selected="true" styleClass="toggleSwt"/>

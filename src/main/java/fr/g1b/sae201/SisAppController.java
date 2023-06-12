@@ -21,10 +21,12 @@ import javafx.scene.layout.VBox;
 
 
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.RangeSlider;
 import org.controlsfx.control.ToggleSwitch;
 
+import java.io.File;
 import java.util.*;
 
 import javafx.scene.control.ComboBox;
@@ -115,11 +117,10 @@ public class SisAppController {
     }*/
 
     private void initializeRegions() {
-        List<String[]> donneesSeismes = dataset.getDataset();
-        int indexregion = DataGetter.findIndexColumnWithColumnName("Région", donneesSeismes);
+        int indexregion = DataGetter.findIndexColumnWithColumnName("Région", filteredList);
         Set<String> uniqueRegions = new HashSet<>();
-        for (int i = 1; i < donneesSeismes.size() - 1; i++) {
-            uniqueRegions.add(donneesSeismes.get(i)[indexregion]);
+        for (int i = 1; i < filteredList.size() - 1; i++) {
+            uniqueRegions.add(filteredList.get(i)[indexregion]);
         }
         ObservableList<String> regions = FXCollections.observableArrayList(uniqueRegions);
         Collections.sort(regions);
@@ -214,12 +215,12 @@ public class SisAppController {
 
     }
 
-    /* pas utile pour l'instant
+    //pas utilisé pour l'instant mais il faudra le faire
     @FXML
     public void addCSV() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Sélectionner un fichier CSV");
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("Fichiers CSV", "*.csv"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSV", "*.csv"));
 
         // Afficher la boîte de dialogue de sélection de fichier
         File selectedFile = fileChooser.showOpenDialog(checkBoxContainer.getScene().getWindow());
@@ -231,8 +232,10 @@ public class SisAppController {
             // Mettre à jour le texte du bouton avec le nom du fichier sélectionné
             addButton.setText(selectedFile.getName());
         }
+        dataset = new DataGetter(this.getClass().getResource(selectedFile.getAbsolutePath()).getFile());
+        filteredList = dataset.getDataset();
     }
-    */
+
 
     private void setMainContainerOverlay() {
         overlayMenu.setVisible(!overlayMenu.isVisible());
