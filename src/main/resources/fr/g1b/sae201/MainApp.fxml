@@ -11,20 +11,22 @@
       xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="fr.g1b.sae201.SisAppController">
 
-    <ScrollPane fx:id="dashboardScrollContainer" layoutX="150.0" styleClass="dashboardScrollContainer">
-        <FlowPane fx:id="dashboardContainer" styleClass="dashboardContainer"/>
+    <ScrollPane fx:id="dashboardScrollContainer" layoutX="150.0">
+        <FlowPane fx:id="dashboardContainer"/>
     </ScrollPane>
-    <Pane fx:id="leftMenuContainer" prefWidth="300.0" styleClass="leftMenuContainer">
-        <VBox fx:id="checkBoxContainer" alignment="CENTER_LEFT" spacing="30.0" styleClass="menuContainer">
-            <CheckBox fx:id="pane1" text="pane 1" styleClass="check-box"/>
-            <CheckBox fx:id="pane2" text="pane 2" styleClass="check-box"/>
-            <CheckBox text="pane 3" styleClass="check-box"/>
-            <CheckBox text="pane 4" styleClass="check-box"/>
 
-            <!-- Bouton "Appliquer" en dessous des checkBox, il faut encore coder la class qui applique les filtres-->
+    <Pane fx:id="overlayMenu" managed="false" visible="false" styleClass="overlayMenu"/>
+
+    <Pane fx:id="leftMenuContainer" prefWidth="300.0" styleClass="menuContainer">
+        <VBox fx:id="checkBoxContainer" visible="false" managed="false" styleClass="checkBoxContainer">
+            <CheckBox fx:id="pane1" text="pane 1" styleClass="checkBox"/>
+            <CheckBox fx:id="pane2" text="pane 2" styleClass="checkBox"/>
+            <CheckBox text="pane 3" styleClass="checkBox"/>
+            <CheckBox text="pane 4" styleClass="checkBox"/>
+
             <Button fx:id="checkButton" onAction="#checkButton" styleClass="checkButton" text="Appliquer">
                 <VBox.margin>
-                    <Insets top="45.0" right="0.0" bottom="0.0" left="80.0"/>
+                    <Insets top="45.0" right="80.0" bottom="0.0" left="80.0"/>
                 </VBox.margin>
             </Button>
         </VBox>
@@ -32,33 +34,32 @@
                 prefWidth="60.0"/>
     </Pane>
 
-    <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="rightMenuContainer">
-        <VBox fx:id="filterContainer" alignment="CENTER_RIGHT" spacing="30.0" styleClass="menuContainer">
-            <HBox styleClass="rightPadding">
+    <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="menuContainer">
+        <VBox fx:id="filterContainer" visible="false" managed="false" styleClass="rightPadding">
+            <HBox>
                 <Label text="Entre deux date :"/>
-                <ToggleSwitch fx:id="toggleBetweenTwoDates" selected="true"/>
+                <ToggleSwitch fx:id="toggleBetweenTwoDates" selected="true" styleClass="toggleSwt"/>
             </HBox>
             <VBox fx:id="betweenTwoDatesContainer">
                 <HBox fx:id="dateLabelContainer" spacing="20.0" alignment="CENTER">
                     <Label fx:id="minValueDateLabel" styleClass="dateRangeSliderLabel"/>
                     <Label fx:id="maxValueDateLabel" styleClass="dateRangeSliderLabel"/>
                 </HBox>
-                <RangeSlider fx:id="dateRangeSlider" styleClass="textfieldRight"/>
+                <RangeSlider fx:id="dateRangeSlider" />
             </VBox>
-            <HBox styleClass="rightPadding">
+            <HBox>
                 <Label text="Date précise :"/>
-                <ToggleSwitch fx:id="togglePreciseDate" selected="false"/>
+                <ToggleSwitch fx:id="togglePreciseDate" selected="false" styleClass="toggleSwt"/>
             </HBox>
-            <DatePicker fx:id="datePicker" styleClass="leftPadding">
-                <VBox.margin>
-                    <Insets top="0.0" right="45.0" bottom="0.0" left="0.0"/>
-                </VBox.margin>
-            </DatePicker>
-            <TextField fx:id="regionFilter"  styleClass="textfieldRight"/>
+            <DatePicker fx:id="datePicker" styleClass="leftPadding"/>
+            <VBox>
+                <Label text="Région : "/>
+                <TextField fx:id="regionFilter" styleClass="textfieldRight"/>
+            </VBox>
 
-            <Button fx:id="applyFilterBtn" onAction="#applyFilter" text="Filtrer" styleClass="rightPadding">
+            <Button fx:id="applyFilterBtn" onAction="#applyFilter" text="Filtrer">
                 <VBox.margin>
-                    <Insets top="0.0" right="100.0" bottom="0.0" left="0.0"/>
+                    <Insets top="45.0" right="80.0" bottom="0.0" left="80.0"/>
                 </VBox.margin>
             </Button>
         </VBox>

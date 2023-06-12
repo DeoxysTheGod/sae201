@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import javafx.scene.text.Text;
@@ -72,10 +73,10 @@ public class SisAppController {
     @FXML
     private Button checkBoxMenuBtn;
 
+    // Overlay
+    @FXML
+    private Pane overlayMenu;
 
-    // Autres
-    private boolean isCheckBoxContainerVisible;
-    private boolean isFilterContainerVisible;
 
     // Taille des menus
     private double rightMenuSize;
@@ -86,16 +87,40 @@ public class SisAppController {
     private List<String[]> filteredList;
     private String filter;
 
-    private void setMainContainerOverlay(boolean overlay) {
-        if (overlay) {
-            mainContainer.getStyleClass().add("overlay");
+    public SisAppController() {
+        dataset = new DataGetter(this.getClass().getResource("seismes_complet.csv").getFile());
+        filteredList = dataset.getDataset();
+    }
+
+    public void initialize() {
+        System.out.println("App launched successfully!");
+
+        // initialisation de la taille des deux menus utile pour plus tard
+        rightMenuSize = leftMenuContainer.getPrefWidth();
+        leftMenuSize = leftMenuContainer.getPrefWidth();
+        // Initialisation de l'interface
+        InterfaceInitialize();
+        createBindings();
+
+        leftMenuContainer.setPrefWidth(0.0);
+        rightMenuContainer.setPrefWidth(0.0);
+    }
+
+    @FXML
+    public void showCheckBoxMenu() {
+        checkBoxContainer.setManaged(!checkBoxContainer.isManaged());
+        checkBoxContainer.setVisible(!checkBoxContainer.isVisible());
+        if (checkBoxContainer.isVisible()) {
+            setMainContainerOverlay(); // Ajouter la superposition pour l'effet d'assombrissement
+            leftMenuContainer.setPrefWidth(leftMenuSize);
         } else {
-            mainContainer.getStyleClass().remove("overlay");
+            setMainContainerOverlay(); // Supprimer la superposition
+            leftMenuContainer.setPrefWidth(0.0);
         }
     }
 
     @FXML
-    private void checkButton(){
+    public void checkButton(){
         dashboardContainer.getChildren().clear();
         if (pane1.isSelected()){
             CustomInformationDisplayPane pane1 = new CustomInformationDisplayPane(400, 400, filteredList);
@@ -110,67 +135,45 @@ public class SisAppController {
 
     }
 
-    public SisAppController() {
-        dataset = new DataGetter(this.getClass().getResource("seismes_complet.csv").getFile());
-        filteredList = dataset.getDataset();
-        isCheckBoxContainerVisible = false;
-        isFilterContainerVisible = false;
-    }
-
-    public void initialize() {
-        System.out.println("App launched successfully!");
-
-        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuButton.png")));
-        view.setPreserveRatio(true);
-        view.setFitWidth(40.0);
-        checkBoxMenuBtn.setGraphic(view);
-
-        ImageView view_two = new ImageView(new Image(getClass().getResourceAsStream("menuButton.png")));
-        view_two.setPreserveRatio(true);
-        view_two.setFitWidth(40.0);
-        filterMenuBtn.setGraphic(view_two);
-
-
-        // Initialisation de l'interface
-        createBindings();
-        InterfaceInitialize();
-
-        rightMenuContainer.setPrefWidth(0.0);
-        leftMenuContainer.setPrefWidth(0.0);
-
-
-        CustomInformationDisplayPane cb1 = new CustomInformationDisplayPane(400, 400, dataset.getDataset());
-        CustomInformationDisplayPane cb2 = new CustomInformationDisplayPane(400, 400, dataset.getDataset());
-
-        cb1.addingBarChartEarthQuakePerYear();
-        cb2.addingBarChartEarthQuakeIntensityPerRegion();
-
-        dashboardContainer.getChildren().addAll(cb1, cb2);
+    @FXML
+    public void showFilterMenu() {
+        filterContainer.setManaged(!filterContainer.isManaged());
+        filterContainer.setVisible(!filterContainer.isVisible());
+        if (filterContainer.isVisible()) {
+            setMainContainerOverlay(); // Ajouter la superposition pour l'effet d'assombrissement
+            rightMenuContainer.setPrefWidth(leftMenuSize);
+        } else {
+            setMainContainerOverlay(); // Supprimer la superposition
+            rightMenuContainer.setPrefWidth(0.0);
+        }
     }
 
     @FXML
-    private void showCheckBoxMenu() {
-        isCheckBoxContainerVisible = !isCheckBoxContainerVisible;
-        checkBoxContainer.setManaged(isCheckBoxContainerVisible);
-        checkBoxContainer.setVisible(isCheckBoxContainerVisible);
-        if (isCheckBoxContainerVisible) {
-            setMainContainerOverlay(true); // Ajouter la superposition pour l'effet d'assombrissement
-            leftMenuContainer.setPrefWidth(rightMenuSize);
+    private void applyFilter() {
+        StringBuilder sb = new StringBuilder();
+        if (toggleBetweenTwoDates.isSelected()) {
+            sb.append((int) dateRangeSlider.getLowValue() + "-" + (int) dateRangeSlider.getHighValue());
         } else {
-            setMainContainerOverlay(false); // Supprimer la superposition
-            leftMenuContainer.setPrefWidth(0.0);
+            sb.append("none");
         }
-    }
+        sb.append(",");
+        if (togglePreciseDate.isSelected()) {
+            sb.append(datePicker.getValue().toString().replace("-", "/"));
+        } else {
+            sb.append("none");
+        }
+        sb.append(",");
+        if (!regionFilter.getText().isEmpty()) {
+            sb.append(regionFilter.getText());
+        } else {
+            sb.append("none");
+        }
 
-    public void showFilterMenu() {
-        isFilterContainerVisible = !isFilterContainerVisible;
-        filterContainer.setManaged(isFilterContainerVisible);
-        filterContainer.setVisible(isFilterContainerVisible);
-        if (isFilterContainerVisible) {
-            leftMenuContainer.setPrefWidth(leftMenuSize);
-        } else {
-            leftMenuContainer.setPrefWidth(0.0);
-        }
+        filter = sb.toString();
+
+        filteredList = dataset.applyFilter(filter);
+        checkButton();
+
     }
 
     /* pas utile pour l'instant
@@ -193,18 +196,37 @@ public class SisAppController {
     }
     */
 
+    private void setMainContainerOverlay() {
+        overlayMenu.setVisible(!overlayMenu.isVisible());
+        overlayMenu.setManaged(!overlayMenu.isManaged());
+    }
+
     public void InterfaceInitialize() {
+        // Image des boutons de menu
+        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuButton.png")));
+        view.setPreserveRatio(true);
+        view.setFitWidth(40.0);
+        checkBoxMenuBtn.setGraphic(view);
+
+        ImageView view_two = new ImageView(new Image(getClass().getResourceAsStream("menuButton.png")));
+        view_two.setPreserveRatio(true);
+        view_two.setFitWidth(40.0);
+        filterMenuBtn.setGraphic(view_two);
+
+        // Overlay
+        overlayMenu.setPrefWidth(mainContainer.getPrefWidth());
+        overlayMenu.setPrefHeight(mainContainer.getPrefHeight());
+
         // Initialisation du conteneur du menu de gauche
         checkBoxMenuBtn.setLayoutX(30.0);
         checkBoxMenuBtn.setLayoutY(30.0);
 
-        checkBoxContainer.setLayoutX(15.0);
-        checkBoxContainer.setLayoutY(15.0);
+        leftMenuContainer.setLayoutX(checkBoxMenuBtn.getLayoutX()/2);
+        leftMenuContainer.setLayoutY(checkBoxMenuBtn.getLayoutY()/2);
 
-        leftMenuContainer.setPrefHeight(mainContainer.getPrefHeight());
+        leftMenuContainer.setPrefHeight(mainContainer.getPrefHeight() - leftMenuContainer.getLayoutY() * 2);
 
-        checkBoxContainer.setVisible(isCheckBoxContainerVisible);
-        checkBoxContainer.setPrefHeight(leftMenuContainer.getPrefHeight() - checkBoxContainer.getLayoutY() * 2);
+        checkBoxContainer.setPrefHeight(leftMenuContainer.getPrefHeight());
         checkBoxContainer.setPrefWidth(leftMenuContainer.getPrefWidth() - checkBoxContainer.getLayoutX());
 
         checkBoxContainer.setPadding(new Insets(0, 0, 0, checkBoxMenuBtn.getLayoutX() - checkBoxContainer.getLayoutX()));
@@ -215,12 +237,12 @@ public class SisAppController {
 
         filterContainer.setLayoutY(15.0);
 
-        rightMenuContainer.setPrefHeight(mainContainer.getPrefHeight());
-        rightMenuContainer.setLayoutX(mainContainer.getPrefWidth() - rightMenuContainer.getPrefWidth());
+        rightMenuContainer.setLayoutY(filterMenuBtn.getLayoutY()/2);
+        rightMenuContainer.setPrefHeight(mainContainer.getPrefHeight() - leftMenuContainer.getLayoutX()*2);
+        rightMenuContainer.setLayoutX(mainContainer.getPrefWidth() - (rightMenuContainer.getPrefWidth() + leftMenuContainer.getLayoutX()));
 
-        filterContainer.setVisible(isFilterContainerVisible);
-        filterContainer.setPrefWidth(rightMenuContainer.getPrefWidth() - 15.0);
-        filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight() - filterContainer.getLayoutY() * 2);
+        filterContainer.setPrefWidth(rightMenuContainer.getPrefWidth());
+        filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight() );
 
         // Initialisation du RangeSlider pour les dates
         dateRangeSlider.setMax(2007);
@@ -232,7 +254,7 @@ public class SisAppController {
 
         // Initialisation du Dashboard
         dashboardScrollContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
-        dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth() - (rightMenuSize + leftMenuSize + dashboardScrollContainer.getLayoutX() * 2));
+        dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth() - dashboardScrollContainer.getLayoutX()*2);
         dashboardScrollContainer.setPrefHeight(mainContainer.getPrefHeight() - (checkBoxMenuBtn.getLayoutY() * 2));
 
         dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth() - 40);
@@ -278,44 +300,6 @@ public class SisAppController {
                 toggleBetweenTwoDates.setSelected(!newValue);
             }
         });
-    }
-
-    @FXML
-    private void applyFilter() {
-        StringBuilder sb = new StringBuilder();
-        if (toggleBetweenTwoDates.isSelected()) {
-            sb.append((int) dateRangeSlider.getLowValue() + "-" + (int) dateRangeSlider.getHighValue());
-        } else {
-            sb.append("none");
-        }
-        sb.append(",");
-        if (togglePreciseDate.isSelected()) {
-            sb.append(datePicker.getValue().toString().replace("-", "/"));
-        } else {
-            sb.append("none");
-        }
-        sb.append(",");
-        if (!regionFilter.getText().isEmpty()) {
-            sb.append(regionFilter.getText());
-        } else {
-            sb.append("none");
-        }
-
-        filter = sb.toString();
-
-        filteredList = dataset.applyFilter(filter);
-        checkButton();
-
-    }
-
-    @FXML
-    private void setMainContainerOpacity(double opacity) {
-        mainContainer.setOpacity(opacity);
-    }
-
-    @FXML
-    public void mainContainerBack() {
-        setMainContainerOverlay(false); // Supprimer la superposition
     }
 
 

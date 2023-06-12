@@ -1,65 +1,134 @@
 Label, CheckBox, TextField {
     -fx-font-size: 18;
+    -fx-text-fill: white;
+}
+
+* {
+    light-blue: #8bb7cc;
+    medium-light-blue: #3d7bbe;
+    medium-dark-blue: #1646ad;
+    dark-blue: #093385;
 }
 
 .mainContainer {
-    -fx-background-color: #b2e1e5;
+    -fx-background-color: light-blue;
 }
 
-.check-box {
-    /* default properties */
-    selected-box-color: white;
-    box-color: black;
-    mark-color: white;
-}
-
-.check-box:selected > .box {
-    /* background color for selected checkbox */
-    -fx-background-color: selected-box-color;
-}
-
+/* Menu */
 .menuContainer {
-    -fx-background-color: #5ba7a8;
+    -fx-background-color: medium-light-blue;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
-
-
-    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);*/
 }
-
 .menuBtn {
-    -fx-background-color: #5ba7a8;
+    -fx-background-color: medium-light-blue;
     -fx-background-radius: 20px;
 }
-
 .menuBtn:hover {
-    -fx-background-color: #3c8788;
+    -fx-background-color: dark-blue;
 }
 
+/* Menu de gauche */
+#checkBoxContainer {
+    -fx-alignment: center-left;
+    -fx-spacing: 30px;
+}
+
+/* Check Box */
+.checkBox .box {
+    -fx-background-color: light-blue;
+    -fx-background-radius: 10;
+}
+.checkBox:selected .mark {
+    -fx-background-color: light-blue;
+}
+.checkBox:selected .box {
+    -fx-background-color: dark-blue;
+}
+/* Menu de droite */
+#filterContainer {
+    -fx-alignment: center;
+    -fx-spacing: 30px;
+}
+#betweenTwoDatesContainer {
+    -fx-spacing: 10px;
+}
 .textfieldRight{
     -fx-padding: 20px;
     -fx-border-insets: 20px;
     -fx-background-insets: 20px;
 }
-
-.overlay {
-    -fx-background-color: rgba(0, 0, 0, 0.5); /* Couleur semi-transparente pour l'effet d'assombrissement */
-}
-
-.checkButton{
-
-}
-
 .dateRangeSliderLabel {
     -fx-background-color: white;
     -fx-alignment: center;
     -fx-pref-width: 60px;
+}
+#dateRangeSlider .track {
+    -fx-background-color: light-blue;
+}
+#dateRangeSlider .track-fill {
+    -fx-background-color: transparent;
+}
+#dateRangeSlider .range-bar {
+    -fx-background-color: dark-blue;
+}
+#dateRangeSlider .thumb {
+    -fx-background-color: dark-blue;
+}
+#dateRangeSlider .axis {
+    -fx-tick-label-fill: white;
+}
+
+.toggleSwt .thumb {
+    -fx-background-color: dark-blue;
+}
+.toggleSwt .thumb-area {
+    -fx-background-color: light-blue;
+}
+.toggleSwt:selected .thumb-area {
+    -fx-background-color: medium-dark-blue;
 }
 
 .rightPadding{
     -fx-padding: 20px;
     -fx-border-insets: 20px;
     -fx-background-insets: 15px;
+}
+
+/* Dashboard */
+
+ScrollPane, ScrollPane .viewport {
+    -fx-background-color: transparent;
+}
+#dashboardContainer {
+    -fx-hgap: 20px;
+    -fx-vgap: 20px;
+}
+.dashboardItem {
+    -fx-background-color: medium-light-blue;
+    -fx-background-radius: 20px;
+}
+.chart-legend {
+    -fx-background-color:  transparent;
+    -fx-padding: 0px;
+}
+.chart-bar {
+    -fx-bar-fill: dark-blue;
+}
+.chart .title {
+    -fx-text-fill: white;
+}
+.chart .label {
+    -fx-text-fill: white;
+}
+.chart .axis {
+    -fx-tick-label-fill: white;
+}
+
+
+/* Overlay */
+.overlayMenu {
+    -fx-background-color: rgba(0, 0, 0, 0.7); /* Couleur semi-transparente pour l'effet d'assombrissement */
 }
 
 
