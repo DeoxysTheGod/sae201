@@ -5,6 +5,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -15,11 +17,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+
 import javafx.scene.text.Text;
 import org.controlsfx.control.RangeSlider;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.util.List;
+import javafx.scene.control.ComboBox;
+
 
 public class SisAppController {
     // Containers
@@ -62,7 +67,7 @@ public class SisAppController {
     @FXML
     private ToggleSwitch togglePreciseDate;
     @FXML
-    private TextField regionFilter;
+    private ComboBox regionFilter;
 
     // Controls
     @FXML
@@ -86,12 +91,23 @@ public class SisAppController {
     private DataGetter dataset;
     private List<String[]> filteredList;
     private String filter;
+    private ObservableList<String> regions;
 
     public SisAppController() {
         dataset = new DataGetter(this.getClass().getResource("seismes_complet.csv").getFile());
         filteredList = dataset.getDataset();
     }
+    @FXML
+    private void initializeRegions() {
+        ObservableList<String> regions = FXCollections.observableArrayList(
+                "Auvergne-Rhône-Alpes", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val de Loire",
+                "Corse", "Grand Est", "Hauts-de-France", "Île-de-France", "Normandie", "Nouvelle-Aquitaine",
+                "Occitanie", "Pays de la Loire", "Provence-Alpes-Côte d'Azur"
+        );
+        regionFilter.setItems(regions);
 
+    }
+    @FXML
     public void initialize() {
         System.out.println("App launched successfully!");
 
@@ -104,7 +120,16 @@ public class SisAppController {
 
         leftMenuContainer.setPrefWidth(0.0);
         rightMenuContainer.setPrefWidth(0.0);
+        regions = FXCollections.observableArrayList(
+                "Auvergne-Rhône-Alpes", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val de Loire",
+                "Corse", "Grand Est", "Hauts-de-France", "Île-de-France", "Normandie", "Nouvelle-Aquitaine",
+                "Occitanie", "Pays de la Loire", "Provence-Alpes-Côte d'Azur"
+        );
+
+        regionFilter.setItems(regions); // Appel de la méthode pour initialiser les régions dans la ComboBox
+        initializeRegions();
     }
+
 
     @FXML
     public void showCheckBoxMenu() {
@@ -163,11 +188,12 @@ public class SisAppController {
             sb.append("none");
         }
         sb.append(",");
-        if (!regionFilter.getText().isEmpty()) {
-            sb.append(regionFilter.getText());
+        if (regionFilter.getValue() != null && !regionFilter.getValue().toString().isEmpty()) {
+            sb.append(regionFilter.getValue().toString());
         } else {
             sb.append("none");
         }
+
 
         filter = sb.toString();
 
@@ -300,7 +326,28 @@ public class SisAppController {
                 toggleBetweenTwoDates.setSelected(!newValue);
             }
         });
+
     }
+    @FXML
+    private void clearFilter() {
+        dateRangeSlider.setLowValue(1500);
+        dateRangeSlider.setHighValue(2007);
+        toggleBetweenTwoDates.setSelected(false);
+        togglePreciseDate.setSelected(false);
+        datePicker.setValue(null);
+        regionFilter.getSelectionModel().clearSelection();
+        regionFilter.setPromptText("Séléctionnez une région ");
+
+
+        filter = "";
+        filteredList = dataset.getDataset();
+        checkButton();
+
+
+    }
+
+
+
 
 
 }

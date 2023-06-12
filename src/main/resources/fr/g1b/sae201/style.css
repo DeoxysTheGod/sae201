@@ -1,6 +1,9 @@
-Label, CheckBox, TextField {
+Label, CheckBox{
     -fx-font-size: 18;
     -fx-text-fill: white;
+}
+TextField {
+    -fx-font-size: 18;
 }
 
 * {
@@ -62,6 +65,7 @@ Label, CheckBox, TextField {
     -fx-background-color: white;
     -fx-alignment: center;
     -fx-pref-width: 60px;
+    -fx-text-fill: BLACK;
 }
 #dateRangeSlider .track {
     -fx-background-color: light-blue;

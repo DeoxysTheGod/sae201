@@ -54,14 +54,15 @@
             <DatePicker fx:id="datePicker" styleClass="leftPadding"/>
             <VBox>
                 <Label text="Région : "/>
-                <TextField fx:id="regionFilter" styleClass="textfieldRight"/>
+                <ComboBox fx:id="regionFilter" styleClass="textfieldRight" promptText="Sélectionner une région"/>
             </VBox>
-
+            <HBox spacing="20" alignment="CENTER">
             <Button fx:id="applyFilterBtn" onAction="#applyFilter" text="Filtrer">
-                <VBox.margin>
-                    <Insets top="45.0" right="80.0" bottom="0.0" left="80.0"/>
-                </VBox.margin>
             </Button>
+            <Button fx:id="clearButton" onAction="#clearFilter" text="Effacer">
+            </Button>
+            </HBox>
+
         </VBox>
         <Button fx:id="filterMenuBtn" styleClass="menuBtn" prefHeight="60.0" prefWidth="60.0"
                 onAction="#showFilterMenu"/>
