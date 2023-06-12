@@ -39,7 +39,7 @@ public class CustomInformationDisplayPane extends Pane {
         int dateColumnIndex = DataGetter.findIndexColumnWithColumnName("Date", dataset);
 
         if (dateColumnIndex == -1) {
-            System.out.println("Error the column you are searching for does not exist");
+            System.out.println("Error : the column you are searching for does not exist.");
             return;
         }
 

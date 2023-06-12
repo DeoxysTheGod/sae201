@@ -14,9 +14,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Lecture2 extends Application {
+public class AffichageTableauDonnees extends Application {
 
-    private static final String CSV_FILE_PATH = "/amuhome/d22020033/IdeaProjects/sae201/src/main/resources/fr/g1b/sae201/seismes.csv";
+    private static final String CSV_FILE_PATH = "src/main/resources/fr/g1b/sae201/seismes.csv";
     private static final String CSV_SPLIT_BY = ",";
 
     public static void main(String[] args) {

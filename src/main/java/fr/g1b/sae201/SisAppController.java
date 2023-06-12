@@ -46,6 +46,9 @@ public class SisAppController {
     private CheckBox pane1;
     @FXML
     private CheckBox pane2;
+    @FXML
+    private CheckBox pane3;
+    //MANQUE PLUS QUE LA CARTE
 
     // Dashboard
     @FXML
@@ -97,12 +100,6 @@ public class SisAppController {
     private DataGetter dataset;
     private List<String[]> filteredList;
     private String filter;
-    private ObservableList<String> regions;
-
-    public SisAppController() {
-        //dataset = new DataGetter(this.getClass().getResource("seismes.csv").getFile());
-        //filteredList = dataset.getDataset();
-    }
 
     @FXML
     public void addCSV() {
@@ -148,8 +145,6 @@ public class SisAppController {
         leftMenuSize = leftMenuContainer.getPrefWidth();
         // Initialisation de l'interface
         InterfaceInitialize();
-        /**createBindings();
-        initializeRegions();**/
         leftMenuContainer.setPrefWidth(0.0);
         rightMenuContainer.setPrefWidth(0.0);
 
@@ -181,6 +176,11 @@ public class SisAppController {
             CustomInformationDisplayPane pane2 = new CustomInformationDisplayPane(400, 400, filteredList);
             pane2.addingBarChartEarthQuakeIntensityPerRegion();
             dashboardContainer.getChildren().add(pane2);
+        }
+        if (pane3.isSelected()) {
+            AffichageTableauDonnees pane3 = new AffichageTableauDonnees();
+            //pane3.
+            //dashboardContainer.getChildren().add(pane3);
         }
 
     }
