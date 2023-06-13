@@ -11,13 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 
 import javafx.scene.text.Text;
@@ -50,6 +48,8 @@ public class SisAppController {
     private CheckBox pane3;
     @FXML
     private CheckBox pane4;
+    @FXML
+    private CheckBox pane5;
     // Dashboard
     @FXML
     private ScrollPane dashboardScrollContainer;
@@ -157,22 +157,27 @@ public class SisAppController {
         if (pane1.isSelected()) {
             CustomInformationDisplayPane barchartPane1 = new CustomInformationDisplayPane(500, 300, filteredList);
             barchartPane1.addingBarChartEarthQuakePerYear();
-            dashboardContainer.getChildren().add(barchartPane1);
+            dashboardContainer.getChildren().add(new Pane(barchartPane1));
         }
         if (pane2.isSelected()) {
             CustomInformationDisplayPane barchartPane2 = new CustomInformationDisplayPane(300, 400, filteredList);
             barchartPane2.addingBarChartEarthQuakeIntensityPerRegion();
-            dashboardContainer.getChildren().add(barchartPane2);
+            dashboardContainer.getChildren().add(new Pane(barchartPane2));
+        }
+        if (pane5.isSelected()) {
+            CustomInformationDisplayPane intensityPane = new CustomInformationDisplayPane(130, 150, filteredList);
+            intensityPane.addingMaxIntensity();
+            dashboardContainer.getChildren().add(new Pane(intensityPane));
         }
         if (pane3.isSelected()) {
             CustomInformationDisplayPane tablePane = new CustomInformationDisplayPane(600, 300, filteredList);
             tablePane.addingTable();
-            dashboardContainer.getChildren().add(tablePane);
+            dashboardContainer.getChildren().add(new Pane(tablePane));
         }
         if (pane4.isSelected()) {
             CustomInformationDisplayPane mapPane = new CustomInformationDisplayPane(400, 400, filteredList);
             mapPane.addingMap();
-            dashboardContainer.getChildren().add(mapPane);
+            dashboardContainer.getChildren().add(new Pane(mapPane));
         }
     }
 
@@ -226,6 +231,7 @@ public class SisAppController {
             initializeRegions();
             getMinAndMaxYear();
             clearFilter();
+            dashboardContainer.getChildren().clear();
         }
     }
 
@@ -261,7 +267,7 @@ public class SisAppController {
 
     public void InterfaceInitialize() {
         // Image des boutons de menu
-        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuIconF.png")));
+        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuIcon.png")));
         view.setPreserveRatio(true);
         view.setFitWidth(40.0);
         checkBoxMenuBtn.setGraphic(view);

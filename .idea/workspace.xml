@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout de tests + 2 csv pour les tests de filtre">
+    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout des bonnes Icones + finalisation du css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +175,7 @@
       <workItem from="1686215591224" duration="17000" />
       <workItem from="1686513662072" duration="1102000" />
       <workItem from="1686515075347" duration="16254000" />
-      <workItem from="1686645342347" duration="17861000" />
+      <workItem from="1686645342347" duration="24073000" />
     </task>
     <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
       <created>1686140571540</created>
@@ -252,7 +254,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686662893597</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Ajout des bonnes Icones + finalisation du css">
+      <created>1686666841595</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1686666841595</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -283,7 +292,8 @@
     <MESSAGE value="changement du css" />
     <MESSAGE value="ajout du tableau et de la map dans le dashboard + amélioration des filtres" />
     <MESSAGE value="Ajout de tests + 2 csv pour les tests de filtre" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout de tests + 2 csv pour les tests de filtre" />
+    <MESSAGE value="Ajout des bonnes Icones + finalisation du css" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout des bonnes Icones + finalisation du css" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -297,11 +307,8 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="(Integer.parseInt(date[0]) &lt;= Integer.parseInt(value[1])) &amp;&amp; (Integer.parseInt(date[0]) &gt;= Integer.parseInt(value[0]))" language="JAVA" />
-        <watch expression="(Integer.parseInt(date[0]) &lt;= Integer.parseInt(value[1])" language="JAVA" />
-        <watch expression="(Integer.parseInt(date[0]) &gt;= Integer.parseInt(value[0]))" language="JAVA" />
-        <watch expression="Integer.parseInt(date[0])" language="JAVA" />
-        <watch expression="Integer.parseInt(value[1])" language="JAVA" />
+        <watch expression="dataset.get(maxIntensityIndex)[intensityColumnIndex]" language="JAVA" />
+        <watch expression="dataset.get(i)[intensityColumnIndex]" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

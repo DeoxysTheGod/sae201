@@ -8,13 +8,18 @@ import fr.g1b.sae201.DataGetter;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -22,7 +27,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CustomInformationDisplayPane extends Pane {
+public class CustomInformationDisplayPane extends VBox {
 
     private int width;
     private int heigth;
@@ -34,6 +39,51 @@ public class CustomInformationDisplayPane extends Pane {
         this.width = width;
         this.heigth = height;
         this.dataset = dataset;
+        this.getStyleClass().add("dashboardItem");
+    }
+
+    public void addingMaxIntensity() {
+        this.getChildren().clear();
+
+        int dateColumnIndex = DataGetter.findIndexColumnWithColumnName("Date", dataset);
+        int intensityColumnIndex = DataGetter.findIndexColumnWithColumnName("Intensité épicentrale", dataset);
+        int regionColumnIndex = DataGetter.findIndexColumnWithColumnName("Région", dataset);
+
+        int maxIntensityIndex = 1;
+        int minIntensityIndex = 1;
+
+        for (int i = 1; i < dataset.size(); i++) {
+            if (Double.parseDouble(dataset.get(i)[intensityColumnIndex])
+                    >= Double.parseDouble(dataset.get(maxIntensityIndex)[intensityColumnIndex])) {
+                maxIntensityIndex = i;
+            }
+            if (Double.parseDouble(dataset.get(i)[intensityColumnIndex])
+                    <= Double.parseDouble(dataset.get(maxIntensityIndex)[intensityColumnIndex])) {
+                minIntensityIndex = i;
+            }
+        }
+
+        Label dateMaxLabel = new Label(dataset.get(maxIntensityIndex)[dateColumnIndex]);
+        Label intensityMaxLabel = new Label(dataset.get(maxIntensityIndex)[intensityColumnIndex]);
+        intensityMaxLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 24px");
+        Label regionMaxNameLabel = new Label(dataset.get(maxIntensityIndex)[regionColumnIndex]);
+
+        Separator sep = new Separator();
+
+        Label dateMinLabel = new Label(dataset.get(minIntensityIndex)[dateColumnIndex]);
+        Label intensityMinLabel = new Label(dataset.get(minIntensityIndex)[intensityColumnIndex]);
+        intensityMinLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 24px");
+        Label regionMinNameLabel = new Label(dataset.get(minIntensityIndex)[regionColumnIndex]);
+
+        VBox labelContainer = new VBox();
+        labelContainer.setAlignment(Pos.CENTER);
+
+        labelContainer.getStyleClass().add("minAndMaxPane");
+
+        labelContainer.getChildren().addAll(dateMaxLabel, intensityMaxLabel, regionMaxNameLabel, sep,
+                dateMinLabel, intensityMinLabel, regionMinNameLabel);
+
+        this.getChildren().addAll(labelContainer);
     }
 
     public void addingMap() {
@@ -113,7 +163,7 @@ public class CustomInformationDisplayPane extends Pane {
 
         xAxis.setLabel("Année");
         yAxis.setLabel("Nombre de seisme");
-        this.getStyleClass().add("dashboardItem");
+
         this.getChildren().add(barChart);
     }
 

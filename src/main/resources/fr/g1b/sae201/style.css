@@ -112,6 +112,12 @@ ScrollPane, ScrollPane .viewport {
     -fx-background-color: medium-light-blue;
     -fx-alignment: center;
     -fx-background-radius: 20px;
+    -fx-alignment: center;
+}
+.minAndMaxPane {
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+    -fx-padding: 10px;
 }
 .chart-legend {
     -fx-background-color:  transparent;

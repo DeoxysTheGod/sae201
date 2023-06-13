@@ -8,7 +8,11 @@
 <Pane fx:id="mainContainer" prefHeight="800.0" prefWidth="1400.0" styleClass="mainContainer" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.g1b.sae201.SisAppController">
 
     <ScrollPane fx:id="dashboardScrollContainer" layoutX="150.0">
-        <FlowPane fx:id="dashboardContainer"/>
+        <FlowPane fx:id="dashboardContainer" rowValignment="CENTER">
+            <VBox styleClass="dashboardItem">
+                <Label text="Veuillez choisir un fichier CSV pour commencer"/>
+            </VBox>
+        </FlowPane>
     </ScrollPane>
 
     <Pane fx:id="overlayMenu" managed="false" styleClass="overlayMenu" visible="false" />
@@ -19,7 +23,7 @@
             <CheckBox fx:id="pane2" styleClass="checkBox" text="Intensité moyenne des séismes par région" wrapText="true"/>
             <CheckBox fx:id="pane3" styleClass="checkBox" text="Tableau des données" wrapText="true"/>
             <CheckBox fx:id="pane4" styleClass="checkBox" text="Carte des évènements" wrapText="true"/>
-
+            <CheckBox fx:id="pane5" styleClass="checkBox" text="Intensité maximale et minimale" wrapText="true"/>
             <Button fx:id="checkButton" onAction="#checkButton" styleClass="checkButton" text="Appliquer">
                 <VBox.margin>
                     <Insets bottom="0.0" left="80.0" right="80.0" top="45.0" />
