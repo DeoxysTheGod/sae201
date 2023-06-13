@@ -1,26 +1,19 @@
 package fr.g1b.sae201;
 
 import fr.g1b.sae201.dashboardpane.CustomInformationDisplayPane;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.controlsfx.control.RangeSlider;
 import org.controlsfx.control.ToggleSwitch;
 
@@ -109,6 +102,9 @@ public class SisAppController {
     int sliderMinValue;
     int sliderMaxValue;
 
+    /**
+     * Initialisation des variables utiles à l'affichages
+     */
     @FXML
     public void initialize() {
         System.out.println("App launched successfully!");
@@ -122,10 +118,11 @@ public class SisAppController {
         createBindings();
         leftMenuContainer.setPrefWidth(0.0);
         rightMenuContainer.setPrefWidth(0.0);
-
     }
 
-
+    /**
+     * Affiche le menu de gauche
+     */
     @FXML
     public void showCheckBoxMenu() {
         checkBoxContainer.setManaged(!checkBoxContainer.isManaged());
@@ -138,6 +135,9 @@ public class SisAppController {
         setMainContainerOverlay();
     }
 
+    /**
+     * Affiche le menu des filtres
+     */
     @FXML
     public void showFilterMenu() {
         filterContainer.setManaged(!filterContainer.isManaged());
@@ -150,11 +150,17 @@ public class SisAppController {
         setMainContainerOverlay();
     }
 
+    /**
+     * Gère l'affichage de l'overlay pour assombrir le fond lorsqu'on ouvre un menu
+     */
     private void setMainContainerOverlay() {
         overlayMenu.setVisible(filterContainer.isVisible() || checkBoxContainer.isVisible());
         overlayMenu.setManaged(filterContainer.isManaged() || checkBoxContainer.isManaged());
     }
 
+    /**
+     * Permet de mettre les informations choisies du menu de gauche dans le dashboard
+     */
     @FXML
     public void checkButton() {
         dashboardContainer.getChildren().clear();
@@ -185,6 +191,10 @@ public class SisAppController {
         }
     }
 
+    /**
+     * Applique les filtres sur le dataset de base
+     * et les enregistres dans filteredList
+     */
     @FXML
     private void applyFilter() {
         StringBuilder sb = new StringBuilder();
@@ -213,6 +223,11 @@ public class SisAppController {
 
     }
 
+    /**
+     * Ajoute le CSV et initialise les régions à mettre dans la comboBox de filtre
+     * et la récupération des dates minimales et maximales pour le RangeSlider
+     * et déblocage des boutons de filtre et du menu de gauche
+     */
     @FXML
     public void addCSV() {
         FileChooser fileChooser = new FileChooser();
@@ -242,6 +257,10 @@ public class SisAppController {
         }
     }
 
+    /**
+     * Initialisation des régions à afficher dans la comboBox de filtre
+     * en parcourant la base de données
+     */
     private void initializeRegions() {
         int indexregion = DataGetter.findIndexColumnWithColumnName("Région", dataset.getDataset());
         Set<String> uniqueRegions = new HashSet<>();
@@ -253,6 +272,10 @@ public class SisAppController {
         regionFilter.setItems(regions);
     }
 
+    /**
+     * Récupération de l'année minimale et maximale de la base de données
+     * pour le RangeSlider
+     */
     private void getMinAndMaxYear() {
         int indexDate = DataGetter.findIndexColumnWithColumnName("Date", dataset.getDataset());
         sliderMinValue = 2023;
@@ -272,6 +295,10 @@ public class SisAppController {
         dateRangeSlider.setLowValue(sliderMinValue);
     }
 
+    /**
+     * Initialisation de la position et de la taille des nœuds qui dépendent des autres
+     * afin d'avoir un affichage correct, symétrique et plaisant
+     */
     public void InterfaceInitialize() {
         // Image des boutons de menu
         ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuIcon.png")));
@@ -327,6 +354,9 @@ public class SisAppController {
         dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth() - 60);
     }
 
+    /**
+     * Création des bindings pour le RangeSlider, etc.
+     */
     public void createBindings() {
         dateRangeSlider.highValueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -368,6 +398,9 @@ public class SisAppController {
 
     }
 
+    /**
+     * Remise à zéro des filtres
+     */
     @FXML
     private void clearFilter() {
         dateRangeSlider.setLowValue(sliderMinValue);

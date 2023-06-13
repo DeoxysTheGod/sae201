@@ -6,10 +6,17 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * Classe personnalisée pour les points de notre carte
+ */
 public class CustomCircleMarkerLayer extends MapLayer {
     private MapPoint mapPoint;
     private Circle circle;
 
+    /**
+     * @param mapPoint Le point à customiser
+     * @param couleurIntensite La couleur du point
+     */
     public CustomCircleMarkerLayer(MapPoint mapPoint, Color couleurIntensite) {
         this.mapPoint = mapPoint;
         this.circle = new Circle(5, couleurIntensite);
@@ -18,6 +25,9 @@ public class CustomCircleMarkerLayer extends MapLayer {
         this.getChildren().add(circle);
     }
 
+    /**
+     * Override de la méthode layoutLayer pour afficher les points sur la carte
+     */
     @Override
     protected void layoutLayer() {
         /* Conversion du MapPoint vers Point2D */

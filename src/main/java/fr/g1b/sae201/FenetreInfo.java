@@ -9,10 +9,12 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 
 
-public class fenetreintro {
+public class FenetreInfo {
 
-
-    public static void display()
+    /**
+     * Affichage du message popup du CSV
+     */
+    public void display()
     {
         Stage popupwindow=new Stage();
 

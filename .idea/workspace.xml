@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Blocage des fonctionnalités s'il n'y a pas de CSV">
+    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Réglage d'un problème d'affichage du DatePicker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/AffichageCarte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/AffichageCarte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/CustomCircleMarkerLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/CustomCircleMarkerLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/fenetreintro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/FenetreInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +178,7 @@
       <workItem from="1686215591224" duration="17000" />
       <workItem from="1686513662072" duration="1102000" />
       <workItem from="1686515075347" duration="16254000" />
-      <workItem from="1686645342347" duration="25314000" />
+      <workItem from="1686645342347" duration="27767000" />
     </task>
     <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
       <created>1686140571540</created>
@@ -272,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686683338973</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Réglage d'un problème d'affichage du DatePicker">
+      <created>1686684696390</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1686684696390</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,14 +319,15 @@
     <MESSAGE value="Ajout des bonnes Icones + finalisation du css" />
     <MESSAGE value="Ajout d'informations pour le dashboard" />
     <MESSAGE value="Blocage des fonctionnalités s'il n'y a pas de CSV" />
-    <option name="LAST_COMMIT_MESSAGE" value="Blocage des fonctionnalités s'il n'y a pas de CSV" />
+    <MESSAGE value="Réglage d'un problème d'affichage du DatePicker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Réglage d'un problème d'affichage du DatePicker" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java</url>
-          <line>48</line>
+          <line>63</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
