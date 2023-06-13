@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="ajout du tableau et de la map dans le dashboard + amélioration des filtres">
+    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout de tests + 2 csv pour les tests de filtre">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/fr/g1b/sae201/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/fr/g1b/sae201/MainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +61,7 @@
       <recent name="fr.g1b.sae201" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MainTest">
+  <component name="RunManager" selected="Application.MainApp">
     <configuration name="AffichageCarte" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.AffichageCarte" />
       <module name="sae201" />
@@ -133,9 +134,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainApp" />
         <item itemvalue="JUnit.MainTest" />
         <item itemvalue="JUnit.MainTest.testFiltres" />
-        <item itemvalue="Application.MainApp" />
         <item itemvalue="Application.AffichageTableauDonnees" />
         <item itemvalue="Application.AffichageCarte" />
       </list>
@@ -172,7 +173,7 @@
       <workItem from="1686215591224" duration="17000" />
       <workItem from="1686513662072" duration="1102000" />
       <workItem from="1686515075347" duration="16254000" />
-      <workItem from="1686645342347" duration="16360000" />
+      <workItem from="1686645342347" duration="17861000" />
     </task>
     <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
       <created>1686140571540</created>
@@ -244,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686660466838</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Ajout de tests + 2 csv pour les tests de filtre">
+      <created>1686662893597</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1686662893597</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,7 +282,8 @@
     <MESSAGE value="Correction d'un bug + ajout d'une bd plus grande" />
     <MESSAGE value="changement du css" />
     <MESSAGE value="ajout du tableau et de la map dans le dashboard + amélioration des filtres" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout du tableau et de la map dans le dashboard + amélioration des filtres" />
+    <MESSAGE value="Ajout de tests + 2 csv pour les tests de filtre" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout de tests + 2 csv pour les tests de filtre" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -24,10 +24,7 @@ TextField {
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
 }
-.menuBtn {
-    -fx-background-color: medium-light-blue;
-    -fx-background-radius: 20px;
-}
+
 .menuBtn:hover {
     -fx-background-color: dark-blue;
 }
@@ -139,7 +136,15 @@ ScrollPane, ScrollPane .viewport {
     -fx-background-color: rgba(0, 0, 0, 0.6); /* Couleur semi-transparente pour l'effet d'assombrissement */
 }
 
-
-
-
-
+.button {
+    -fx-background-color: medium-dark-blue;
+    -fx-background-radius: 15px;
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+}
+.combo-box {
+    -fx-background-color: light-blue;
+    -fx-background-radius: 15px;
+    -fx-font-size: 15px;
+}

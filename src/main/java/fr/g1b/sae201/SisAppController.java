@@ -207,7 +207,7 @@ public class SisAppController {
     @FXML
     public void addCSV() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Sélectionner un fichier CSV");
+        fileChooser.setTitle("Sélectionnez un fichier CSV");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSV", "*.csv"));
 
         // Afficher la boîte de dialogue de sélection de fichier
@@ -261,12 +261,12 @@ public class SisAppController {
 
     public void InterfaceInitialize() {
         // Image des boutons de menu
-        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuButton.png")));
+        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuIconF.png")));
         view.setPreserveRatio(true);
         view.setFitWidth(40.0);
         checkBoxMenuBtn.setGraphic(view);
 
-        ImageView view_two = new ImageView(new Image(getClass().getResourceAsStream("menuButton.png")));
+        ImageView view_two = new ImageView(new Image(getClass().getResourceAsStream("filterIcon.png")));
         view_two.setPreserveRatio(true);
         view_two.setFitWidth(40.0);
         filterMenuBtn.setGraphic(view_two);
@@ -363,7 +363,7 @@ public class SisAppController {
         togglePreciseDate.setSelected(false);
         datePicker.setValue(null);
         regionFilter.getSelectionModel().clearSelection();
-        regionFilter.setPromptText("Séléctionnez une région ");
+        regionFilter.setPromptText("Sélectionnez une région ");
 
         filter = "";
         filteredList = dataset.getDataset();
