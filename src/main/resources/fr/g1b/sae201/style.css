@@ -108,6 +108,9 @@ ScrollPane, ScrollPane .viewport {
     -fx-vgap: 20px;
     -fx-alignment: center;
 }
+#datePicker .label {
+    -fx-text-fill: black;
+}
 .dashboardItem {
     -fx-background-color: medium-light-blue;
     -fx-alignment: center;

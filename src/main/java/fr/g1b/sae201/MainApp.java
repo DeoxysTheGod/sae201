@@ -6,8 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import java.io.IOException;
-
 public class MainApp extends Application {
 
     @Override
@@ -18,7 +16,8 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        fenetreintro.display();
+        FenetreInfo popup = new FenetreInfo();
+        popup.display();
     }
 
     public static void main(String[] args) {

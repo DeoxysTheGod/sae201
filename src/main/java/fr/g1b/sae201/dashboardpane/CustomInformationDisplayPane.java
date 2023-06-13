@@ -1,8 +1,5 @@
 package fr.g1b.sae201.dashboardpane;
 
-import com.gluonhq.maps.MapLayer;
-import com.gluonhq.maps.MapPoint;
-import com.gluonhq.maps.MapView;
 import fr.g1b.sae201.AffichageCarte;
 import fr.g1b.sae201.DataGetter;
 import javafx.beans.binding.Bindings;
@@ -17,12 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +26,13 @@ public class CustomInformationDisplayPane extends VBox {
     private int heigth;
     private List<String[]> dataset;
 
+    /**
+     * Initialisation de la VBox et de sa classe de style
+     *
+     * @param width Largeur de la VBox
+     * @param height Hauteur de la VBox
+     * @param dataset La base de données à utiliser pour l'affichage des informations
+     */
     public CustomInformationDisplayPane(int width, int height, List<String[]> dataset) {
         setPrefWidth(width);
         setPrefHeight(height);
@@ -42,6 +42,9 @@ public class CustomInformationDisplayPane extends VBox {
         this.getStyleClass().add("dashboardItem");
     }
 
+    /**
+     * Permet l'affichage du séisme avec l'intensité la plus grande et la plus petite
+     */
     public void addingMaxIntensity() {
         this.getChildren().clear();
 
@@ -86,6 +89,10 @@ public class CustomInformationDisplayPane extends VBox {
         this.getChildren().addAll(labelContainer);
     }
 
+    /**
+     * Instanci la classe AffichageCarte pour ajouter la carte
+     * à une VBox
+     */
     public void addingMap() {
         this.getChildren().clear();
         AffichageCarte map = new AffichageCarte(dataset);
@@ -95,6 +102,9 @@ public class CustomInformationDisplayPane extends VBox {
         this.getChildren().add(map.getMap());
     }
 
+    /**
+     * Ajoute le tableau de données dans une VBox
+     */
     public void addingTable() {
         this.getChildren().clear();
 
@@ -123,6 +133,9 @@ public class CustomInformationDisplayPane extends VBox {
         this.getChildren().add(tableView);
     }
 
+    /**
+     * Ajoute un BarChart qui montre le nombre de séismes par an
+     */
     public void addingBarChartEarthQuakePerYear() {
         this.getChildren().clear();
 
@@ -167,6 +180,9 @@ public class CustomInformationDisplayPane extends VBox {
         this.getChildren().add(barChart);
     }
 
+    /**
+     * Ajoute un BarChart qui montre l'intensité moyenne par région
+     */
     public void addingBarChartEarthQuakeIntensityPerRegion() {
         this.getChildren().clear();
 

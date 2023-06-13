@@ -1,22 +1,16 @@
 package fr.g1b.sae201;
 
-import com.gluonhq.maps.MapLayer;
 import com.gluonhq.maps.MapPoint;
 import com.gluonhq.maps.MapView;
 
-import javafx.application.Application;
-import javafx.geometry.Point2D;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseButton;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 import java.util.List;
 
-import static java.lang.Math.pow;
-
+/**
+ * Crée et dispose les points des séismes sur la carte et
+ * leur donne uune couleur en fonction de leur puissance
+ */
 public class AffichageCarte {
     private MapPoint dernierpoint;
     private MapView carte;
@@ -25,11 +19,19 @@ public class AffichageCarte {
 
     public static Color couleurIntensite = Color.color(0,0,0);
 
+    /**
+     * initialisation de la classe
+     *
+     * @param dataset La base de données qui permet d'afficher les points
+     */
     public AffichageCarte(List<String[]> dataset) {
         donneesSeismes = dataset;
         carte = new MapView();
     }
 
+    /**
+     * Dessine les points sur la carte
+     */
     public void dessinepoint() {
         int indexX = DataGetter.findIndexColumnWithColumnName("Lat", donneesSeismes);
         int indexY = DataGetter.findIndexColumnWithColumnName("Long", donneesSeismes);
@@ -82,6 +84,9 @@ public class AffichageCarte {
         carte.flyTo(0, dernierpoint, 0.1);
     }
 
+    /**
+     * @return Renvoie la map compléter
+     */
     public MapView getMap() {
         return carte;
     }
