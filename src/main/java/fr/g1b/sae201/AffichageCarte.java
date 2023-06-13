@@ -50,13 +50,13 @@ public class AffichageCarte {
                  * Les seismes de faible intensité sont verts, les forts sont rouges.
                  * On suppose que l'intensité maximale est de 9.0. (NE PAS METTRE EN DESSOUS DE 7)
                  */
-                double t = Double.parseDouble(donneesSeismes.get(i)[indexIntensite]) / 10.5;
+                double valueR = Double.parseDouble(donneesSeismes.get(i)[indexIntensite]) / 10.5;
                 //LIGNE DEBUG
                 //System.out.println(t);
                 /**
                  * Ici, on arrondit la valeur au cas où elle dépasserait 1.0 ou serait inférieure à 0
                  */
-                double valueG = 1 - t;
+                double valueG = 1 - valueR;
 
                 if (valueG < 0.0) {
                     valueG = 0.0;
@@ -69,7 +69,7 @@ public class AffichageCarte {
                  * C'est ici que les points sont placés sur la couche des points. On règle d'abord leur couleur, puis on les place sur la carte
                  * en fonction de leurs coordonnées. (MapPoint)
                  */
-                couleurIntensite = Color.color(t, valueG, 0);
+                couleurIntensite = Color.color(valueR, valueG, 0);
                 MapPoint mapPoint = new MapPoint(Double.parseDouble(donneesSeismes.get(i)[indexX]), Double.parseDouble(donneesSeismes.get(i)[indexY]));
                 CustomCircleMarkerLayer mapLayer = new CustomCircleMarkerLayer(mapPoint, couleurIntensite);
                 carte.addLayer(mapLayer);
