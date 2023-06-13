@@ -1,7 +1,8 @@
-Label, CheckBox{
+Label, CheckBox {
     -fx-font-size: 18;
     -fx-text-fill: white;
 }
+
 TextField {
     -fx-font-size: 18;
 }
@@ -65,7 +66,7 @@ TextField {
     -fx-background-color: white;
     -fx-alignment: center;
     -fx-pref-width: 60px;
-    -fx-text-fill: BLACK;
+    -fx-text-fill: black;
 }
 #dateRangeSlider .track {
     -fx-background-color: light-blue;
@@ -104,12 +105,15 @@ TextField {
 ScrollPane, ScrollPane .viewport {
     -fx-background-color: transparent;
 }
+
 #dashboardContainer {
     -fx-hgap: 20px;
     -fx-vgap: 20px;
+    -fx-alignment: center;
 }
 .dashboardItem {
     -fx-background-color: medium-light-blue;
+    -fx-alignment: center;
     -fx-background-radius: 20px;
 }
 .chart-legend {
@@ -132,7 +136,7 @@ ScrollPane, ScrollPane .viewport {
 
 /* Overlay */
 .overlayMenu {
-    -fx-background-color: rgba(0, 0, 0, 0.7); /* Couleur semi-transparente pour l'effet d'assombrissement */
+    -fx-background-color: rgba(0, 0, 0, 0.6); /* Couleur semi-transparente pour l'effet d'assombrissement */
 }
 
 

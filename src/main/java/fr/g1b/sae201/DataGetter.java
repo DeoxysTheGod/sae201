@@ -43,17 +43,19 @@ public class DataGetter {
         String[] separatedFilter = filter.split(",");
         List<String[]> filteredDataset = getDataset().stream()
                 .skip(1)
-                .filter(element -> {
-                    if (separatedFilter[0].matches("\\d{4}-\\d{4}")) {
+                .filter((element) -> {
+                    if (!separatedFilter[0].matches("none")) {
                         int dateIndex = DataGetter.findIndexColumnWithColumnName("Date", dataset);
-                        return ((Integer.parseInt(element[dateIndex].substring(0, 4)) <= Integer.parseInt(separatedFilter[0].substring(5, 9)))
-                                && (Integer.parseInt(element[dateIndex].substring(0, 4)) >= Integer.parseInt(separatedFilter[0].substring(0, 4))));
+                        String[] value = separatedFilter[0].split("-");
+                        String[] date = element[dateIndex].split("/");
+                        return ((Integer.parseInt(date[0]) <= Integer.parseInt(value[1]))
+                                && (Integer.parseInt(date[0]) >= Integer.parseInt(value[0])));
                     } else {
                         return true;
                     }
                 })
-                .filter(element -> {
-                    if (separatedFilter[1].matches("\\d{4}/\\d{2}/\\d{2}")) {
+                .filter((element) -> {
+                    if (!separatedFilter[1].matches("none")) {
                         int dateIndex = DataGetter.findIndexColumnWithColumnName("Date", dataset);
                         return element[dateIndex].equals(separatedFilter[1]);
                     } else {
@@ -61,11 +63,10 @@ public class DataGetter {
                     }
                 })
                 .filter((element) -> {
-                    if(!separatedFilter[2].matches("none")) {
+                    if (!separatedFilter[2].matches("none")) {
                         int dateIndex = DataGetter.findIndexColumnWithColumnName("Région", dataset);
                         return element[dateIndex].toLowerCase().trim().contains(separatedFilter[2].toLowerCase().trim());
-                    }
-                    else return true;
+                    } else return true;
                 })
                 .collect(Collectors.toList());
 

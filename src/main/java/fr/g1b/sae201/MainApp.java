@@ -17,7 +17,6 @@ public class MainApp extends Application {
         stage.setTitle("SismicAnalyzer");
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setFullScreen(true);
         stage.show();
     }
 

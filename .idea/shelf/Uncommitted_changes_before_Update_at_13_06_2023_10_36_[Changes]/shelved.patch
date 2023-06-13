@@ -1,0 +1,829 @@
+Index: src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fr.g1b.sae201.dashboardpane;\n\nimport fr.g1b.sae201.DataGetter;\nimport javafx.scene.chart.BarChart;\nimport javafx.scene.chart.CategoryAxis;\nimport javafx.scene.chart.NumberAxis;\nimport javafx.scene.chart.XYChart;\nimport javafx.scene.layout.Pane;\n\nimport java.util.ArrayList;\nimport java.util.LinkedHashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class CustomInformationDisplayPane extends Pane {\n\n    private int width;\n    private int heigth;\n    private List<String[]> dataset;\n\n    public CustomInformationDisplayPane(int width, int heigth, List<String[]> dataset) {\n        setPrefWidth(width);\n        setPrefHeight(heigth);\n        this.width = width;\n        this.heigth = heigth;\n        this.dataset = dataset;\n    }\n\n    public void addingBarChartEarthQuakePerYear() {\n        this.getChildren().clear();\n\n        CategoryAxis xAxis = new CategoryAxis();\n        NumberAxis yAxis = new NumberAxis();\n\n        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);\n\n        Map<String, Integer> yearsCounts = new LinkedHashMap<>();\n\n        int dateColumnIndex = DataGetter.findIndexColumnWithColumnName(\"Date\", dataset);\n\n        if (dateColumnIndex == -1) {\n            System.out.println(\"Error the column you are searching for does not exist\");\n            return;\n        }\n\n        for (int i = 1; i < dataset.size(); i++) {\n            String year = dataset.get(i)[dateColumnIndex].substring(0, 4);\n            if (yearsCounts.containsKey(year)) {\n                yearsCounts.put(year, yearsCounts.get(year) + 1);\n            } else {\n                yearsCounts.put(year, 1);\n            }\n        }\n\n        XYChart.Series<String, Number> series = new XYChart.Series<>();\n        for (String year : yearsCounts.keySet()) {\n            series.getData().add(new XYChart.Data<>(year, yearsCounts.get(year)));\n        }\n\n        barChart.getData().add(series);\n\n        barChart.setPrefWidth(width);\n        barChart.setPrefHeight(heigth);\n\n        barChart.setTitle(\"Nombre de séismes par année\");\n\n        xAxis.setLabel(\"Année\");\n        yAxis.setLabel(\"Nombre de seisme\");\n\n        this.getChildren().add(barChart);\n    }\n\n    public void addingBarChartEarthQuakeIntensityPerRegion() {\n        this.getChildren().clear();\n\n        CategoryAxis xAxis = new CategoryAxis();\n        NumberAxis yAxis = new NumberAxis();\n\n        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);\n\n        Map<String, Double> regionsName = new LinkedHashMap<>();\n        Map<String, Integer> nbSeisme = new LinkedHashMap<>();\n\n        int regionColumnIndex = DataGetter.findIndexColumnWithColumnName(\"Région épicentrale\", dataset);\n        int intensityColumnIndex = DataGetter.findIndexColumnWithColumnName(\"Intensité épicentrale\", dataset);\n\n        if (regionColumnIndex == -1 || intensityColumnIndex == -1) {\n            System.out.println(\"Error the column you are searching for does not exist\");\n            return;\n        }\n\n        for (int i = 1; i < dataset.size(); i++) {\n            String region = dataset.get(i)[regionColumnIndex];\n            double intensity = Double.parseDouble(dataset.get(i)[intensityColumnIndex]);\n            if (regionsName.containsKey(region)) {\n                regionsName.put(region, regionsName.get(region) + intensity);\n                nbSeisme.put(region, nbSeisme.get(region) + 1);\n            } else {\n                regionsName.put(region, intensity);\n                nbSeisme.put(region, 1);\n            }\n        }\n\n        for (String region : regionsName.keySet()) {\n            regionsName.put(region, regionsName.get(region)/nbSeisme.get(region));\n        }\n\n        XYChart.Series<String, Number> series = new XYChart.Series<>();\n        for (String year : regionsName.keySet()) {\n            series.getData().add(new XYChart.Data<>(year, regionsName.get(year)));\n        }\n\n        barChart.getData().add(series);\n\n        barChart.setPrefWidth(width);\n        barChart.setPrefHeight(heigth);\n\n        barChart.setTitle(\"Intensité moyenne des séismes par région\");\n\n        xAxis.setLabel(\"Région\");\n        yAxis.setLabel(\"Intensité\");\n\n        this.getChildren().add(barChart);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java b/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java
+--- a/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
++++ b/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java	(date 1686570758191)
+@@ -1,11 +1,16 @@
+ package fr.g1b.sae201.dashboardpane;
+ 
++import com.gluonhq.maps.MapLayer;
++import com.gluonhq.maps.MapPoint;
++import com.gluonhq.maps.MapView;
++import fr.g1b.sae201.AffichageCarte;
+ import fr.g1b.sae201.DataGetter;
+ import javafx.scene.chart.BarChart;
+ import javafx.scene.chart.CategoryAxis;
+ import javafx.scene.chart.NumberAxis;
+ import javafx.scene.chart.XYChart;
+ import javafx.scene.layout.Pane;
++import javafx.scene.paint.Color;
+ 
+ import java.util.ArrayList;
+ import java.util.LinkedHashMap;
+@@ -24,7 +29,13 @@
+         this.width = width;
+         this.heigth = heigth;
+         this.dataset = dataset;
++        this.getStyleClass().add("dashboardItem");
+     }
++
++    public void addingMap() {
++
++    }
++
+ 
+     public void addingBarChartEarthQuakePerYear() {
+         this.getChildren().clear();
+Index: src/main/java/fr/g1b/sae201/AffichageCarte.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fr.g1b.sae201;\n\nimport com.gluonhq.maps.MapLayer;\nimport com.gluonhq.maps.MapPoint;\nimport com.gluonhq.maps.MapView;\n\nimport javafx.application.Application;\nimport javafx.geometry.Point2D;\nimport javafx.scene.Scene;\nimport javafx.scene.input.MouseButton;\nimport javafx.scene.layout.GridPane;\nimport javafx.scene.paint.Color;\nimport javafx.scene.shape.Circle;\nimport javafx.stage.Stage;\n\nimport java.util.List;\n\nimport static java.lang.Math.pow;\n\npublic class AffichageCarte extends Application {\n    private MapPoint dernierpoint;\n    private MapView carte = new MapView();\n\n    public static DataGetter listedeseismes = new DataGetter(\"src/main/resources/fr/g1b/sae201/seismesgrosseliste.csv\");\n    List<String[]> donneesSeismes = (listedeseismes.getDataset());\n\n    int indexX = DataGetter.findIndexColumnWithColumnName(\"Lat\", donneesSeismes);\n    int indexY = DataGetter.findIndexColumnWithColumnName(\"Long\", donneesSeismes);\n    int indexIntensite = DataGetter.findIndexColumnWithColumnName(\"Intens\", donneesSeismes);\n    //un peu dangereux, il y a 2 colonnes avec Intens dans le csv donc il risque de confondre mais bon là ça marche donc...\n\n    public static Color couleurIntensite = Color.color(0,0,0);\n    public static void main(String[] args) {\n        launch();\n    }\n\n    public class CustomCircleMarkerLayer extends MapLayer {\n        private final MapPoint mapPoint;\n        private final Circle circle;\n        //public static Color couleurIntensite = Color.color(0, 0, 0);\n\n        /**\n         * @param mapPoint le point (latitude et longitude) où afficher le cercle\n         * @see com.gluonhq.maps.MapPoint\n         */\n        public CustomCircleMarkerLayer(MapPoint mapPoint) {\n            this.mapPoint = mapPoint;\n\n            /* Cercle rouge de taille 5 */\n            this.circle = new Circle(5, couleurIntensite);\n\n            /* Ajoute le cercle au MapLayer */\n            this.getChildren().add(circle);\n        }\n\n        /* La fonction est appelée à chaque rafraichissement de la carte */\n        @Override\n        protected void layoutLayer() {\n            /* Conversion du MapPoint vers Point2D */\n            Point2D point2d = this.getMapPoint(mapPoint.getLatitude(), mapPoint.getLongitude());\n\n            /* Déplace le cercle selon les coordonnées du point */\n            circle.setTranslateX(point2d.getX());\n            circle.setTranslateY(point2d.getY());\n        }\n    }\n\n\n    /**\n     * Cette fonction dessine les points représentant chacun un seïsme sur la carte.\n     * @param stage\n     */\n    public void dessinepoint(Stage stage) {\n        for (int i = 1; i < donneesSeismes.size() - 1; i++) {\n            /**\n             * On vérifie que l'entré dans la colonne des coordonnées lat et long du seïsme n'est pas vide\n             */\n            if (!donneesSeismes.get(i)[indexX].isEmpty() && !donneesSeismes.get(i)[indexY].isEmpty()) {\n\n                /**\n                 * on crée un double qui reprend l'intensité du séisme et la remet sur une échelle de 1 à 0 pour la couleur.\n                 * Les seïsmes de faible intensité sont verts, les forts sont rouges.\n                 * On supppose que l'intensité maximale est de 9.0. (NE PAS METTRE EN DESSOUS DE 7)\n                 */\n                double t = Double.parseDouble(donneesSeismes.get(i)[indexIntensite]) / 10.5;\n                //LIGNE DEBUG\n                //System.out.println(t);\n                /**\n                 * Ici on arrondit la valeur au cas ou elle dépasserait 1.0 ou serait inférieure à .0\n                 */\n                double valueG = 1 - t;\n\n                if (valueG < 0.0) {\n                    valueG = 0.0;\n                    System.out.println(\"Valeur ajustée\");\n                } else if (valueG > 1.0) {\n                    valueG =  1.0;\n                    System.out.println(\"Valeur ajustée\");\n                }\n                /**\n                 * C'est ici que les points sont placés sur la couche des points. On règle d'abord leur couleur, puis on les place sur la carte\n                 * en fonction de leurs coordonnées. (MapPoint)\n                 */\n                couleurIntensite = Color.color(t, valueG, 0);\n                MapPoint mapPoint = new MapPoint(Double.parseDouble(donneesSeismes.get(i)[indexX]), Double.parseDouble(donneesSeismes.get(i)[indexY]));\n                MapLayer mapLayer = new CustomCircleMarkerLayer(mapPoint);\n                carte.addLayer(mapLayer);\n                dernierpoint = mapPoint;\n            } else {\n                System.out.println(\"Erreur: Le seïsme ID \" + donneesSeismes.get(i)[0] + \" n'a pas de coordonnés.\");\n            }\n        }\n        carte.setZoom(5);\n        carte.flyTo(0, dernierpoint, 0.1);\n    }\n\n\n/*\n    public void getMapPosition(double sceneX, double sceneY) {\n        double x = sceneX - this.getTranslateX();\n        double y = sceneY - this.getTranslateY();\n        carte.setOnMouseClicked(e -> {\n                    MapPoint mapPosition = carte.getMapPosition(e.getSceneX(), e.getSceneY());\n                    System.out.println(\"mapPosition: \" + mapPosition.getLatitude() + \", \" + mapPosition.getLongitude());\n                }\n        );\n    }\n*/\n\n\n    @Override\n    public void start(Stage stage) {\n\n        /* Définit la plate-forme pour éviter \"javafx.platform is not defined\" */\n        System.setProperty(\"javafx.platform\", \"desktop\");\n\n        GridPane root = new GridPane();\n\n        /* Création des points avec latitude et longitude */\n\n        dessinepoint(stage);\n\n        root.getChildren().add(carte);\n        Scene scene = new Scene(root, 800, 800);\n        stage.setScene(scene);\n\n        stage.setTitle(\"Carte des séismes selectionnés\");\n        stage.show();\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/fr/g1b/sae201/AffichageCarte.java b/src/main/java/fr/g1b/sae201/AffichageCarte.java
+--- a/src/main/java/fr/g1b/sae201/AffichageCarte.java	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
++++ b/src/main/java/fr/g1b/sae201/AffichageCarte.java	(date 1686570758175)
+@@ -17,7 +17,7 @@
+ 
+ import static java.lang.Math.pow;
+ 
+-public class AffichageCarte extends Application {
++public class AffichageCarte {
+     private MapPoint dernierpoint;
+     private MapView carte = new MapView();
+ 
+@@ -30,9 +30,6 @@
+     //un peu dangereux, il y a 2 colonnes avec Intens dans le csv donc il risque de confondre mais bon là ça marche donc...
+ 
+     public static Color couleurIntensite = Color.color(0,0,0);
+-    public static void main(String[] args) {
+-        launch();
+-    }
+ 
+     public class CustomCircleMarkerLayer extends MapLayer {
+         private final MapPoint mapPoint;
+@@ -67,26 +64,26 @@
+ 
+ 
+     /**
+-     * Cette fonction dessine les points représentant chacun un seïsme sur la carte.
++     * Cette fonction dessine les points représentant chacun un seisme sur la carte.
+      * @param stage
+      */
+-    public void dessinepoint(Stage stage) {
++    public void dessinepoint() {
+         for (int i = 1; i < donneesSeismes.size() - 1; i++) {
+             /**
+-             * On vérifie que l'entré dans la colonne des coordonnées lat et long du seïsme n'est pas vide
++             * On vérifie que l'entrée dans la colonne des coordonnés lat et long du seisme n'est pas vide
+              */
+             if (!donneesSeismes.get(i)[indexX].isEmpty() && !donneesSeismes.get(i)[indexY].isEmpty()) {
+ 
+                 /**
+-                 * on crée un double qui reprend l'intensité du séisme et la remet sur une échelle de 1 à 0 pour la couleur.
+-                 * Les seïsmes de faible intensité sont verts, les forts sont rouges.
+-                 * On supppose que l'intensité maximale est de 9.0. (NE PAS METTRE EN DESSOUS DE 7)
++                 * On crée un double qui reprend l'intensité du séisme et la remet sur une échelle de 1 à 0 pour la couleur.
++                 * Les seismes de faible intensité sont verts, les forts sont rouges.
++                 * On suppose que l'intensité maximale est de 9.0. (NE PAS METTRE EN DESSOUS DE 7)
+                  */
+                 double t = Double.parseDouble(donneesSeismes.get(i)[indexIntensite]) / 10.5;
+                 //LIGNE DEBUG
+                 //System.out.println(t);
+                 /**
+-                 * Ici on arrondit la valeur au cas ou elle dépasserait 1.0 ou serait inférieure à .0
++                 * Ici, on arrondit la valeur au cas où elle dépasserait 1.0 ou serait inférieure à 0
+                  */
+                 double valueG = 1 - t;
+ 
+@@ -107,38 +104,22 @@
+                 carte.addLayer(mapLayer);
+                 dernierpoint = mapPoint;
+             } else {
+-                System.out.println("Erreur: Le seïsme ID " + donneesSeismes.get(i)[0] + " n'a pas de coordonnés.");
++                System.out.println("Erreur: Le seisme ID " + donneesSeismes.get(i)[0] + " n'a pas de coordonnés.");
+             }
+         }
+         carte.setZoom(5);
+         carte.flyTo(0, dernierpoint, 0.1);
+     }
+-
+-
+ /*
+-    public void getMapPosition(double sceneX, double sceneY) {
+-        double x = sceneX - this.getTranslateX();
+-        double y = sceneY - this.getTranslateY();
+-        carte.setOnMouseClicked(e -> {
+-                    MapPoint mapPosition = carte.getMapPosition(e.getSceneX(), e.getSceneY());
+-                    System.out.println("mapPosition: " + mapPosition.getLatitude() + ", " + mapPosition.getLongitude());
+-                }
+-        );
+-    }
+-*/
+-
+-
+     @Override
+     public void start(Stage stage) {
+ 
+-        /* Définit la plate-forme pour éviter "javafx.platform is not defined" */
+         System.setProperty("javafx.platform", "desktop");
+ 
+         GridPane root = new GridPane();
+ 
+-        /* Création des points avec latitude et longitude */
+ 
+-        dessinepoint(stage);
++        dessinepoint();
+ 
+         root.getChildren().add(carte);
+         Scene scene = new Scene(root, 800, 800);
+@@ -147,4 +128,5 @@
+         stage.setTitle("Carte des séismes selectionnés");
+         stage.show();
+     }
++    */
+ }
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23__Changes_.xml	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
++++ /dev/null	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_06_06_2023_10_23_[Changes]" date="1686039821944" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 06/06/2023 10:23 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25__Changes_.xml	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
++++ /dev/null	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_06_06_2023_10_25_[Changes]" date="1686039957304" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 06/06/2023 10:25 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_23_[Changes]/shelved.patch	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
++++ /dev/null	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
+@@ -1,59 +0,0 @@
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_20\" default=\"true\" project-jdk-name=\"openjdk-20\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/misc.xml b/.idea/misc.xml
+---- a/.idea/misc.xml	(revision 7c0e08524306e570bf56a3b3ed37cf45cebb77cb)
+-+++ b/.idea/misc.xml	(date 1686033352761)
+-@@ -8,7 +8,7 @@
+-       </list>
+-     </option>
+-   </component>
+--  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK">
+-+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK">
+-     <output url="file://$PROJECT_DIR$/out" />
+-   </component>
+- </project>
+-\ No newline at end of file
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"6444e694-09b3-4dd1-9ed9-e9d6612a5bee\" name=\"Changes\" comment=\"ajout du boutton pour ajouter le fichier CSV\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"CSS File\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MavenImportPreferences\">\n    <option name=\"generalSettings\">\n      <MavenGeneralSettings>\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\n        <option name=\"useMavenConfig\" value=\"true\" />\n      </MavenGeneralSettings>\n    </option>\n  </component>\n  <component name=\"ProjectId\" id=\"2QmjeAmTlZcGtAO4TuFyrDCdoD3\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/home/quentin/Documents&quot;,\n    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RunManager\">\n    <configuration name=\"MainApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainApp\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.MainApp\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"6444e694-09b3-4dd1-9ed9-e9d6612a5bee\" name=\"Changes\" comment=\"\" />\n      <created>1685959759057</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1685959759057</updated>\n      <workItem from=\"1685959761345\" duration=\"658000\" />\n      <workItem from=\"1685965744851\" duration=\"4759000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"ajout du boutton pour ajouter le fichier CSV\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"ajout du boutton pour ajouter le fichier CSV\" />\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 7c0e08524306e570bf56a3b3ed37cf45cebb77cb)
+-+++ b/.idea/workspace.xml	(date 1686039799426)
+-@@ -5,9 +5,8 @@
+-   </component>
+-   <component name="ChangeListManager">
+-     <list default="true" id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="ajout du boutton pour ajouter le fichier CSV">
+-+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-@@ -28,6 +27,9 @@
+-   <component name="Git.Settings">
+-     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-   </component>
+-+  <component name="MarkdownSettingsMigration">
+-+    <option name="stateVersion" value="1" />
+-+  </component>
+-   <component name="MavenImportPreferences">
+-     <option name="generalSettings">
+-       <MavenGeneralSettings>
+-@@ -90,6 +92,7 @@
+-       <updated>1685959759057</updated>
+-       <workItem from="1685959761345" duration="658000" />
+-       <workItem from="1685965744851" duration="4759000" />
+-+      <workItem from="1686033100176" duration="3512000" />
+-     </task>
+-     <servers />
+-   </component>
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2023_10_25_[Changes]/shelved.patch	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
++++ /dev/null	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
+@@ -1,103 +0,0 @@
+-Index: src/main/resources/fr/g1b/sae201/MainApp.fxml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<?import javafx.geometry.*?>\n<?import javafx.scene.control.*?>\n<?import javafx.scene.layout.*?>\n\n<Pane fx:id=\"mainContainer\" prefHeight=\"607.0\" prefWidth=\"1080.0\" styleClass=\"mainContainer\" stylesheets=\"@style.css\" xmlns=\"http://javafx.com/javafx/17.0.2-ea\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"fr.g1b.sae201.SisAppController\">\n\n    <FlowPane fx:id=\"dashboardContainer\" layoutX=\"100.0\" layoutY=\"100.0\" styleClass=\"dashboardContainer\">\n        <Button text=\"jsp\" />\n        <Button text=\"jsp\" />\n        <Button text=\"jsp\" />\n        <Button text=\"jsp\" />\n    </FlowPane>\n    <Pane fx:id=\"leftMenuContainer\" prefWidth=\"300.0\" styleClass=\"leftMenuContainer\">\n        <VBox fx:id=\"checkBoxContainer\" alignment=\"CENTER_LEFT\" layoutX=\"15.0\" layoutY=\"15.0\" spacing=\"30.0\" styleClass=\"checkBoxContainer\">\n            <!--<padding><Insets left=\"15.0\" top=\"100.0\" /></padding>-->\n            <CheckBox text=\"checkbox1\" />\n            <CheckBox text=\"checkbox2\" />\n            <CheckBox text=\"checkbox3\" />\n            <CheckBox text=\"checkbox4\" />\n        </VBox>\n        <Button fx:id=\"checkBoxMenuBtn\" layoutX=\"30.0\" layoutY=\"30.0\" onAction=\"#hideAndShowMenu\" prefHeight=\"60.0\" prefWidth=\"60.0\" text=\"&gt;\" />\n    </Pane>\n\n</Pane>\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/src/main/resources/fr/g1b/sae201/MainApp.fxml b/src/main/resources/fr/g1b/sae201/MainApp.fxml
+---- a/src/main/resources/fr/g1b/sae201/MainApp.fxml	(revision 82191f3081fd9d0a3a3e9acddca7274695698437)
+-+++ b/src/main/resources/fr/g1b/sae201/MainApp.fxml	(date 1686039606179)
+-@@ -6,7 +6,7 @@
+- 
+- <Pane fx:id="mainContainer" prefHeight="607.0" prefWidth="1080.0" styleClass="mainContainer" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.g1b.sae201.SisAppController">
+- 
+--    <FlowPane fx:id="dashboardContainer" layoutX="100.0" layoutY="100.0" styleClass="dashboardContainer">
+-+    <FlowPane fx:id="dashboardContainer" layoutX="150.0" styleClass="dashboardContainer">
+-         <Button text="jsp" />
+-         <Button text="jsp" />
+-         <Button text="jsp" />
+-@@ -22,5 +22,15 @@
+-         </VBox>
+-         <Button fx:id="checkBoxMenuBtn" layoutX="30.0" layoutY="30.0" onAction="#hideAndShowMenu" prefHeight="60.0" prefWidth="60.0" text="&gt;" />
+-     </Pane>
+-+    <Pane fx:id="rightMenuContainer" prefWidth="300.0" styleClass="leftMenuContainer">
+-+        <VBox fx:id="filterContainer" alignment="CENTER_LEFT" layoutX="15.0" layoutY="15.0" spacing="30.0" styleClass="checkBoxContainer">
+-+            <!--<padding><Insets left="15.0" top="100.0" /></padding>-->
+-+            <CheckBox text="checkbox1" />
+-+            <CheckBox text="checkbox2" />
+-+            <CheckBox text="checkbox3" />
+-+            <CheckBox text="checkbox4" />
+-+        </VBox>
+-+        <Button fx:id="filterMenuBtn" layoutX="30.0" layoutY="30.0" onAction="#hideAndShowMenu" prefHeight="60.0" prefWidth="60.0" text="&gt;" />
+-+    </Pane>
+- 
+- </Pane>
+-Index: src/main/java/fr/g1b/sae201/SisAppController.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package fr.g1b.sae201;\n\nimport javafx.fxml.FXML;\nimport javafx.geometry.Insets;\nimport javafx.scene.control.Button;\nimport javafx.scene.layout.FlowPane;\nimport javafx.scene.layout.Pane;\nimport javafx.scene.layout.VBox;\nimport javafx.stage.FileChooser;\nimport javafx.stage.FileChooser.ExtensionFilter;\n\nimport java.io.File;\n\npublic class SisAppController {\n    // Containers\n    @FXML\n    private Pane mainContainer; // fenêtre principale\n    @FXML\n    private VBox checkBoxContainer; // Menu de gauche\n    @FXML\n    private FlowPane dashboardContainer;\n    @FXML\n    private Pane leftMenuContainer;\n\n    // Controls\n    @FXML\n    private Button addButton;\n    @FXML\n    private Button checkBoxMenuBtn;\n\n    // Autres\n    private boolean booleanMenu;\n\n    public SisAppController() {\n\n        booleanMenu = false;\n    }\n\n    public void initialize() {\n        System.out.println(\"App launched successfully!\");\n\n        // Initialisation de l'interface\n        InterfaceInitialize();\n    }\n\n    public void hideAndShowMenu() {\n        booleanMenu = !booleanMenu;\n        checkBoxContainer.setManaged(booleanMenu);\n        checkBoxContainer.setVisible(booleanMenu);\n    }\n\n    @FXML\n    public void addCSV() {\n        FileChooser fileChooser = new FileChooser();\n        fileChooser.setTitle(\"Sélectionner un fichier CSV\");\n        fileChooser.getExtensionFilters().add(new ExtensionFilter(\"Fichiers CSV\", \"*.csv\"));\n\n        // Afficher la boîte de dialogue de sélection de fichier\n        File selectedFile = fileChooser.showOpenDialog(checkBoxContainer.getScene().getWindow());\n\n        if (selectedFile != null) {\n            // Traiter le fichier CSV sélectionné ici\n            System.out.println(\"Fichier sélectionné : \" + selectedFile.getAbsolutePath());\n\n            // Mettre à jour le texte du bouton avec le nom du fichier sélectionné\n            addButton.setText(selectedFile.getName());\n        }\n    }\n\n    public void InterfaceInitialize() {\n        // Initialisation du conteneur du menu de gauche\n        leftMenuContainer.setPrefHeight(mainContainer.getPrefHeight());\n\n        checkBoxContainer.setVisible(false);\n        checkBoxContainer.setPrefHeight(leftMenuContainer.getPrefHeight()-checkBoxContainer.getLayoutY()*2);\n        checkBoxContainer.setPrefWidth(leftMenuContainer.getPrefWidth()-checkBoxContainer.getLayoutX()*2);\n\n        checkBoxContainer.setPadding(new Insets(0,0,0,checkBoxMenuBtn.getLayoutX()-checkBoxContainer.getLayoutX()));\n\n        // Initialisation du Dashboard\n\n    }\n}\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/src/main/java/fr/g1b/sae201/SisAppController.java b/src/main/java/fr/g1b/sae201/SisAppController.java
+---- a/src/main/java/fr/g1b/sae201/SisAppController.java	(revision 82191f3081fd9d0a3a3e9acddca7274695698437)
+-+++ b/src/main/java/fr/g1b/sae201/SisAppController.java	(date 1686039548598)
+-@@ -78,6 +78,6 @@
+-         checkBoxContainer.setPadding(new Insets(0,0,0,checkBoxMenuBtn.getLayoutX()-checkBoxContainer.getLayoutX()));
+- 
+-         // Initialisation du Dashboard
+--
+-+        dashboardContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());
+-     }
+- }
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"6444e694-09b3-4dd1-9ed9-e9d6612a5bee\" name=\"Changes\" comment=\"ajout du boutton pour ajouter le fichier CSV\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MainApp.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MainApp.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"CSS File\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MavenImportPreferences\">\n    <option name=\"generalSettings\">\n      <MavenGeneralSettings>\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\n        <option name=\"useMavenConfig\" value=\"true\" />\n      </MavenGeneralSettings>\n    </option>\n  </component>\n  <component name=\"ProjectId\" id=\"2QmjeAmTlZcGtAO4TuFyrDCdoD3\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"last_opened_file_path\": \"/home/quentin/Documents\",\n    \"list.type.of.created.stylesheet\": \"CSS\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"project.structure.last.edited\": \"Modules\",\n    \"project.structure.proportion\": \"0.0\",\n    \"project.structure.side.proportion\": \"0.4561201\",\n    \"settings.editor.selected.configurable\": \"reference.settingsdialog.IDE.editor.colors.General\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RunManager\">\n    <configuration name=\"MainApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainApp\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.MainApp\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"6444e694-09b3-4dd1-9ed9-e9d6612a5bee\" name=\"Changes\" comment=\"\" />\n      <created>1685959759057</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1685959759057</updated>\n      <workItem from=\"1685959761345\" duration=\"658000\" />\n      <workItem from=\"1685965744851\" duration=\"4759000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"ajout du boutton pour ajouter le fichier CSV\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"ajout du boutton pour ajouter le fichier CSV\" />\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision 82191f3081fd9d0a3a3e9acddca7274695698437)
+-+++ b/.idea/workspace.xml	(date 1686039925109)
+-@@ -4,13 +4,10 @@
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+-   <component name="ChangeListManager">
+--    <list default="true" id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="ajout du boutton pour ajouter le fichier CSV">
+-+    <list default="true" id="6444e694-09b3-4dd1-9ed9-e9d6612a5bee" name="Changes" comment="Début de l'interface graphique">
+-       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MainApp.java" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/test.fxml" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-@@ -97,6 +94,14 @@
+-       <workItem from="1685959761345" duration="658000" />
+-       <workItem from="1685965744851" duration="4759000" />
+-     </task>
+-+    <task id="LOCAL-00001" summary="Début de l'interface graphique">
+-+      <created>1686039473896</created>
+-+      <option name="number" value="00001" />
+-+      <option name="presentableId" value="LOCAL-00001" />
+-+      <option name="project" value="LOCAL" />
+-+      <updated>1686039473896</updated>
+-+    </task>
+-+    <option name="localTasksCounter" value="2" />
+-     <servers />
+-   </component>
+-   <component name="TypeScriptGeneratedFilesManager">
+-@@ -104,6 +109,7 @@
+-   </component>
+-   <component name="VcsManagerConfiguration">
+-     <MESSAGE value="ajout du boutton pour ajouter le fichier CSV" />
+--    <option name="LAST_COMMIT_MESSAGE" value="ajout du boutton pour ajouter le fichier CSV" />
+-+    <MESSAGE value="Début de l'interface graphique" />
+-+    <option name="LAST_COMMIT_MESSAGE" value="Début de l'interface graphique" />
+-   </component>
+- </project>
+-\ No newline at end of file
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n\n  <groupId>fr.g1b</groupId>\n  <artifactId>sae201</artifactId>\n  <version>1.0-SNAPSHOT</version>\n  <name>sae201</name>\n\n  <properties>\n    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    <junit.version>5.9.2</junit.version>      </properties>\n\n  <dependencies>\n    <dependency>\n      <groupId>org.openjfx</groupId>\n      <artifactId>javafx-controls</artifactId>\n      <version>20</version>\n    </dependency>\n\n    <dependency>\n      <groupId>org.openjfx</groupId>\n      <artifactId>javafx-fxml</artifactId>\n      <version>20</version>\n    </dependency>\n                                    \n    <dependency>\n      <groupId>org.junit.jupiter</groupId>\n      <artifactId>junit-jupiter-api</artifactId>\n      <version>${junit.version}</version>\n      <scope>test</scope>\n    </dependency>\n\n    <dependency>\n      <groupId>org.junit.jupiter</groupId>\n      <artifactId>junit-jupiter-engine</artifactId>\n      <version>${junit.version}</version>\n      <scope>test</scope>\n    </dependency>\n\n    <dependency>\n      <groupId>com.opencsv</groupId>\n      <artifactId>opencsv</artifactId>\n      <version>5.7.1</version>\n    </dependency>\n    <dependency>\n      <groupId>org.controlsfx</groupId>\n      <artifactId>controlsfx</artifactId>\n      <version>11.1.2</version>\n    </dependency>\n    <dependency>\n      <groupId>com.gluonhq</groupId>\n      <artifactId>maps</artifactId>\n      <version>2.0.0-ea+6</version>\n    </dependency>\n  </dependencies>\n\n  <build>\n        <plugins>\n            <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <version>3.11.0</version>\n        <configuration>\n          <source>20</source>\n          <target>20</target>\n        </configuration>\n            </plugin>\n      <plugin>\n        <groupId>org.openjfx</groupId>\n        <artifactId>javafx-maven-plugin</artifactId>\n        <version>0.0.8</version>\n        <executions>\n          <execution>\n            <!-- Default configuration for running with: mvn clean javafx:run -->\n            <id>default-cli</id>\n            <configuration>\n              <mainClass>fr.g1b.sae201/fr.g1b.sae201.MainApp</mainClass>\n              <launcher>app</launcher>\n              <jlinkZipName>app</jlinkZipName>\n              <jlinkImageName>app</jlinkImageName>\n              <noManPages>true</noManPages>\n              <stripDebug>true</stripDebug>\n              <noHeaderFiles>true</noHeaderFiles>\n            </configuration>\n          </execution>\n        </executions>\n      </plugin>\n          </plugins>\n  </build>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
++++ b/pom.xml	(date 1686513713968)
+@@ -2,92 +2,89 @@
+ <project xmlns="http://maven.apache.org/POM/4.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+-  <modelVersion>4.0.0</modelVersion>
+-
+-  <groupId>fr.g1b</groupId>
+-  <artifactId>sae201</artifactId>
+-  <version>1.0-SNAPSHOT</version>
+-  <name>sae201</name>
+-
+-  <properties>
+-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+-    <junit.version>5.9.2</junit.version>      </properties>
++    <modelVersion>4.0.0</modelVersion>
++    <groupId>fr.g1b</groupId>
++    <artifactId>sae201</artifactId>
++    <version>1.0-SNAPSHOT</version>
++    <name>sae201</name>
++    <properties>
++        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++        <junit.version>5.9.2</junit.version>
++    </properties>
+ 
+-  <dependencies>
+-    <dependency>
+-      <groupId>org.openjfx</groupId>
+-      <artifactId>javafx-controls</artifactId>
+-      <version>20</version>
+-    </dependency>
++    <dependencies>
++
++        <dependency>
++            <groupId>org.openjfx</groupId>
++            <artifactId>javafx-controls</artifactId>
++            <version>20</version>
++        </dependency>
+ 
+-    <dependency>
+-      <groupId>org.openjfx</groupId>
+-      <artifactId>javafx-fxml</artifactId>
+-      <version>20</version>
+-    </dependency>
+-                                    
+-    <dependency>
+-      <groupId>org.junit.jupiter</groupId>
+-      <artifactId>junit-jupiter-api</artifactId>
+-      <version>${junit.version}</version>
+-      <scope>test</scope>
+-    </dependency>
+-
+-    <dependency>
+-      <groupId>org.junit.jupiter</groupId>
+-      <artifactId>junit-jupiter-engine</artifactId>
+-      <version>${junit.version}</version>
+-      <scope>test</scope>
+-    </dependency>
+-
+-    <dependency>
+-      <groupId>com.opencsv</groupId>
+-      <artifactId>opencsv</artifactId>
+-      <version>5.7.1</version>
+-    </dependency>
+-    <dependency>
+-      <groupId>org.controlsfx</groupId>
+-      <artifactId>controlsfx</artifactId>
+-      <version>11.1.2</version>
+-    </dependency>
+-    <dependency>
+-      <groupId>com.gluonhq</groupId>
+-      <artifactId>maps</artifactId>
+-      <version>2.0.0-ea+6</version>
+-    </dependency>
+-  </dependencies>
+-
+-  <build>
++        <dependency>
++            <groupId>org.openjfx</groupId>
++            <artifactId>javafx-fxml</artifactId>
++            <version>20</version>
++        </dependency>
++
++        <dependency>
++            <groupId>org.junit.jupiter</groupId>
++            <artifactId>junit-jupiter-api</artifactId>
++            <version>${junit.version}</version>
++            <scope>test</scope>
++        </dependency>
++        <dependency>
++            <groupId>org.junit.jupiter</groupId>
++            <artifactId>junit-jupiter-engine</artifactId>
++            <version>${junit.version}</version>
++            <scope>test</scope>
++        </dependency>
++        <dependency>
++            <groupId>com.opencsv</groupId>
++            <artifactId>opencsv</artifactId>
++            <version>5.7.1</version>
++        </dependency>
++        <dependency>
++            <groupId>org.controlsfx</groupId>
++            <artifactId>controlsfx</artifactId>
++            <version>11.1.2</version>
++        </dependency>
++        <dependency>
++            <groupId>com.gluonhq</groupId>
++            <artifactId>maps</artifactId>
++            <version>2.0.0-ea+6</version>
++        </dependency>
++    </dependencies>
++    <build>
+         <plugins>
+             <plugin>
+-        <groupId>org.apache.maven.plugins</groupId>
+-        <artifactId>maven-compiler-plugin</artifactId>
+-        <version>3.11.0</version>
+-        <configuration>
+-          <source>20</source>
+-          <target>20</target>
+-        </configuration>
++                <groupId>org.apache.maven.plugins</groupId>
++                <artifactId>maven-compiler-plugin</artifactId>
++                <version>3.11.0</version>
++                <configuration>
++                    <source>20</source>
++                    <target>20</target>
++                </configuration>
+             </plugin>
+-      <plugin>
+-        <groupId>org.openjfx</groupId>
+-        <artifactId>javafx-maven-plugin</artifactId>
+-        <version>0.0.8</version>
+-        <executions>
+-          <execution>
+-            <!-- Default configuration for running with: mvn clean javafx:run -->
+-            <id>default-cli</id>
+-            <configuration>
+-              <mainClass>fr.g1b.sae201/fr.g1b.sae201.MainApp</mainClass>
+-              <launcher>app</launcher>
+-              <jlinkZipName>app</jlinkZipName>
+-              <jlinkImageName>app</jlinkImageName>
+-              <noManPages>true</noManPages>
+-              <stripDebug>true</stripDebug>
+-              <noHeaderFiles>true</noHeaderFiles>
+-            </configuration>
+-          </execution>
+-        </executions>
+-      </plugin>
+-          </plugins>
+-  </build>
++            <plugin>
++                <groupId>org.openjfx</groupId>
++                <artifactId>javafx-maven-plugin</artifactId>
++                <version>0.0.8</version>
++                <executions>
++                    <execution>
++                        <!-- Default configuration for running with: mvn clean javafx:run -->
++                        <id>default-cli</id>
++                        <configuration>
++                            <mainClass>fr.g1b.sae201/fr.g1b.sae201.MainApp</mainClass>
++                            <launcher>app</launcher>
++                            <jlinkZipName>app</jlinkZipName>
++                            <jlinkImageName>app</jlinkImageName>
++                            <noManPages>true</noManPages>
++                            <stripDebug>true</stripDebug>
++                            <noHeaderFiles>true</noHeaderFiles>
++                        </configuration>
++                    </execution>
++                </executions>
++            </plugin>
++        </plugins>
++    </build>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" project-jdk-name=\"openjdk-20\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
++++ b/.idea/misc.xml	(date 1686513713928)
+@@ -8,7 +8,7 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/AffichageCarte.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/AffichageCarte.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2Qs4Oqko6a5Rrhg1ymuDsKKURxP\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.4561201&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\Charles\\IdeaProjects\\sae201\\src\\main\\resources\\fr\\g1b\\sae201\" />\n      <recent name=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"CustomPaneBarChart\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.dashboardpane.CustomPaneBarChart\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.dashboardpane.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Lecture\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.Lecture\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"LectureBis\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.LectureBis\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"MainApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainApp\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.CustomPaneBarChart\" />\n        <item itemvalue=\"Application.MainApp\" />\n        <item itemvalue=\"Application.LectureBis\" />\n        <item itemvalue=\"Application.Lecture\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task id=\"LOCAL-00001\" summary=\"modif .gitignore\">\n      <created>1686087886499</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686087886499</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Changement des liens des images\">\n      <created>1686087934161</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686087934161</updated>\n    </task>\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"Changement des liens des images\" />\n      <created>1686128933046</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1686128933046</updated>\n      <workItem from=\"1686128938771\" duration=\"120000\" />\n      <workItem from=\"1686130190759\" duration=\"276000\" />\n      <workItem from=\"1686140496020\" duration=\"11280000\" />\n      <workItem from=\"1686338407695\" duration=\"3826000\" />\n      <workItem from=\"1686393820934\" duration=\"8703000\" />\n      <workItem from=\"1686406789622\" duration=\"7789000\" />\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"suppression de test.fxml et correction de Lecture\">\n      <created>1686140571540</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686140571540</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\n      <created>1686149904820</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686149904820</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\n      <created>1686149975914</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686149975914</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"arrangement du pannel de droite (css)\">\n      <created>1686302814592</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686302814592</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"arrangement du pannel de droite (css)\">\n      <created>1686302833933</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686302833933</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)\">\n      <created>1686397956184</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686397956184</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"9\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"modif .gitignore\" />\n    <MESSAGE value=\"Changement des liens des images\" />\n    <MESSAGE value=\"suppression de test.fxml et correction de Lecture\" />\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\n    <MESSAGE value=\"arrangement du pannel de droite (css)\" />\n    <MESSAGE value=\"On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java</url>\n          <line>305</line>\n          <option name=\"timeStamp\" value=\"3\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n    <watches-manager>\n      <configuration name=\"Application\">\n        <watch expression=\"dataset.get(0)[i].toLowerCase().trim()\" language=\"JAVA\" />\n        <watch expression=\"dataset.get(i)[dateColumnIndex].substring(0,4)\" language=\"JAVA\" />\n      </configuration>\n    </watches-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision f36cc23b7e48701c7563fa7725f3fe6548c6548a)
++++ b/.idea/workspace.xml	(date 1686571144613)
+@@ -4,10 +4,12 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)">
++    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="changement du css">
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/AffichageCarte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/AffichageCarte.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/Lecture.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/dashboardpane/CustomInformationDisplayPane.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -20,6 +22,7 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
++        <option value="CSS File" />
+         <option value="Class" />
+       </list>
+     </option>
+@@ -35,36 +38,35 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.4561201&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "last_opened_file_path": "C:/Users/quent/Documents/prog/java/demo",
++    "list.type.of.created.stylesheet": "CSS",
++    "node.js.detected.package.eslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.4561201",
++    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+-      <recent name="C:\Users\Charles\IdeaProjects\sae201\src\main\resources\fr\g1b\sae201" />
+       <recent name="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201" />
+     </key>
+   </component>
+-  <component name="RunManager">
+-    <configuration name="CustomPaneBarChart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.dashboardpane.CustomPaneBarChart" />
++  <component name="RunManager" selected="Application.AffichageCarte">
++    <configuration name="AffichageCarte" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.AffichageCarte" />
+       <module name="sae201" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.dashboardpane.*" />
++          <option name="PATTERN" value="fr.g1b.sae201.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+@@ -72,8 +74,8 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="Lecture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture" />
++    <configuration name="DataGetter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.DataGetter" />
+       <module name="sae201" />
+       <extension name="coverage">
+         <pattern>
+@@ -85,8 +87,8 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="LectureBis" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.LectureBis" />
++    <configuration name="Lecture2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture2" />
+       <module name="sae201" />
+       <extension name="coverage">
+         <pattern>
+@@ -100,6 +102,19 @@
+     </configuration>
+     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.MainApp" />
++      <module name="sae201" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="fr.g1b.sae201.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="MapApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.MapApplication" />
+       <module name="sae201" />
+       <extension name="coverage">
+         <pattern>
+@@ -113,10 +128,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Application.CustomPaneBarChart" />
++        <item itemvalue="Application.AffichageCarte" />
+         <item itemvalue="Application.MainApp" />
+-        <item itemvalue="Application.LectureBis" />
+-        <item itemvalue="Application.Lecture" />
++        <item itemvalue="Application.Lecture2" />
++        <item itemvalue="Application.MapApplication" />
++        <item itemvalue="Application.DataGetter" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -145,9 +161,12 @@
+       <workItem from="1686128938771" duration="120000" />
+       <workItem from="1686130190759" duration="276000" />
+       <workItem from="1686140496020" duration="11280000" />
+-      <workItem from="1686338407695" duration="3826000" />
+-      <workItem from="1686393820934" duration="8703000" />
+-      <workItem from="1686406789622" duration="7789000" />
++      <workItem from="1686203121173" duration="12607000" />
++      <workItem from="1686140496020" duration="11380000" />
++      <workItem from="1686152029318" duration="203000" />
++      <workItem from="1686215591224" duration="17000" />
++      <workItem from="1686513662072" duration="1102000" />
++      <workItem from="1686515075347" duration="16254000" />
+     </task>
+     <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
+       <created>1686140571540</created>
+@@ -170,57 +189,93 @@
+       <option name="project" value="LOCAL" />
+       <updated>1686149975914</updated>
+     </task>
+-    <task id="LOCAL-00006" summary="arrangement du pannel de droite (css)">
+-      <created>1686302814592</created>
++    <task id="LOCAL-00006" summary="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif">
++      <created>1686218937069</created>
+       <option name="number" value="00006" />
+       <option name="presentableId" value="LOCAL-00006" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686302814592</updated>
++      <updated>1686218937069</updated>
+     </task>
+-    <task id="LOCAL-00007" summary="arrangement du pannel de droite (css)">
+-      <created>1686302833933</created>
++    <task id="LOCAL-00007" summary="Finalisation du graphique ajouté">
++      <created>1686239937879</created>
+       <option name="number" value="00007" />
+       <option name="presentableId" value="LOCAL-00007" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686302833933</updated>
++      <updated>1686239937879</updated>
+     </task>
+-    <task id="LOCAL-00008" summary="On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)">
+-      <created>1686397956184</created>
++    <task id="LOCAL-00008" summary="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)">
++      <created>1686259639036</created>
+       <option name="number" value="00008" />
+       <option name="presentableId" value="LOCAL-00008" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686397956184</updated>
++      <updated>1686259639036</updated>
++    </task>
++    <task id="LOCAL-00009" summary="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)">
++      <created>1686261472995</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1686261472995</updated>
++    </task>
++    <task id="LOCAL-00010" summary="Correction d'un bug + ajout d'une bd plus grande">
++      <created>1686263635326</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1686263635326</updated>
+     </task>
+-    <option name="localTasksCounter" value="9" />
++    <task id="LOCAL-00011" summary="changement du css">
++      <created>1686570789039</created>
++      <option name="number" value="00011" />
++      <option name="presentableId" value="LOCAL-00011" />
++      <option name="project" value="LOCAL" />
++      <updated>1686570789040</updated>
++    </task>
++    <option name="localTasksCounter" value="12" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="modif .gitignore" />
+     <MESSAGE value="Changement des liens des images" />
+     <MESSAGE value="suppression de test.fxml et correction de Lecture" />
+     <MESSAGE value="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+     <MESSAGE value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+-    <MESSAGE value="arrangement du pannel de droite (css)" />
+-    <MESSAGE value="On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)" />
+-    <option name="LAST_COMMIT_MESSAGE" value="On peut afficher plusieurs points maintenant (supprimé le premier fichier test pour la map)" />
++    <MESSAGE value="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif" />
++    <MESSAGE value="encapsulation du FlowPane dans un ScrollPane" />
++    <MESSAGE value="Finalisation du graphique ajouté" />
++    <MESSAGE value="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)" />
++    <MESSAGE value="Correction d'un bug + ajout d'une bd plus grande" />
++    <MESSAGE value="changement du css" />
++    <option name="LAST_COMMIT_MESSAGE" value="changement du css" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+       <breakpoints>
+         <line-breakpoint enabled="true" type="java-line">
+           <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java</url>
+-          <line>305</line>
+-          <option name="timeStamp" value="3" />
++          <line>169</line>
++          <option name="timeStamp" value="4" />
+         </line-breakpoint>
+       </breakpoints>
+     </breakpoint-manager>
+     <watches-manager>
+       <configuration name="Application">
+         <watch expression="dataset.get(0)[i].toLowerCase().trim()" language="JAVA" />
+-        <watch expression="dataset.get(i)[dateColumnIndex].substring(0,4)" language="JAVA" />
++        <watch expression="columnName.toLowerCase().trim()" language="JAVA" />
+       </configuration>
+     </watches-manager>
+   </component>

@@ -1,11 +1,21 @@
 package fr.g1b.sae201.dashboardpane;
 
+import com.gluonhq.maps.MapLayer;
+import com.gluonhq.maps.MapPoint;
+import com.gluonhq.maps.MapView;
+import fr.g1b.sae201.AffichageCarte;
 import fr.g1b.sae201.DataGetter;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,12 +28,49 @@ public class CustomInformationDisplayPane extends Pane {
     private int heigth;
     private List<String[]> dataset;
 
-    public CustomInformationDisplayPane(int width, int heigth, List<String[]> dataset) {
+    public CustomInformationDisplayPane(int width, int height, List<String[]> dataset) {
         setPrefWidth(width);
-        setPrefHeight(heigth);
+        setPrefHeight(height);
         this.width = width;
-        this.heigth = heigth;
+        this.heigth = height;
         this.dataset = dataset;
+    }
+
+    public void addingMap() {
+        this.getChildren().clear();
+        AffichageCarte map = new AffichageCarte(dataset);
+        map.dessinepoint();
+        map.getMap().setPrefWidth(width);
+        map.getMap().setPrefHeight(heigth);
+        this.getChildren().add(map.getMap());
+    }
+
+    public void addingTable() {
+        this.getChildren().clear();
+
+        TableView tableView = new TableView<>();
+        boolean isFirstLine = true;
+        ObservableList<String[]> data = FXCollections.observableArrayList();
+        for (String[] row : dataset) {
+            if (isFirstLine) {
+                for (int i = 0; i < row.length; i++) {
+                    final int colIndex = i;
+                    TableColumn<String[], String> column = new TableColumn<>(row[i]);
+                    column.setCellValueFactory(cellData -> Bindings.createStringBinding(
+                            () -> cellData.getValue()[colIndex]));
+                    tableView.getColumns().add(column);
+                }
+                isFirstLine = false;
+            } else {
+                data.add(row);
+            }
+        }
+        tableView.setItems(data);
+
+        tableView.setPrefWidth(width);
+        tableView.setPrefHeight(heigth);
+
+        this.getChildren().add(tableView);
     }
 
     public void addingBarChartEarthQuakePerYear() {
@@ -66,7 +113,7 @@ public class CustomInformationDisplayPane extends Pane {
 
         xAxis.setLabel("Année");
         yAxis.setLabel("Nombre de seisme");
-
+        this.getStyleClass().add("dashboardItem");
         this.getChildren().add(barChart);
     }
 
@@ -102,7 +149,7 @@ public class CustomInformationDisplayPane extends Pane {
         }
 
         for (String region : regionsName.keySet()) {
-            regionsName.put(region, regionsName.get(region)/nbSeisme.get(region));
+            regionsName.put(region, regionsName.get(region) / nbSeisme.get(region));
         }
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
@@ -120,6 +167,7 @@ public class CustomInformationDisplayPane extends Pane {
         xAxis.setLabel("Région");
         yAxis.setLabel("Intensité");
 
+        this.getStyleClass().add("dashboardItem");
         this.getChildren().add(barChart);
     }
 }

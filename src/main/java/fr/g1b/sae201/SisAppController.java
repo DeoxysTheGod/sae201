@@ -48,8 +48,8 @@ public class SisAppController {
     private CheckBox pane2;
     @FXML
     private CheckBox pane3;
-    //MANQUE PLUS QUE LA CARTE
-
+    @FXML
+    private CheckBox pane4;
     // Dashboard
     @FXML
     private ScrollPane dashboardScrollContainer;
@@ -101,40 +101,9 @@ public class SisAppController {
     private List<String[]> filteredList;
     private String filter;
 
-    @FXML
-    public void addCSV() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Sélectionner un fichier CSV");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSV", "*.csv"));
-
-        // Afficher la boîte de dialogue de sélection de fichier
-        File selectedFile = fileChooser.showOpenDialog(checkBoxContainer.getScene().getWindow());
-
-        if (selectedFile != null) {
-            // Traiter le fichier CSV sélectionné ici
-            System.out.println("Fichier sélectionné : " + selectedFile.getAbsolutePath());
-
-            // Mettre à jour le texte du bouton avec le nom du fichier sélectionné
-            addButton.setText(selectedFile.getName());
-
-            //Mettre le fichier selectionné en tant que DataSet
-            dataset = new DataGetter(selectedFile.getAbsolutePath());
-            filteredList = dataset.getDataset();
-            createBindings();
-            initializeRegions();
-        }
-    }
-
-    private void initializeRegions() {
-        int indexregion = DataGetter.findIndexColumnWithColumnName("Région", filteredList);
-        Set<String> uniqueRegions = new HashSet<>();
-        for (int i = 1; i < filteredList.size() - 1; i++) {
-            uniqueRegions.add(filteredList.get(i)[indexregion]);
-        }
-        ObservableList<String> regions = FXCollections.observableArrayList(uniqueRegions);
-        Collections.sort(regions);
-        regionFilter.setItems(regions);
-    }
+    // RangeSlider
+    int sliderMinValue;
+    int sliderMaxValue;
 
     @FXML
     public void initialize() {
@@ -143,8 +112,10 @@ public class SisAppController {
         // initialisation de la taille des deux menus utile pour plus tard
         rightMenuSize = leftMenuContainer.getPrefWidth();
         leftMenuSize = leftMenuContainer.getPrefWidth();
+
         // Initialisation de l'interface
         InterfaceInitialize();
+        createBindings();
         leftMenuContainer.setPrefWidth(0.0);
         rightMenuContainer.setPrefWidth(0.0);
 
@@ -156,33 +127,11 @@ public class SisAppController {
         checkBoxContainer.setManaged(!checkBoxContainer.isManaged());
         checkBoxContainer.setVisible(!checkBoxContainer.isVisible());
         if (checkBoxContainer.isVisible()) {
-            setMainContainerOverlay(); // Ajouter la superposition pour l'effet d'assombrissement
             leftMenuContainer.setPrefWidth(leftMenuSize);
         } else {
-            setMainContainerOverlay(); // Supprimer la superposition
             leftMenuContainer.setPrefWidth(0.0);
         }
-    }
-
-    @FXML
-    public void checkButton() {
-        dashboardContainer.getChildren().clear();
-        if (pane1.isSelected()) {
-            CustomInformationDisplayPane pane1 = new CustomInformationDisplayPane(400, 400, filteredList);
-            pane1.addingBarChartEarthQuakePerYear();
-            dashboardContainer.getChildren().add(pane1);
-        }
-        if (pane2.isSelected()) {
-            CustomInformationDisplayPane pane2 = new CustomInformationDisplayPane(400, 400, filteredList);
-            pane2.addingBarChartEarthQuakeIntensityPerRegion();
-            dashboardContainer.getChildren().add(pane2);
-        }
-        if (pane3.isSelected()) {
-            AffichageTableauDonnees pane3 = new AffichageTableauDonnees();
-            //pane3.
-            //dashboardContainer.getChildren().add(pane3);
-        }
-
+        setMainContainerOverlay();
     }
 
     @FXML
@@ -190,11 +139,40 @@ public class SisAppController {
         filterContainer.setManaged(!filterContainer.isManaged());
         filterContainer.setVisible(!filterContainer.isVisible());
         if (filterContainer.isVisible()) {
-            setMainContainerOverlay(); // Ajouter la superposition pour l'effet d'assombrissement
             rightMenuContainer.setPrefWidth(leftMenuSize);
         } else {
-            setMainContainerOverlay(); // Supprimer la superposition
             rightMenuContainer.setPrefWidth(0.0);
+        }
+        setMainContainerOverlay();
+    }
+
+    private void setMainContainerOverlay() {
+        overlayMenu.setVisible(filterContainer.isVisible() || checkBoxContainer.isVisible());
+        overlayMenu.setManaged(filterContainer.isManaged() || checkBoxContainer.isManaged());
+    }
+
+    @FXML
+    public void checkButton() {
+        dashboardContainer.getChildren().clear();
+        if (pane1.isSelected()) {
+            CustomInformationDisplayPane barchartPane1 = new CustomInformationDisplayPane(500, 300, filteredList);
+            barchartPane1.addingBarChartEarthQuakePerYear();
+            dashboardContainer.getChildren().add(barchartPane1);
+        }
+        if (pane2.isSelected()) {
+            CustomInformationDisplayPane barchartPane2 = new CustomInformationDisplayPane(300, 400, filteredList);
+            barchartPane2.addingBarChartEarthQuakeIntensityPerRegion();
+            dashboardContainer.getChildren().add(barchartPane2);
+        }
+        if (pane3.isSelected()) {
+            CustomInformationDisplayPane tablePane = new CustomInformationDisplayPane(600, 300, filteredList);
+            tablePane.addingTable();
+            dashboardContainer.getChildren().add(tablePane);
+        }
+        if (pane4.isSelected()) {
+            CustomInformationDisplayPane mapPane = new CustomInformationDisplayPane(400, 400, filteredList);
+            mapPane.addingMap();
+            dashboardContainer.getChildren().add(mapPane);
         }
     }
 
@@ -219,7 +197,6 @@ public class SisAppController {
             sb.append("none");
         }
 
-
         filter = sb.toString();
 
         filteredList = dataset.applyFilter(filter);
@@ -227,9 +204,59 @@ public class SisAppController {
 
     }
 
-    private void setMainContainerOverlay() {
-        overlayMenu.setVisible(!overlayMenu.isVisible());
-        overlayMenu.setManaged(!overlayMenu.isManaged());
+    @FXML
+    public void addCSV() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sélectionner un fichier CSV");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSV", "*.csv"));
+
+        // Afficher la boîte de dialogue de sélection de fichier
+        File selectedFile = fileChooser.showOpenDialog(checkBoxContainer.getScene().getWindow());
+
+        if (selectedFile != null) {
+            // Traiter le fichier CSV sélectionné ici
+            System.out.println("Fichier sélectionné : " + selectedFile.getAbsolutePath());
+
+            // Mettre à jour le texte du bouton avec le nom du fichier sélectionné
+            addButton.setText(selectedFile.getName());
+
+            //Mettre le fichier selectionné en tant que DataSet
+            dataset = new DataGetter(selectedFile.getAbsolutePath());
+            filteredList = dataset.getDataset();
+            initializeRegions();
+            getMinAndMaxYear();
+            clearFilter();
+        }
+    }
+
+    private void initializeRegions() {
+        int indexregion = DataGetter.findIndexColumnWithColumnName("Région", dataset.getDataset());
+        Set<String> uniqueRegions = new HashSet<>();
+        for (int i = 1; i < dataset.getDataset().size() - 1; i++) {
+            uniqueRegions.add(dataset.getDataset().get(i)[indexregion]);
+        }
+        ObservableList<String> regions = FXCollections.observableArrayList(uniqueRegions);
+        Collections.sort(regions);
+        regionFilter.setItems(regions);
+    }
+
+    private void getMinAndMaxYear() {
+        int indexDate = DataGetter.findIndexColumnWithColumnName("Date", dataset.getDataset());
+        sliderMinValue = 2023;
+        sliderMaxValue = 0;
+        for (int i = 1 ; i < dataset.getDataset().size() ; i++) {
+            int value = Integer.parseInt(dataset.getDataset().get(i)[indexDate].split("/")[0]);
+            if (value > sliderMaxValue) {
+                sliderMaxValue = value;
+            }
+            if (value < sliderMinValue) {
+                sliderMinValue = value;
+            }
+        }
+        dateRangeSlider.setMax(sliderMaxValue);
+        dateRangeSlider.setMin(sliderMinValue);
+        dateRangeSlider.setHighValue(sliderMaxValue);
+        dateRangeSlider.setLowValue(sliderMinValue);
     }
 
     public void InterfaceInitialize() {
@@ -276,10 +303,6 @@ public class SisAppController {
         filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight());
 
         // Initialisation du RangeSlider pour les dates
-        dateRangeSlider.setMax(2007);
-        dateRangeSlider.setMin(1500);
-        dateRangeSlider.setHighValue(2007);
-        dateRangeSlider.setLowValue(1500);
         dateRangeSlider.setMajorTickUnit(10);
         dateRangeSlider.setShowTickLabels(true);
 
@@ -288,7 +311,7 @@ public class SisAppController {
         dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth() - dashboardScrollContainer.getLayoutX() * 2);
         dashboardScrollContainer.setPrefHeight(mainContainer.getPrefHeight() - (checkBoxMenuBtn.getLayoutY() * 2));
 
-        dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth() - 40);
+        dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth() - 60);
     }
 
     public void createBindings() {
@@ -319,7 +342,6 @@ public class SisAppController {
         toggleBetweenTwoDates.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
-                System.out.println(newValue);
                 togglePreciseDate.setSelected(!newValue);
             }
         });
@@ -327,7 +349,6 @@ public class SisAppController {
         togglePreciseDate.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
-                System.out.println(newValue);
                 toggleBetweenTwoDates.setSelected(!newValue);
             }
         });
@@ -336,21 +357,16 @@ public class SisAppController {
 
     @FXML
     private void clearFilter() {
-        dateRangeSlider.setLowValue(1500);
-        dateRangeSlider.setHighValue(2007);
+        dateRangeSlider.setLowValue(sliderMinValue);
+        dateRangeSlider.setHighValue(sliderMaxValue);
         toggleBetweenTwoDates.setSelected(false);
         togglePreciseDate.setSelected(false);
         datePicker.setValue(null);
         regionFilter.getSelectionModel().clearSelection();
         regionFilter.setPromptText("Séléctionnez une région ");
 
-
         filter = "";
         filteredList = dataset.getDataset();
         checkButton();
-
-
     }
-
-
 }

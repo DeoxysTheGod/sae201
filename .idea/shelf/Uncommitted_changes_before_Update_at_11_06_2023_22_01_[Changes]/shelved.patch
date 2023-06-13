@@ -1,0 +1,416 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2Qs4Oqko6a5Rrhg1ymuDsKKURxP\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.4561201&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.MainApp\">\n    <configuration name=\"CustomPaneBarChart\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.dashboardpane.CustomPaneBarChart\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.dashboardpane.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Lecture\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.Lecture\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"LectureBis\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.LectureBis\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"MainApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainApp\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.MainApp\" />\n        <item itemvalue=\"Application.CustomPaneBarChart\" />\n        <item itemvalue=\"Application.LectureBis\" />\n        <item itemvalue=\"Application.Lecture\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task id=\"LOCAL-00001\" summary=\"modif .gitignore\">\n      <created>1686087886499</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686087886499</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Changement des liens des images\">\n      <created>1686087934161</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686087934161</updated>\n    </task>\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"Changement des liens des images\" />\n      <created>1686128933046</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1686128933046</updated>\n      <workItem from=\"1686128938771\" duration=\"120000\" />\n      <workItem from=\"1686130190759\" duration=\"276000\" />\n      <workItem from=\"1686140496020\" duration=\"11280000\" />\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"suppression de test.fxml et correction de Lecture\">\n      <created>1686140571540</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686140571540</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\n      <created>1686149904820</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686149904820</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\n      <created>1686149975914</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686149975914</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"arrangement du pannel de droite (css)\">\n      <created>1686302814592</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686302814592</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"arrangement du pannel de droite (css)\">\n      <created>1686302833933</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686302833933</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"8\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"modif .gitignore\" />\n    <MESSAGE value=\"Changement des liens des images\" />\n    <MESSAGE value=\"suppression de test.fxml et correction de Lecture\" />\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\n    <MESSAGE value=\"arrangement du pannel de droite (css)\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"arrangement du pannel de droite (css)\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java</url>\n          <line>305</line>\n          <option name=\"timeStamp\" value=\"3\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n    <watches-manager>\n      <configuration name=\"Application\">\n        <watch expression=\"dataset.get(0)[i].toLowerCase().trim()\" language=\"JAVA\" />\n        <watch expression=\"dataset.get(i)[dateColumnIndex].substring(0,4)\" language=\"JAVA\" />\n      </configuration>\n    </watches-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 182f856afbd8c4db3d39b92ed5239e6e8fb37086)
++++ b/.idea/workspace.xml	(date 1686319252564)
+@@ -4,10 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="">
++    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Correction d'un bug">
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/MainApp.fxml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -40,12 +40,12 @@
+     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/quent/Documents/prog/java/demo&quot;,
+     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+     &quot;project.structure.side.proportion&quot;: &quot;0.4561201&quot;,
+     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+@@ -57,8 +57,8 @@
+     </key>
+   </component>
+   <component name="RunManager" selected="Application.MainApp">
+-    <configuration name="CustomPaneBarChart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.dashboardpane.CustomPaneBarChart" />
++    <configuration name="CustomInformationDisplayPane" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.dashboardpane.CustomInformationDisplayPane" />
+       <module name="sae201" />
+       <extension name="coverage">
+         <pattern>
+@@ -70,8 +70,8 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="Lecture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture" />
++    <configuration name="DataGetter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.DataGetter" />
+       <module name="sae201" />
+       <extension name="coverage">
+         <pattern>
+@@ -83,8 +83,8 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="LectureBis" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.LectureBis" />
++    <configuration name="Lecture2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.Lecture2" />
+       <module name="sae201" />
+       <extension name="coverage">
+         <pattern>
+@@ -109,12 +109,26 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <configuration name="MapApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.MapApplication" />
++      <module name="sae201" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="fr.g1b.sae201.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <recent_temporary>
+       <list>
+         <item itemvalue="Application.MainApp" />
+-        <item itemvalue="Application.CustomPaneBarChart" />
+-        <item itemvalue="Application.LectureBis" />
+-        <item itemvalue="Application.Lecture" />
++        <item itemvalue="Application.Lecture2" />
++        <item itemvalue="Application.MapApplication" />
++        <item itemvalue="Application.DataGetter" />
++        <item itemvalue="Application.CustomInformationDisplayPane" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -143,6 +157,10 @@
+       <workItem from="1686128938771" duration="120000" />
+       <workItem from="1686130190759" duration="276000" />
+       <workItem from="1686140496020" duration="11280000" />
++      <workItem from="1686203121173" duration="12607000" />
++      <workItem from="1686140496020" duration="11380000" />
++      <workItem from="1686152029318" duration="203000" />
++      <workItem from="1686215591224" duration="17000" />
+     </task>
+     <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
+       <created>1686140571540</created>
+@@ -165,25 +183,57 @@
+       <option name="project" value="LOCAL" />
+       <updated>1686149975914</updated>
+     </task>
+-    <task id="LOCAL-00006" summary="arrangement du pannel de droite (css)">
+-      <created>1686302814592</created>
++    <task id="LOCAL-00006" summary="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif">
++      <created>1686218937069</created>
+       <option name="number" value="00006" />
+       <option name="presentableId" value="LOCAL-00006" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686302814592</updated>
++      <updated>1686218937069</updated>
+     </task>
+-    <task id="LOCAL-00007" summary="arrangement du pannel de droite (css)">
+-      <created>1686302833933</created>
++    <task id="LOCAL-00007" summary="Finalisation du graphique ajouté">
++      <created>1686239937879</created>
+       <option name="number" value="00007" />
+       <option name="presentableId" value="LOCAL-00007" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686302833933</updated>
++      <updated>1686239937879</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL-00008" summary="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)">
++      <created>1686259639036</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1686259639036</updated>
++    </task>
++    <task id="LOCAL-00009" summary="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)">
++      <created>1686261472995</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1686261472995</updated>
++    </task>
++    <task id="LOCAL-00010" summary="Correction d'un bug + ajout d'une bd plus grande">
++      <created>1686263635326</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1686263635326</updated>
++    </task>
++    <option name="localTasksCounter" value="11" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
++  </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="modif .gitignore" />
+@@ -191,8 +241,12 @@
+     <MESSAGE value="suppression de test.fxml et correction de Lecture" />
+     <MESSAGE value="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+     <MESSAGE value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+-    <MESSAGE value="arrangement du pannel de droite (css)" />
+-    <option name="LAST_COMMIT_MESSAGE" value="arrangement du pannel de droite (css)" />
++    <MESSAGE value="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif" />
++    <MESSAGE value="encapsulation du FlowPane dans un ScrollPane" />
++    <MESSAGE value="Finalisation du graphique ajouté" />
++    <MESSAGE value="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)" />
++    <MESSAGE value="Correction d'un bug + ajout d'une bd plus grande" />
++    <option name="LAST_COMMIT_MESSAGE" value="Correction d'un bug + ajout d'une bd plus grande" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+@@ -200,14 +254,15 @@
+         <line-breakpoint enabled="true" type="java-line">
+           <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java</url>
+           <line>305</line>
+-          <option name="timeStamp" value="3" />
++          <option name="timeStamp" value="4" />
+         </line-breakpoint>
+       </breakpoints>
+     </breakpoint-manager>
+     <watches-manager>
+       <configuration name="Application">
+-        <watch expression="dataset.get(0)[i].toLowerCase().trim()" language="JAVA" />
+-        <watch expression="dataset.get(i)[dateColumnIndex].substring(0,4)" language="JAVA" />
++        <watch expression="element[1].substring(0,4)" language="JAVA" />
++        <watch expression="filter.substring(5,9)" language="JAVA" />
++        <watch expression="Integer.parseInt(element[1].substring(0,4)) &gt; Integer.parseInt(filter.substring(0,4)))                                     || (Integer.parseInt(element[1].substring(0,4)) &lt; Integer.parseInt(filter.substring(5,9))" language="JAVA" />
+       </configuration>
+     </watches-manager>
+   </component>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"MavenProjectsManager\">\n    <option name=\"originalFiles\">\n      <list>\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"openjdk-20\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 182f856afbd8c4db3d39b92ed5239e6e8fb37086)
++++ b/.idea/misc.xml	(date 1686319190254)
+@@ -8,7 +8,7 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n\n  <groupId>fr.g1b</groupId>\n  <artifactId>sae201</artifactId>\n  <version>1.0-SNAPSHOT</version>\n  <name>sae201</name>\n\n  <properties>\n    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    <junit.version>5.9.2</junit.version>      </properties>\n\n  <dependencies>\n    <dependency>\n      <groupId>org.openjfx</groupId>\n      <artifactId>javafx-controls</artifactId>\n      <version>20</version>\n    </dependency>\n\n    <dependency>\n      <groupId>org.openjfx</groupId>\n      <artifactId>javafx-fxml</artifactId>\n      <version>20</version>\n    </dependency>\n                                    \n    <dependency>\n      <groupId>org.junit.jupiter</groupId>\n      <artifactId>junit-jupiter-api</artifactId>\n      <version>${junit.version}</version>\n      <scope>test</scope>\n    </dependency>\n\n    <dependency>\n      <groupId>org.junit.jupiter</groupId>\n      <artifactId>junit-jupiter-engine</artifactId>\n      <version>${junit.version}</version>\n      <scope>test</scope>\n    </dependency>\n\n    <dependency>\n      <groupId>com.opencsv</groupId>\n      <artifactId>opencsv</artifactId>\n      <version>5.7.1</version>\n    </dependency>\n    <dependency>\n      <groupId>org.controlsfx</groupId>\n      <artifactId>controlsfx</artifactId>\n      <version>11.1.2</version>\n    </dependency>\n    <dependency>\n      <groupId>com.gluonhq</groupId>\n      <artifactId>maps</artifactId>\n      <version>2.0.0-ea+6</version>\n    </dependency>\n  </dependencies>\n\n  <build>\n        <plugins>\n            <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <version>3.11.0</version>\n        <configuration>\n          <source>20</source>\n          <target>20</target>\n        </configuration>\n            </plugin>\n      <plugin>\n        <groupId>org.openjfx</groupId>\n        <artifactId>javafx-maven-plugin</artifactId>\n        <version>0.0.8</version>\n        <executions>\n          <execution>\n            <!-- Default configuration for running with: mvn clean javafx:run -->\n            <id>default-cli</id>\n            <configuration>\n              <mainClass>fr.g1b.sae201/fr.g1b.sae201.MainApp</mainClass>\n              <launcher>app</launcher>\n              <jlinkZipName>app</jlinkZipName>\n              <jlinkImageName>app</jlinkImageName>\n              <noManPages>true</noManPages>\n              <stripDebug>true</stripDebug>\n              <noHeaderFiles>true</noHeaderFiles>\n            </configuration>\n          </execution>\n        </executions>\n      </plugin>\n          </plugins>\n  </build>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 182f856afbd8c4db3d39b92ed5239e6e8fb37086)
++++ b/pom.xml	(date 1686319156459)
+@@ -2,92 +2,89 @@
+ <project xmlns="http://maven.apache.org/POM/4.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+-  <modelVersion>4.0.0</modelVersion>
+-
+-  <groupId>fr.g1b</groupId>
+-  <artifactId>sae201</artifactId>
+-  <version>1.0-SNAPSHOT</version>
+-  <name>sae201</name>
+-
+-  <properties>
+-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+-    <junit.version>5.9.2</junit.version>      </properties>
++    <modelVersion>4.0.0</modelVersion>
++    <groupId>fr.g1b</groupId>
++    <artifactId>sae201</artifactId>
++    <version>1.0-SNAPSHOT</version>
++    <name>sae201</name>
++    <properties>
++        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++        <junit.version>5.9.2</junit.version>
++    </properties>
+ 
+-  <dependencies>
+-    <dependency>
+-      <groupId>org.openjfx</groupId>
+-      <artifactId>javafx-controls</artifactId>
+-      <version>20</version>
+-    </dependency>
++    <dependencies>
++
++        <dependency>
++            <groupId>org.openjfx</groupId>
++            <artifactId>javafx-controls</artifactId>
++            <version>20</version>
++        </dependency>
+ 
+-    <dependency>
+-      <groupId>org.openjfx</groupId>
+-      <artifactId>javafx-fxml</artifactId>
+-      <version>20</version>
+-    </dependency>
+-                                    
+-    <dependency>
+-      <groupId>org.junit.jupiter</groupId>
+-      <artifactId>junit-jupiter-api</artifactId>
+-      <version>${junit.version}</version>
+-      <scope>test</scope>
+-    </dependency>
+-
+-    <dependency>
+-      <groupId>org.junit.jupiter</groupId>
+-      <artifactId>junit-jupiter-engine</artifactId>
+-      <version>${junit.version}</version>
+-      <scope>test</scope>
+-    </dependency>
+-
+-    <dependency>
+-      <groupId>com.opencsv</groupId>
+-      <artifactId>opencsv</artifactId>
+-      <version>5.7.1</version>
+-    </dependency>
+-    <dependency>
+-      <groupId>org.controlsfx</groupId>
+-      <artifactId>controlsfx</artifactId>
+-      <version>11.1.2</version>
+-    </dependency>
+-    <dependency>
+-      <groupId>com.gluonhq</groupId>
+-      <artifactId>maps</artifactId>
+-      <version>2.0.0-ea+6</version>
+-    </dependency>
+-  </dependencies>
+-
+-  <build>
++        <dependency>
++            <groupId>org.openjfx</groupId>
++            <artifactId>javafx-fxml</artifactId>
++            <version>20</version>
++        </dependency>
++
++        <dependency>
++            <groupId>org.junit.jupiter</groupId>
++            <artifactId>junit-jupiter-api</artifactId>
++            <version>${junit.version}</version>
++            <scope>test</scope>
++        </dependency>
++        <dependency>
++            <groupId>org.junit.jupiter</groupId>
++            <artifactId>junit-jupiter-engine</artifactId>
++            <version>${junit.version}</version>
++            <scope>test</scope>
++        </dependency>
++        <dependency>
++            <groupId>com.opencsv</groupId>
++            <artifactId>opencsv</artifactId>
++            <version>5.7.1</version>
++        </dependency>
++        <dependency>
++            <groupId>org.controlsfx</groupId>
++            <artifactId>controlsfx</artifactId>
++            <version>11.1.2</version>
++        </dependency>
++        <dependency>
++            <groupId>com.gluonhq</groupId>
++            <artifactId>maps</artifactId>
++            <version>2.0.0-ea+6</version>
++        </dependency>
++    </dependencies>
++    <build>
+         <plugins>
+             <plugin>
+-        <groupId>org.apache.maven.plugins</groupId>
+-        <artifactId>maven-compiler-plugin</artifactId>
+-        <version>3.11.0</version>
+-        <configuration>
+-          <source>20</source>
+-          <target>20</target>
+-        </configuration>
++                <groupId>org.apache.maven.plugins</groupId>
++                <artifactId>maven-compiler-plugin</artifactId>
++                <version>3.11.0</version>
++                <configuration>
++                    <source>20</source>
++                    <target>20</target>
++                </configuration>
+             </plugin>
+-      <plugin>
+-        <groupId>org.openjfx</groupId>
+-        <artifactId>javafx-maven-plugin</artifactId>
+-        <version>0.0.8</version>
+-        <executions>
+-          <execution>
+-            <!-- Default configuration for running with: mvn clean javafx:run -->
+-            <id>default-cli</id>
+-            <configuration>
+-              <mainClass>fr.g1b.sae201/fr.g1b.sae201.MainApp</mainClass>
+-              <launcher>app</launcher>
+-              <jlinkZipName>app</jlinkZipName>
+-              <jlinkImageName>app</jlinkImageName>
+-              <noManPages>true</noManPages>
+-              <stripDebug>true</stripDebug>
+-              <noHeaderFiles>true</noHeaderFiles>
+-            </configuration>
+-          </execution>
+-        </executions>
+-      </plugin>
+-          </plugins>
+-  </build>
++            <plugin>
++                <groupId>org.openjfx</groupId>
++                <artifactId>javafx-maven-plugin</artifactId>
++                <version>0.0.8</version>
++                <executions>
++                    <execution>
++                        <!-- Default configuration for running with: mvn clean javafx:run -->
++                        <id>default-cli</id>
++                        <configuration>
++                            <mainClass>fr.g1b.sae201/fr.g1b.sae201.MainApp</mainClass>
++                            <launcher>app</launcher>
++                            <jlinkZipName>app</jlinkZipName>
++                            <jlinkImageName>app</jlinkImageName>
++                            <noManPages>true</noManPages>
++                            <stripDebug>true</stripDebug>
++                            <noHeaderFiles>true</noHeaderFiles>
++                        </configuration>
++                    </execution>
++                </executions>
++            </plugin>
++        </plugins>
++    </build>
+ </project>
+\ No newline at end of file
