@@ -1,0 +1,419 @@
+Index: src/main/java/fr/g1b/sae201/MainApp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fr.g1b.sae201;\n\nimport javafx.application.Application;\nimport javafx.fxml.FXMLLoader;\nimport javafx.scene.Scene;\nimport javafx.stage.Stage;\nimport java.io.IOException;\n\nimport java.io.IOException;\n\npublic class MainApp extends Application {\n\n    @Override\n    public void start(Stage stage) throws IOException {\n        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource(\"MainApp.fxml\"));\n        Scene scene = new Scene(fxmlLoader.load());\n        stage.setTitle(\"SismicAnalyzer\");\n        stage.setScene(scene);\n        stage.setResizable(false);\n        stage.show();\n    }\n\n    public static void main(String[] args) {\n        launch();\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/fr/g1b/sae201/MainApp.java b/src/main/java/fr/g1b/sae201/MainApp.java
+--- a/src/main/java/fr/g1b/sae201/MainApp.java	(revision d33ba0e37b73eeb95039463617cd5d8e4b342bfb)
++++ b/src/main/java/fr/g1b/sae201/MainApp.java	(date 1686680866826)
+@@ -18,6 +18,7 @@
+         stage.setScene(scene);
+         stage.setResizable(false);
+         stage.show();
++        fenetreintro.display();
+     }
+ 
+     public static void main(String[] args) {
+Index: src/main/java/fr/g1b/sae201/SisAppController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fr.g1b.sae201;\n\nimport fr.g1b.sae201.dashboardpane.CustomInformationDisplayPane;\nimport javafx.beans.binding.Bindings;\nimport javafx.beans.property.BooleanProperty;\nimport javafx.beans.value.ChangeListener;\nimport javafx.beans.value.ObservableValue;\nimport javafx.collections.FXCollections;\nimport javafx.collections.ObservableArray;\nimport javafx.collections.ObservableList;\nimport javafx.collections.ObservableListBase;\nimport javafx.fxml.FXML;\nimport javafx.geometry.Insets;\nimport javafx.scene.control.*;\nimport javafx.scene.image.Image;\nimport javafx.scene.image.ImageView;\nimport javafx.scene.layout.FlowPane;\nimport javafx.scene.layout.Pane;\nimport javafx.scene.layout.StackPane;\nimport javafx.scene.layout.VBox;\n\n\nimport javafx.scene.text.Text;\nimport javafx.stage.FileChooser;\nimport javafx.stage.Stage;\nimport org.controlsfx.control.RangeSlider;\nimport org.controlsfx.control.ToggleSwitch;\n\nimport java.io.File;\nimport java.util.*;\n\nimport javafx.scene.control.ComboBox;\n\n\npublic class SisAppController {\n    // Containers\n    @FXML\n    private Pane mainContainer; // fenêtre principale\n\n    // Menu de gauche\n    @FXML\n    private Pane leftMenuContainer;\n    @FXML\n    private VBox checkBoxContainer;\n    @FXML\n    private CheckBox pane1;\n    @FXML\n    private CheckBox pane2;\n    @FXML\n    private CheckBox pane3;\n    @FXML\n    private CheckBox pane4;\n    // Dashboard\n    @FXML\n    private ScrollPane dashboardScrollContainer;\n    @FXML\n    private FlowPane dashboardContainer;\n\n    // Menu de droite\n    @FXML\n    private Pane rightMenuContainer;\n    @FXML\n    private RangeSlider dateRangeSlider;\n    @FXML\n    private Label minValueDateLabel;\n    @FXML\n    private Label maxValueDateLabel;\n    @FXML\n    private VBox filterContainer;\n    @FXML\n    private VBox betweenTwoDatesContainer;\n    @FXML\n    private ToggleSwitch toggleBetweenTwoDates;\n    @FXML\n    private DatePicker datePicker;\n    @FXML\n    private ToggleSwitch togglePreciseDate;\n    @FXML\n    private ComboBox regionFilter;\n\n    // Controls\n    @FXML\n    private Button addButton;\n\n    @FXML\n    private Button filterMenuBtn;\n    @FXML\n    private Button checkBoxMenuBtn;\n\n    // Overlay\n    @FXML\n    private Pane overlayMenu;\n\n\n    // Taille des menus\n    private double rightMenuSize;\n    private double leftMenuSize;\n\n    // Dataset\n    private DataGetter dataset;\n    private List<String[]> filteredList;\n    private String filter;\n\n    // RangeSlider\n    int sliderMinValue;\n    int sliderMaxValue;\n\n    @FXML\n    public void initialize() {\n        System.out.println(\"App launched successfully!\");\n\n        // initialisation de la taille des deux menus utile pour plus tard\n        rightMenuSize = leftMenuContainer.getPrefWidth();\n        leftMenuSize = leftMenuContainer.getPrefWidth();\n\n        // Initialisation de l'interface\n        InterfaceInitialize();\n        createBindings();\n        leftMenuContainer.setPrefWidth(0.0);\n        rightMenuContainer.setPrefWidth(0.0);\n\n    }\n\n\n    @FXML\n    public void showCheckBoxMenu() {\n        checkBoxContainer.setManaged(!checkBoxContainer.isManaged());\n        checkBoxContainer.setVisible(!checkBoxContainer.isVisible());\n        if (checkBoxContainer.isVisible()) {\n            leftMenuContainer.setPrefWidth(leftMenuSize);\n        } else {\n            leftMenuContainer.setPrefWidth(0.0);\n        }\n        setMainContainerOverlay();\n    }\n\n    @FXML\n    public void showFilterMenu() {\n        filterContainer.setManaged(!filterContainer.isManaged());\n        filterContainer.setVisible(!filterContainer.isVisible());\n        if (filterContainer.isVisible()) {\n            rightMenuContainer.setPrefWidth(leftMenuSize);\n        } else {\n            rightMenuContainer.setPrefWidth(0.0);\n        }\n        setMainContainerOverlay();\n    }\n\n    private void setMainContainerOverlay() {\n        overlayMenu.setVisible(filterContainer.isVisible() || checkBoxContainer.isVisible());\n        overlayMenu.setManaged(filterContainer.isManaged() || checkBoxContainer.isManaged());\n    }\n\n    @FXML\n    public void checkButton() {\n        dashboardContainer.getChildren().clear();\n        if (pane1.isSelected()) {\n            CustomInformationDisplayPane barchartPane1 = new CustomInformationDisplayPane(500, 300, filteredList);\n            barchartPane1.addingBarChartEarthQuakePerYear();\n            dashboardContainer.getChildren().add(barchartPane1);\n        }\n        if (pane2.isSelected()) {\n            CustomInformationDisplayPane barchartPane2 = new CustomInformationDisplayPane(300, 400, filteredList);\n            barchartPane2.addingBarChartEarthQuakeIntensityPerRegion();\n            dashboardContainer.getChildren().add(barchartPane2);\n        }\n        if (pane3.isSelected()) {\n            CustomInformationDisplayPane tablePane = new CustomInformationDisplayPane(600, 300, filteredList);\n            tablePane.addingTable();\n            dashboardContainer.getChildren().add(tablePane);\n        }\n        if (pane4.isSelected()) {\n            CustomInformationDisplayPane mapPane = new CustomInformationDisplayPane(400, 400, filteredList);\n            mapPane.addingMap();\n            dashboardContainer.getChildren().add(mapPane);\n        }\n    }\n\n    @FXML\n    private void applyFilter() {\n        StringBuilder sb = new StringBuilder();\n        if (toggleBetweenTwoDates.isSelected()) {\n            sb.append((int) dateRangeSlider.getLowValue() + \"-\" + (int) dateRangeSlider.getHighValue());\n        } else {\n            sb.append(\"none\");\n        }\n        sb.append(\",\");\n        if (togglePreciseDate.isSelected()) {\n            sb.append(datePicker.getValue().toString().replace(\"-\", \"/\"));\n        } else {\n            sb.append(\"none\");\n        }\n        sb.append(\",\");\n        if (regionFilter.getValue() != null && !regionFilter.getValue().toString().isEmpty()) {\n            sb.append(regionFilter.getValue().toString());\n        } else {\n            sb.append(\"none\");\n        }\n\n        filter = sb.toString();\n\n        filteredList = dataset.applyFilter(filter);\n        checkButton();\n\n    }\n\n    @FXML\n    public void addCSV() {\n        FileChooser fileChooser = new FileChooser();\n        fileChooser.setTitle(\"Sélectionnez un fichier CSV\");\n        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(\"Fichiers CSV\", \"*.csv\"));\n\n        // Afficher la boîte de dialogue de sélection de fichier\n        File selectedFile = fileChooser.showOpenDialog(checkBoxContainer.getScene().getWindow());\n\n        if (selectedFile != null) {\n            // Traiter le fichier CSV sélectionné ici\n            System.out.println(\"Fichier sélectionné : \" + selectedFile.getAbsolutePath());\n\n            // Mettre à jour le texte du bouton avec le nom du fichier sélectionné\n            addButton.setText(selectedFile.getName());\n\n            //Mettre le fichier selectionné en tant que DataSet\n            dataset = new DataGetter(selectedFile.getAbsolutePath());\n            filteredList = dataset.getDataset();\n            initializeRegions();\n            getMinAndMaxYear();\n            clearFilter();\n        }\n    }\n\n    private void initializeRegions() {\n        int indexregion = DataGetter.findIndexColumnWithColumnName(\"Région\", dataset.getDataset());\n        Set<String> uniqueRegions = new HashSet<>();\n        for (int i = 1; i < dataset.getDataset().size() - 1; i++) {\n            uniqueRegions.add(dataset.getDataset().get(i)[indexregion]);\n        }\n        ObservableList<String> regions = FXCollections.observableArrayList(uniqueRegions);\n        Collections.sort(regions);\n        regionFilter.setItems(regions);\n    }\n\n    private void getMinAndMaxYear() {\n        int indexDate = DataGetter.findIndexColumnWithColumnName(\"Date\", dataset.getDataset());\n        sliderMinValue = 2023;\n        sliderMaxValue = 0;\n        for (int i = 1 ; i < dataset.getDataset().size() ; i++) {\n            int value = Integer.parseInt(dataset.getDataset().get(i)[indexDate].split(\"/\")[0]);\n            if (value > sliderMaxValue) {\n                sliderMaxValue = value;\n            }\n            if (value < sliderMinValue) {\n                sliderMinValue = value;\n            }\n        }\n        dateRangeSlider.setMax(sliderMaxValue);\n        dateRangeSlider.setMin(sliderMinValue);\n        dateRangeSlider.setHighValue(sliderMaxValue);\n        dateRangeSlider.setLowValue(sliderMinValue);\n    }\n\n    public void InterfaceInitialize() {\n        // Image des boutons de menu\n        ImageView view = new ImageView(new Image(getClass().getResourceAsStream(\"menuIconF.png\")));\n        view.setPreserveRatio(true);\n        view.setFitWidth(40.0);\n        checkBoxMenuBtn.setGraphic(view);\n\n        ImageView view_two = new ImageView(new Image(getClass().getResourceAsStream(\"filterIcon.png\")));\n        view_two.setPreserveRatio(true);\n        view_two.setFitWidth(40.0);\n        filterMenuBtn.setGraphic(view_two);\n\n        // Overlay\n        overlayMenu.setPrefWidth(mainContainer.getPrefWidth());\n        overlayMenu.setPrefHeight(mainContainer.getPrefHeight());\n\n        // Initialisation du conteneur du menu de gauche\n        checkBoxMenuBtn.setLayoutX(30.0);\n        checkBoxMenuBtn.setLayoutY(30.0);\n\n        leftMenuContainer.setLayoutX(checkBoxMenuBtn.getLayoutX() / 2);\n        leftMenuContainer.setLayoutY(checkBoxMenuBtn.getLayoutY() / 2);\n\n        leftMenuContainer.setPrefHeight(mainContainer.getPrefHeight() - leftMenuContainer.getLayoutY() * 2);\n\n        checkBoxContainer.setPrefHeight(leftMenuContainer.getPrefHeight());\n        checkBoxContainer.setPrefWidth(leftMenuContainer.getPrefWidth() - checkBoxContainer.getLayoutX());\n\n        checkBoxContainer.setPadding(new Insets(0, 0, 0, checkBoxMenuBtn.getLayoutX() - checkBoxContainer.getLayoutX()));\n\n        // Initialisation du conteneur du menu de droite\n        filterMenuBtn.setLayoutX(rightMenuContainer.getPrefWidth() - (30.0 + filterMenuBtn.getPrefWidth()));\n        filterMenuBtn.setLayoutY(30.0);\n\n        filterContainer.setLayoutY(15.0);\n\n        rightMenuContainer.setLayoutY(filterMenuBtn.getLayoutY() / 2);\n        rightMenuContainer.setPrefHeight(mainContainer.getPrefHeight() - leftMenuContainer.getLayoutX() * 2);\n        rightMenuContainer.setLayoutX(mainContainer.getPrefWidth() - (rightMenuContainer.getPrefWidth() + leftMenuContainer.getLayoutX()));\n\n        filterContainer.setPrefWidth(rightMenuContainer.getPrefWidth());\n        filterContainer.setPrefHeight(rightMenuContainer.getPrefHeight());\n\n        // Initialisation du RangeSlider pour les dates\n        dateRangeSlider.setMajorTickUnit(10);\n        dateRangeSlider.setShowTickLabels(true);\n\n        // Initialisation du Dashboard\n        dashboardScrollContainer.setLayoutY(checkBoxMenuBtn.getLayoutY());\n        dashboardScrollContainer.setPrefWidth(mainContainer.getPrefWidth() - dashboardScrollContainer.getLayoutX() * 2);\n        dashboardScrollContainer.setPrefHeight(mainContainer.getPrefHeight() - (checkBoxMenuBtn.getLayoutY() * 2));\n\n        dashboardContainer.setPrefWidth(dashboardScrollContainer.getPrefWidth() - 60);\n    }\n\n    public void createBindings() {\n        dateRangeSlider.highValueProperty().addListener(new ChangeListener<Number>() {\n            @Override\n            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {\n                maxValueDateLabel.setText(String.format(\"%d\", newValue.intValue()));\n            }\n        });\n\n        dateRangeSlider.lowValueProperty().addListener(new ChangeListener<Number>() {\n            @Override\n            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {\n                minValueDateLabel.setText(String.format(\"%d\", newValue.intValue()));\n            }\n        });\n\n        // filtres : Entre deux dates\n        betweenTwoDatesContainer.visibleProperty().bind(toggleBetweenTwoDates.selectedProperty());\n        betweenTwoDatesContainer.managedProperty().bind(toggleBetweenTwoDates.selectedProperty());\n        betweenTwoDatesContainer.disableProperty().bind(toggleBetweenTwoDates.selectedProperty().not());\n\n        // filtres : Date Précise\n        datePicker.visibleProperty().bind(togglePreciseDate.selectedProperty());\n        datePicker.managedProperty().bind(togglePreciseDate.selectedProperty());\n        datePicker.disableProperty().bind(togglePreciseDate.selectedProperty().not());\n\n        toggleBetweenTwoDates.selectedProperty().addListener(new ChangeListener<Boolean>() {\n            @Override\n            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {\n                togglePreciseDate.setSelected(!newValue);\n            }\n        });\n\n        togglePreciseDate.selectedProperty().addListener(new ChangeListener<Boolean>() {\n            @Override\n            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {\n                toggleBetweenTwoDates.setSelected(!newValue);\n            }\n        });\n\n    }\n\n    @FXML\n    private void clearFilter() {\n        dateRangeSlider.setLowValue(sliderMinValue);\n        dateRangeSlider.setHighValue(sliderMaxValue);\n        toggleBetweenTwoDates.setSelected(false);\n        togglePreciseDate.setSelected(false);\n        datePicker.setValue(null);\n        regionFilter.getSelectionModel().clearSelection();\n        regionFilter.setPromptText(\"Sélectionnez une région \");\n\n        filter = \"\";\n        filteredList = dataset.getDataset();\n        checkButton();\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/fr/g1b/sae201/SisAppController.java b/src/main/java/fr/g1b/sae201/SisAppController.java
+--- a/src/main/java/fr/g1b/sae201/SisAppController.java	(revision d33ba0e37b73eeb95039463617cd5d8e4b342bfb)
++++ b/src/main/java/fr/g1b/sae201/SisAppController.java	(date 1686679591638)
+@@ -261,7 +261,7 @@
+ 
+     public void InterfaceInitialize() {
+         // Image des boutons de menu
+-        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuIconF.png")));
++        ImageView view = new ImageView(new Image(getClass().getResourceAsStream("menuIcon.png")));
+         view.setPreserveRatio(true);
+         view.setFitWidth(40.0);
+         checkBoxMenuBtn.setGraphic(view);
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"Ajout de tests + 2 csv pour les tests de filtre\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"CSS File\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2Qs4Oqko6a5Rrhg1ymuDsKKURxP\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"last_opened_file_path\": \"/home/quentin/Documents/programmation/Java/testConv\",\n    \"list.type.of.created.stylesheet\": \"CSS\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"project.structure.last.edited\": \"Modules\",\n    \"project.structure.proportion\": \"0.15\",\n    \"project.structure.side.proportion\": \"0.4561201\",\n    \"settings.editor.selected.configurable\": \"reference.settings.project.maven.repository.indices\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src/main/resources/fr/g1b/sae201\" />\n    </key>\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\n      <recent name=\"fr.g1b.sae201\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.MainApp\">\n    <configuration name=\"AffichageCarte\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.AffichageCarte\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"AffichageTableauDonnees\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.AffichageTableauDonnees\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"MainApp\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainApp\" />\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"MainTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"PACKAGE_NAME\" value=\"fr.g1b.sae201\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainTest\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"MainTest.testFiltres\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"sae201\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"fr.g1b.sae201.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"PACKAGE_NAME\" value=\"fr.g1b.sae201\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"fr.g1b.sae201.MainTest\" />\n      <option name=\"METHOD_NAME\" value=\"testFiltres\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.MainApp\" />\n        <item itemvalue=\"JUnit.MainTest\" />\n        <item itemvalue=\"JUnit.MainTest.testFiltres\" />\n        <item itemvalue=\"Application.AffichageTableauDonnees\" />\n        <item itemvalue=\"Application.AffichageCarte\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task id=\"LOCAL-00001\" summary=\"modif .gitignore\">\n      <created>1686087886499</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686087886499</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Changement des liens des images\">\n      <created>1686087934161</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686087934161</updated>\n    </task>\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"2b561bc9-af17-4a1a-84f4-0cbaf3086f80\" name=\"Changes\" comment=\"Changement des liens des images\" />\n      <created>1686128933046</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1686128933046</updated>\n      <workItem from=\"1686128938771\" duration=\"120000\" />\n      <workItem from=\"1686130190759\" duration=\"276000\" />\n      <workItem from=\"1686140496020\" duration=\"11280000\" />\n      <workItem from=\"1686203121173\" duration=\"12607000\" />\n      <workItem from=\"1686140496020\" duration=\"11380000\" />\n      <workItem from=\"1686152029318\" duration=\"203000\" />\n      <workItem from=\"1686215591224\" duration=\"17000\" />\n      <workItem from=\"1686513662072\" duration=\"1102000\" />\n      <workItem from=\"1686515075347\" duration=\"16254000\" />\n      <workItem from=\"1686645342347\" duration=\"17861000\" />\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"suppression de test.fxml et correction de Lecture\">\n      <created>1686140571540</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686140571540</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\n      <created>1686149904820</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686149904820</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\">\n      <created>1686149975914</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686149975914</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif\">\n      <created>1686218937069</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686218937069</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"Finalisation du graphique ajouté\">\n      <created>1686239937879</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686239937879</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)\">\n      <created>1686259639036</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686259639036</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)\">\n      <created>1686261472995</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686261472995</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"Correction d'un bug + ajout d'une bd plus grande\">\n      <created>1686263635326</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686263635326</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"changement du css\">\n      <created>1686570789039</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686570789040</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"ajout du tableau et de la map dans le dashboard + amélioration des filtres\">\n      <created>1686660466838</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686660466838</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"Ajout de tests + 2 csv pour les tests de filtre\">\n      <created>1686662893597</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1686662893597</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"14\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"modif .gitignore\" />\n    <MESSAGE value=\"Changement des liens des images\" />\n    <MESSAGE value=\"suppression de test.fxml et correction de Lecture\" />\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\n    <MESSAGE value=\"Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an\" />\n    <MESSAGE value=\"Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif\" />\n    <MESSAGE value=\"encapsulation du FlowPane dans un ScrollPane\" />\n    <MESSAGE value=\"Finalisation du graphique ajouté\" />\n    <MESSAGE value=\"Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)\" />\n    <MESSAGE value=\"Correction d'un bug + ajout d'une bd plus grande\" />\n    <MESSAGE value=\"changement du css\" />\n    <MESSAGE value=\"ajout du tableau et de la map dans le dashboard + amélioration des filtres\" />\n    <MESSAGE value=\"Ajout de tests + 2 csv pour les tests de filtre\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Ajout de tests + 2 csv pour les tests de filtre\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java</url>\n          <line>48</line>\n          <option name=\"timeStamp\" value=\"12\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n    <watches-manager>\n      <configuration name=\"Application\">\n        <watch expression=\"(Integer.parseInt(date[0]) &lt;= Integer.parseInt(value[1])) &amp;&amp; (Integer.parseInt(date[0]) &gt;= Integer.parseInt(value[0]))\" language=\"JAVA\" />\n        <watch expression=\"(Integer.parseInt(date[0]) &lt;= Integer.parseInt(value[1])\" language=\"JAVA\" />\n        <watch expression=\"(Integer.parseInt(date[0]) &gt;= Integer.parseInt(value[0]))\" language=\"JAVA\" />\n        <watch expression=\"Integer.parseInt(date[0])\" language=\"JAVA\" />\n        <watch expression=\"Integer.parseInt(value[1])\" language=\"JAVA\" />\n      </configuration>\n    </watches-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d33ba0e37b73eeb95039463617cd5d8e4b342bfb)
++++ b/.idea/workspace.xml	(date 1686681375553)
+@@ -4,10 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout de tests + 2 csv pour les tests de filtre">
++    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Créé un test qui marche, fait d'autres changements mineurs, vais essayer d'afficher le tableau dans le Dashboardpane demain">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/MainApp.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/g1b/sae201/SisAppController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201/style.css" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -20,7 +20,6 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
+-        <option value="CSS File" />
+         <option value="Class" />
+       </list>
+     </option>
+@@ -28,7 +27,15 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="ProjectId" id="2Qs4Oqko6a5Rrhg1ymuDsKKURxP" />
++  <component name="MavenImportPreferences">
++    <option name="generalSettings">
++      <MavenGeneralSettings>
++        <option name="mavenHome" value="Use Maven wrapper" />
++        <option name="useMavenConfig" value="true" />
++      </MavenGeneralSettings>
++    </option>
++  </component>
++  <component name="ProjectId" id="2Qs6VlaryiEWPwwskH5a2RtGpV0" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="1" id="Add" />
+   </component>
+@@ -36,58 +43,39 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "last_opened_file_path": "/home/quentin/Documents/programmation/Java/testConv",
+-    "list.type.of.created.stylesheet": "CSS",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "project.structure.last.edited": "Modules",
+-    "project.structure.proportion": "0.15",
+-    "project.structure.side.proportion": "0.4561201",
+-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
++    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
++    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
++    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
++    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/home/carlos/Downloads/maps-master&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.22351572&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="$PROJECT_DIR$/src/main/resources/fr/g1b/sae201" />
+     </key>
+-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+-      <recent name="fr.g1b.sae201" />
+-    </key>
+   </component>
+-  <component name="RunManager" selected="Application.MainApp">
+-    <configuration name="AffichageCarte" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.AffichageCarte" />
+-      <module name="sae201" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="AffichageTableauDonnees" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.AffichageTableauDonnees" />
+-      <module name="sae201" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
++  <component name="RunAnythingCache">
++    <option name="myCommands">
++      <command value="mvn test" />
++    </option>
++  </component>
++  <component name="RunManager">
+     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.MainApp" />
+       <module name="sae201" />
+@@ -101,44 +89,9 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="MainTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+-      <module name="sae201" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <option name="PACKAGE_NAME" value="fr.g1b.sae201" />
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.MainTest" />
+-      <option name="TEST_OBJECT" value="class" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="MainTest.testFiltres" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+-      <module name="sae201" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="fr.g1b.sae201.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <option name="PACKAGE_NAME" value="fr.g1b.sae201" />
+-      <option name="MAIN_CLASS_NAME" value="fr.g1b.sae201.MainTest" />
+-      <option name="METHOD_NAME" value="testFiltres" />
+-      <option name="TEST_OBJECT" value="method" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+     <recent_temporary>
+       <list>
+         <item itemvalue="Application.MainApp" />
+-        <item itemvalue="JUnit.MainTest" />
+-        <item itemvalue="JUnit.MainTest.testFiltres" />
+-        <item itemvalue="Application.AffichageTableauDonnees" />
+-        <item itemvalue="Application.AffichageCarte" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -151,108 +104,57 @@
+       <option name="project" value="LOCAL" />
+       <updated>1686087886499</updated>
+     </task>
+-    <task id="LOCAL-00002" summary="Changement des liens des images">
+-      <created>1686087934161</created>
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="modif .gitignore" />
++      <created>1686129976068</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1686129976068</updated>
++      <workItem from="1686129980226" duration="1827000" />
++      <workItem from="1686143949139" duration="7245000" />
++      <workItem from="1686215227480" duration="2926000" />
++      <workItem from="1686218749563" duration="6362000" />
++      <workItem from="1686236796942" duration="3342000" />
++      <workItem from="1686591828553" duration="1159000" />
++      <workItem from="1686600244577" duration="13356000" />
++      <workItem from="1686678846746" duration="2343000" />
++    </task>
++    <task id="LOCAL-00002" summary="Lecture2 permet de générer un TableView à partir des colonnes du CSV. Lecture1 contient ce qu'il faut pour extraire chaque ligne d'infos et les mettre dans des ArryList. Maintenant il faut combiner les 2. A voir. Faudra penser à ajouter la map aussi après.">
++      <created>1686151122898</created>
+       <option name="number" value="00002" />
+       <option name="presentableId" value="LOCAL-00002" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686087934161</updated>
+-    </task>
+-    <task active="true" id="Default" summary="Default task">
+-      <changelist id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Changement des liens des images" />
+-      <created>1686128933046</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1686128933046</updated>
+-      <workItem from="1686128938771" duration="120000" />
+-      <workItem from="1686130190759" duration="276000" />
+-      <workItem from="1686140496020" duration="11280000" />
+-      <workItem from="1686203121173" duration="12607000" />
+-      <workItem from="1686140496020" duration="11380000" />
+-      <workItem from="1686152029318" duration="203000" />
+-      <workItem from="1686215591224" duration="17000" />
+-      <workItem from="1686513662072" duration="1102000" />
+-      <workItem from="1686515075347" duration="16254000" />
+-      <workItem from="1686645342347" duration="17861000" />
++      <updated>1686151122931</updated>
+     </task>
+-    <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
+-      <created>1686140571540</created>
++    <task id="LOCAL-00003" summary="MapApplication affiche la page Web de Google Maps. Pas exactement ce que je voulais mais peut-être qu'on peut faire un truc avec quand même? Genre récupérer les cooroonnées qui sont dans l'url pour afficher les seimsmes qui sont arrivés à cet endroit? Ou cliquer sur un seimse et afficher l'endroit ou ça c'est produit? En tout cas j'ai galéré un max pour pas grand chose mais bon on verra... J'avais esssayé avec Gluon au début mais ça à l'ai hyper galère et en plus faut faire des manip chelous et tout arrghhh jsp">
++      <created>1686229972763</created>
+       <option name="number" value="00003" />
+       <option name="presentableId" value="LOCAL-00003" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686140571540</updated>
++      <updated>1686229972764</updated>
+     </task>
+-    <task id="LOCAL-00004" summary="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
+-      <created>1686149904820</created>
++    <task id="LOCAL-00004" summary="Ah bah finalement j'ai rien dit gluon c'est facile&#10;Il me manque plus qu'a trouver un moyen d'ajouter des points et peut-être des zones, comprendre les méthodes des coordonnées etc...">
++      <created>1686240071613</created>
+       <option name="number" value="00004" />
+       <option name="presentableId" value="LOCAL-00004" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686149904820</updated>
++      <updated>1686240071613</updated>
+     </task>
+-    <task id="LOCAL-00005" summary="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an">
+-      <created>1686149975914</created>
++    <task id="LOCAL-00005" summary="L'upload du csv est maintenant possible (et obligatoire même xD) le bouton se trouve dans le menu de gauche">
++      <created>1686604060626</created>
+       <option name="number" value="00005" />
+       <option name="presentableId" value="LOCAL-00005" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686149975914</updated>
++      <updated>1686604060629</updated>
+     </task>
+-    <task id="LOCAL-00006" summary="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif">
+-      <created>1686218937069</created>
++    <task id="LOCAL-00006" summary="Créé un test qui marche, fait d'autres changements mineurs, vais essayer d'afficher le tableau dans le Dashboardpane demain">
++      <created>1686613808184</created>
+       <option name="number" value="00006" />
+       <option name="presentableId" value="LOCAL-00006" />
+       <option name="project" value="LOCAL" />
+-      <updated>1686218937069</updated>
+-    </task>
+-    <task id="LOCAL-00007" summary="Finalisation du graphique ajouté">
+-      <created>1686239937879</created>
+-      <option name="number" value="00007" />
+-      <option name="presentableId" value="LOCAL-00007" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686239937879</updated>
+-    </task>
+-    <task id="LOCAL-00008" summary="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)">
+-      <created>1686259639036</created>
+-      <option name="number" value="00008" />
+-      <option name="presentableId" value="LOCAL-00008" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686259639036</updated>
+-    </task>
+-    <task id="LOCAL-00009" summary="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)">
+-      <created>1686261472995</created>
+-      <option name="number" value="00009" />
+-      <option name="presentableId" value="LOCAL-00009" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686261472995</updated>
++      <updated>1686613808184</updated>
+     </task>
+-    <task id="LOCAL-00010" summary="Correction d'un bug + ajout d'une bd plus grande">
+-      <created>1686263635326</created>
+-      <option name="number" value="00010" />
+-      <option name="presentableId" value="LOCAL-00010" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686263635326</updated>
+-    </task>
+-    <task id="LOCAL-00011" summary="changement du css">
+-      <created>1686570789039</created>
+-      <option name="number" value="00011" />
+-      <option name="presentableId" value="LOCAL-00011" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686570789040</updated>
+-    </task>
+-    <task id="LOCAL-00012" summary="ajout du tableau et de la map dans le dashboard + amélioration des filtres">
+-      <created>1686660466838</created>
+-      <option name="number" value="00012" />
+-      <option name="presentableId" value="LOCAL-00012" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686660466838</updated>
+-    </task>
+-    <task id="LOCAL-00013" summary="Ajout de tests + 2 csv pour les tests de filtre">
+-      <created>1686662893597</created>
+-      <option name="number" value="00013" />
+-      <option name="presentableId" value="LOCAL-00013" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1686662893597</updated>
+-    </task>
+-    <option name="localTasksCounter" value="14" />
++    <option name="localTasksCounter" value="7" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -263,7 +165,15 @@
+       <map>
+         <entry key="MAIN">
+           <value>
+-            <State />
++            <State>
++              <option name="COLUMN_ID_WIDTH">
++                <map>
++                  <entry key="Table.Default.Author.ColumnIdWidth" value="58" />
++                  <entry key="Table.Default.Date.ColumnIdWidth" value="61" />
++                  <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="61" />
++                </map>
++              </option>
++            </State>
+           </value>
+         </entry>
+       </map>
+@@ -271,38 +181,11 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="modif .gitignore" />
+-    <MESSAGE value="Changement des liens des images" />
+-    <MESSAGE value="suppression de test.fxml et correction de Lecture" />
+-    <MESSAGE value="Ajout d'une classe permettant de créer un graphique&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+-    <MESSAGE value="Ajout d'une classe permettant de créer un graphique + LectureBis, une amélioration de Lecture&#10;&#10;Cette classe permet de créer un graphique `BarChart` encapsulé dans un `Pane`. Ce graphique montre le nombre de séisme par an" />
+-    <MESSAGE value="Ajout d'un RangeSlider dans le menu des filtres&#10;&#10;Plus quelque modif" />
+-    <MESSAGE value="encapsulation du FlowPane dans un ScrollPane" />
+-    <MESSAGE value="Finalisation du graphique ajouté" />
+-    <MESSAGE value="Ajout d'un système de filtrage + Amélioration du menu de filtre&#10;&#10;Je vais bientôt ajouter la documentation (patience)" />
+-    <MESSAGE value="Correction d'un bug + ajout d'une bd plus grande" />
+-    <MESSAGE value="changement du css" />
+-    <MESSAGE value="ajout du tableau et de la map dans le dashboard + amélioration des filtres" />
+-    <MESSAGE value="Ajout de tests + 2 csv pour les tests de filtre" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Ajout de tests + 2 csv pour les tests de filtre" />
+-  </component>
+-  <component name="XDebuggerManager">
+-    <breakpoint-manager>
+-      <breakpoints>
+-        <line-breakpoint enabled="true" type="java-line">
+-          <url>file://$PROJECT_DIR$/src/main/java/fr/g1b/sae201/DataGetter.java</url>
+-          <line>48</line>
+-          <option name="timeStamp" value="12" />
+-        </line-breakpoint>
+-      </breakpoints>
+-    </breakpoint-manager>
+-    <watches-manager>
+-      <configuration name="Application">
+-        <watch expression="(Integer.parseInt(date[0]) &lt;= Integer.parseInt(value[1])) &amp;&amp; (Integer.parseInt(date[0]) &gt;= Integer.parseInt(value[0]))" language="JAVA" />
+-        <watch expression="(Integer.parseInt(date[0]) &lt;= Integer.parseInt(value[1])" language="JAVA" />
+-        <watch expression="(Integer.parseInt(date[0]) &gt;= Integer.parseInt(value[0]))" language="JAVA" />
+-        <watch expression="Integer.parseInt(date[0])" language="JAVA" />
+-        <watch expression="Integer.parseInt(value[1])" language="JAVA" />
+-      </configuration>
+-    </watches-manager>
++    <MESSAGE value="Lecture2 permet de générer un TableView à partir des colonnes du CSV. Lecture1 contient ce qu'il faut pour extraire chaque ligne d'infos et les mettre dans des ArryList. Maintenant il faut combiner les 2. A voir. Faudra penser à ajouter la map aussi après." />
++    <MESSAGE value="MapApplication affiche la page Web de Google Maps. Pas exactement ce que je voulais mais peut-être qu'on peut faire un truc avec quand même? Genre récupérer les cooroonnées qui sont dans l'url pour afficher les seimsmes qui sont arrivés à cet endroit? Ou cliquer sur un seimse et afficher l'endroit ou ça c'est produit? En tout cas j'ai galéré un max pour pas grand chose mais bon on verra... J'avais esssayé avec Gluon au début mais ça à l'ai hyper galère et en plus faut faire des manip chelous et tout arrghhh jsp" />
++    <MESSAGE value="Ah bah finalement j'ai rien dit gluon c'est facile&#10;Il me manque plus qu'a trouver un moyen d'ajouter des points et peut-être des zones, comprendre les méthodes des coordonnées etc..." />
++    <MESSAGE value="L'upload du csv est maintenant possible (et obligatoire même xD) le bouton se trouve dans le menu de gauche" />
++    <MESSAGE value="Créé un test qui marche, fait d'autres changements mineurs, vais essayer d'afficher le tableau dans le Dashboardpane demain" />
++    <option name="LAST_COMMIT_MESSAGE" value="Créé un test qui marche, fait d'autres changements mineurs, vais essayer d'afficher le tableau dans le Dashboardpane demain" />
+   </component>
+ </project>
+\ No newline at end of file

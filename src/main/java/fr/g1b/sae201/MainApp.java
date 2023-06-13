@@ -18,6 +18,7 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+        fenetreintro.display();
     }
 
     public static void main(String[] args) {
