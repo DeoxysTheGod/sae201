@@ -86,6 +86,10 @@ public class SisAppController {
     private Button filterMenuBtn;
     @FXML
     private Button checkBoxMenuBtn;
+    @FXML
+    private Button applyFilterBtn;
+    @FXML
+    private Button clearButton;
 
     // Overlay
     @FXML
@@ -232,6 +236,9 @@ public class SisAppController {
             getMinAndMaxYear();
             clearFilter();
             dashboardContainer.getChildren().clear();
+            checkBoxMenuBtn.setDisable(false);
+            clearButton.setDisable(false);
+            applyFilterBtn.setDisable(false);
         }
     }
 
