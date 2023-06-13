@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="Ajout de la documentation" />
+    <list default="true" id="2b561bc9-af17-4a1a-84f4-0cbaf3086f80" name="Changes" comment="update workspace" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -169,7 +169,7 @@
       <workItem from="1686215591224" duration="17000" />
       <workItem from="1686513662072" duration="1102000" />
       <workItem from="1686515075347" duration="16254000" />
-      <workItem from="1686645342347" duration="28135000" />
+      <workItem from="1686645342347" duration="28173000" />
     </task>
     <task id="LOCAL-00003" summary="suppression de test.fxml et correction de Lecture">
       <created>1686140571540</created>
@@ -283,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686687269737</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="update workspace">
+      <created>1686687600859</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1686687600859</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +326,8 @@
     <MESSAGE value="Blocage des fonctionnalités s'il n'y a pas de CSV" />
     <MESSAGE value="Réglage d'un problème d'affichage du DatePicker" />
     <MESSAGE value="Ajout de la documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout de la documentation" />
+    <MESSAGE value="update workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="update workspace" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
